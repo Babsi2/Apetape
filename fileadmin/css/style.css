@@ -1,0 +1,235 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+a{
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+}
+
+a:hover{
+	color: #fe0002;
+}
+
+#outerWrap #header{
+	display: block;
+	width: 35px;
+	height: 35px;
+	position: relative;
+	z-index: 3;
+	margin: 10px;
+}
+
+#contentWrap #complete_content #content{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left:0;
+	top: 0;
+	overflow: hidden;
+}
+
+.scrollable {
+  /* required settings */
+  position:relative;
+  overflow:hidden;
+  width: 660px;
+  height:90px;
+}
+
+.scrollable .items {
+  /* this cannot be too large */
+  width:20000em;
+  position:absolute;
+}
+
+.items div {
+  float:left;
+}
+
+#contentWrap #complete_content #content #inhalt .image img{
+	display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+#contentWrap #complete_content #content #inhalt .scrollable .items img{
+	display: block;
+    height: auto;
+    width: 100%;
+}
+
+#contentWrap #complete_content #content #inhalt .scrollable .items img.zoomed{
+	transform:scale(1.5,1.5);
+	-ms-transform:scale(1.5,1.5); /* IE 9 */
+	-webkit-transform:scale(1.5,1.5); /* Safari and Chrome */	    
+}
+
+#contentWrap #complete_content #content #inhalt .scrollable .items img.blured{
+	-webkit-filter: blur(10px);
+  	filter: blur(10px);	    
+}
+
+#contentWrap #complete_content #content #inhalt .scrollable .items img.rotated{
+	transform:rotate(10deg);
+	-ms-transform:rotate(10deg); /* IE 9 */
+	-webkit-transform:rotate(10deg); /* Safari and Chrome */
+
+}
+
+#contentWrap #complete_content #content #inhalt .scrollable .items img.rotated.zoomed{
+	transform:rotate(10deg) scale(1.5,1.5);
+	-ms-transform:rotate(10deg) scale(1.5,1.5); /* IE 9 */
+	-webkit-transform:rotate(10deg) scale(1.5,1.5); /* Safari and Chrome */
+
+}
+
+#contentWrap #complete_content #content #inhalt .scrollable .items img.opacified{
+	opacity: 0.7;	    
+}
+
+#contentWrap #complete_content #content #inhalt .buttons{
+	display: block;
+	z-index: 2;
+	height: 25px;
+	position: absolute;
+	bottom: 50px;
+	right: 10px;
+	font-size: 34px;
+	color: #505050;
+}
+
+#contentWrap #complete_content #content #inhalt .buttons .button{
+	float: left;
+	width: 150px;
+	background: #404040;
+	text-align: center;
+	padding: 0 5px;
+	margin-left: 5px;
+	cursor: pointer;
+	text-shadow: 1px 1px 0px #202020, -1px -1px 0px #606060;
+	border-radius: 5px;
+} 
+
+#contentWrap #complete_content #content #inhalt .buttons .button.active{
+	background: #ffff01;
+}
+
+#contentWrap #complete_content #content #inhalt .controls{
+	display: block;
+	z-index: 2;
+	height: 96px;
+	position: absolute;
+	bottom: 37px;
+	left: 26px;
+	font-size: 34px;
+	color: #505050;
+}
+
+#contentWrap #complete_content #content #inhalt .control{
+	width: 47px;
+	height: 42px;
+	background: url(../images/pfeile.png) no-repeat;
+	text-align: center;
+	cursor: pointer;
+} 
+
+#contentWrap #complete_content #content #inhalt .browse{
+	width: 50px;
+	height: 45px;
+	bottom: 45px;
+	z-index: 10;
+	position: absolute;
+	cursor: pointer;
+}
+
+.tooltip {
+padding: 10px;
+color: white;
+border-radius: 20px;
+font: bold 14px "Helvetica Neue", Sans-Serif;
+text-transform: uppercase;
+box-shadow: 0 0 7px black;
+background: black;
+border: 2px solid white;
+z-index: 99999;
+}
+
+#contentWrap #complete_content #content #inhalt .browse.left{
+	left: 70px;
+	background: url(../images/pfeile.png) -2px -44px no-repeat;
+} 
+
+#contentWrap #complete_content #content #inhalt .controls .control.top{
+	background-position:44px -1px;
+	padding-left: 91px;
+} 
+
+#contentWrap #complete_content #content #inhalt .browse.right{
+	z-index: 6;
+	position: absolute;
+	left: 165px;
+	width: 50px;
+	height: 45px;
+	background: url(../images/pfeile.png) -93px -44px no-repeat;
+} 
+
+#contentWrap #complete_content #content #inhalt .browse.right.disabled, #contentWrap #complete_content #content #inhalt .browse.left.disabled,
+#contentWrap #complete_content #content #inhalt .controls .control.bottom.disabled, #contentWrap #complete_content #content #inhalt .controls .control.top.disabled{
+	opacity: 0.8;
+}
+
+#contentWrap #complete_content #content #inhalt .controls .control.bottom{
+	background-position:44px -88px;
+	padding-left: 91px;
+	margin-top: 44px;
+} 
+
+.szeneMenue{
+	width: 708px;
+	margin: 200px 0 0 -354px;
+	position: absolute;
+	z-index: 3;
+	left: 50%;
+}
+
+.menue{
+    float: left;
+    height: 170px;
+    margin: 15px;
+    position: relative;
+    width: 200px;
+    border: 3px solid #000;
+}
+
+.menue a{
+	position: absolute;
+	overflow: hidden;
+}
+
+.menue img{
+	transition: all 0.2s ease-out 0s;
+}
+
+.menue img:hover{
+	transform: scale(1.02);
+}
+
+.textSzene{
+	background: none repeat scroll 0 0 #FFFFFF;
+    bottom: 5px;
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.menuBackground{
+	position: absolute;
+	z-index: 1;
+}

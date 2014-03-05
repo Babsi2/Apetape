@@ -1,0 +1,10 @@
+################################################################
+
+#plugin.tx_content_pi1 {
+#	general_stdWrap {
+#		brTag = 
+#		parseFunc < tt_content.text.20.parseFunc
+#	}
+#}
+#plugin.tx_content_pi2.general_stdWrap < plugin.tx_content_pi1.general_stdWrap
+

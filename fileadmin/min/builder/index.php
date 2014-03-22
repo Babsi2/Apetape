@@ -53,7 +53,7 @@ if (! isset($min_cachePath) && ! function_exists('sys_get_temp_dir')) {
 
 ob_start();
 ?>
-<!DOCTYPE HTML>
+
 <title>Minify URI Builder</title>
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
 <style>

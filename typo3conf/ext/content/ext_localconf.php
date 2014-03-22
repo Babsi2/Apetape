@@ -12,6 +12,12 @@ t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_szene.php','_szene'
 // Menu on first page
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_menu.php','_menu','list_type',1);
 
+// Overlay
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_overlay.php','_overlay','list_type',1);
+
+/// Ausgabe
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_path.php','_path','list_type',1);
+
 
 // clear cache
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][] = 'EXT:content/class.content.php:&tx_content->clearCachePostProc';

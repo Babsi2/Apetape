@@ -15,7 +15,7 @@ page {
 	#shortcutIcon = {$filepaths.images}favicon.ico
 
 	config {
-		doctype = html5
+		#doctype = html5
 		disableImgBorderAttr = 1
 		disablePrefixComment = 1
 		htmlTag_langKey = de-DE 
@@ -33,9 +33,11 @@ page {
 	includeJS.file1 = http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js
 	includeJS.file2 = fileadmin/js/typo.js
 	
+
     includeCSS.file1 = fileadmin/css/jquery-ui-1.10.3.custom.css
     includeCSS.file2 = fileadmin/css/jquery-ui-1.10.3.custom.min.css
    	includeCSS.file3 = fileadmin/css/style.css
+   	#includeCSS.file4 = fileadmin/js/bower_components/animo.js/animate+animo.css
     
 	includeLibs.scriptlibrary = fileadmin/inc/class.tx_FEFunctions.php
 

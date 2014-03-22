@@ -1,6 +1,6 @@
 <?php
 
-require_once(PATH_site.'/fileadmin/inc/class.tx_BEFunctions.php');
+require_once(PATH_site.'fileadmin/inc/class.tx_BEFunctions.php');
 
 $temp = Array (
 	'menu_item' => array(
@@ -55,6 +55,14 @@ $temp = Array (
 		)
 	),
 
+	'image_order' => array(
+		'exclude' => 1,
+		'label' => 'Bilder hintereinander anordnen',
+		'config' => Array(
+			'type' => 'check',
+			'default' => 0
+		)
+	),
 
 	'image' => array(
 		'exclude' => 1,
@@ -179,6 +187,36 @@ $temp = Array (
             'foreign_table' => 'tx_controls',
             'foreign_table_where' => 'ORDER BY tx_controls.title',
    ),
+
+   	"image_path" => Array (
+		"label" => "Hintergrund für Pfad:",
+		"config" => Array (
+			"type" => "group",
+			"internal_type" => "file",
+			"allowed" => "*",
+			"max_size" => 50000,
+			"uploadfolder" => "fileadmin/user_upload/images",
+			"show_thumbs" => 1,
+			"size" => 1,
+			"minitems" => 0,
+			"maxitems" => 1,
+		)
+	),
+	'position_image' => Array (
+		'exclude' => 1,
+		'label' => 'Position:',
+		'config' => Array (
+			'type' => 'user',
+			'userFunc' => 'tx_BEFunctions-> user_pathPosition'
+		)
+	),
+	'position' => array(
+		'exclude' => 1,
+		'label' => 'Koordinaten: ',
+		'config' => array(
+			'type' => 'text',
+		)
+	),
 ),
 
 
@@ -222,12 +260,26 @@ $TCA['tt_content']['types'][$_EXTKEY.'_background']['showitem']='CType;;14;,head
 t3lib_extMgm::addPlugin(Array('Backgroundelement', $_EXTKEY.'_background'),'CType');
 
 # Text Element
-$TCA['tt_content']['types'][$_EXTKEY.'_szene']['showitem']='CType;;14;,header,border, images, sound, button_effect_one, button_effect_two, button_effect_three, button_effect_four, controls';
+$TCA['tt_content']['types'][$_EXTKEY.'_szene']['showitem']='CType;;14;,header,border, images, image_order, sound, button_effect_one, button_effect_two, button_effect_three, button_effect_four, controls';
 t3lib_extMgm::addPlugin(Array('Szenenelement', $_EXTKEY.'_szene'),'CType');
 
+#Menü element
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_menu']='';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_menu']='';
 t3lib_extMgm::addPlugin(Array('Menü', $_EXTKEY.'_menu'),'list_type');
+
+#Overlay element
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_overlay']='';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_overlay']='';
+t3lib_extMgm::addPlugin(Array('Overlay', $_EXTKEY.'_overlay'),'list_type');
+
+# body background
+$TCA['tt_content']['types'][$_EXTKEY.'_background']['showitem']='CType;;14;,header,image';
+t3lib_extMgm::addPlugin(Array('Backgroundelement', $_EXTKEY.'_background'),'CType');
+
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_path']='layout,select_key';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_path']='tree,image;Hintergrund';
+t3lib_extMgm::addPlugin(Array('Pfad: Ausgabe', $_EXTKEY.'_path'),'list_type');
 
 #############################################################################################################
 
@@ -288,6 +340,34 @@ $TCA["tx_controls"] = Array (
 		"iconfile" => t3lib_extMgm::extRelPath($_EXTKEY)."tca/move.gif",
 	),
 );
+
+#############################################################################################################
+
+t3lib_extMgm::allowTableOnStandardPages("tx_path");
+t3lib_extMgm::addToInsertRecords("tx_path");
+
+	$TCA["tx_path"] = Array (
+		"ctrl" => Array (
+			'title' => 'Datensatz: Pfad',
+			'label' => 'title',
+			'tstamp' => 'tstamp',
+			'crdate' => 'crdate',
+			'cruser_id' => 'cruser_id',
+			"sortby" => "sorting",
+			"delete" => "deleted",
+			"dividers2tabs" => "1",
+			'languageField' => 'sys_language_uid',
+		  	'transOrigPointerField' => 'l18n_parent',
+		  	'transOrigDiffSourceField' => 'l18n_diffsource',
+			"enablecolumns" => Array (
+				"disabled" => "hidden",
+				"starttime" => "starttime",
+				"endtime" => "endtime",
+			),
+			"dynamicConfigFile" => t3lib_extMgm::extPath($_EXTKEY)."tca/tca_path.php",
+			"iconfile" => t3lib_extMgm::extRelPath($_EXTKEY)."tca/tx_path.png",
+		),
+	);
 
 #############################################################################################################
 

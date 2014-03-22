@@ -1,6 +1,6 @@
 <?PHP
 require_once(PATH_site . 'fileadmin/inc/class.Utils.php');
-require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
+// require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
 require_once(PATH_site . 'fileadmin/inc/class.Table.php');
 require_once(PATH_site . 'fileadmin/inc/class.View.php');
 
@@ -88,9 +88,9 @@ class tx_FEFunctions implements t3lib_Singleton {
 		return $content;
 	}
 
-	public function getCopyright() {
-		return strftime(Translations::Fetch('copyright'));
-	}	
+	// public function getCopyright() {
+	// 	return strftime(Translations::Fetch('copyright'));
+	// }	
 	
 	
 	public function getLogo($content, $conf, $pathOnly = false) {

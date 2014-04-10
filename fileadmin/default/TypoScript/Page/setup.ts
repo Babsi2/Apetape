@@ -28,16 +28,35 @@ page {
 		removeDefaultCSS = 1
 		inlineStyle2TempFile = 1
 	}
-
-
-	includeJS.file1 = http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js
-	includeJS.file2 = fileadmin/js/typo.js
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	
 
+
+	includeJS.file1 = http://code.jquery.com/jquery-1.11.0.min.js
+    includeJS.file2 = http://code.jquery.com/jquery-migrate-1.2.1.min.js
+    includeJS.file3 = fileadmin/js/jquery-tools.js
+	includeJS.file4 = fileadmin/js/dancer/src/dancer.js
+	includeJS.file5 = fileadmin/js/dancer/src/support.js
+	includeJS.file6 = fileadmin/js/dancer/src/kick.js
+	includeJS.file7 = fileadmin/js/dancer/src/adapterFlash.js
+	includeJS.file8 = fileadmin/js/dancer/src/adapterMoz.js
+	includeJS.file9 = fileadmin/js/dancer/src/adapterWebAudio.js
+	includeJS.file10 = fileadmin/js/dancer/lib/fft.js
+	includeJS.file11 = fileadmin/js/dancer/lib/flash_detect.js
+	includeJS.file12 = fileadmin/js/dancer/plugins/dancer.rotate.js
+	includeJS.file13 = fileadmin/js/dancer/plugins/dancer.zoom.js
+	
+	includeJS.file14 = fileadmin/js/typo.js
+	includeJS.file15 = fileadmin/js/buttons.js
+	includeJS.file16 = fileadmin/js/controls.js
+	includeJS.file17 = fileadmin/js/dancer-script.js
+	
+	includeJS.file18 = fileadmin/js/be.js
+	
     includeCSS.file1 = fileadmin/css/jquery-ui-1.10.3.custom.css
     includeCSS.file2 = fileadmin/css/jquery-ui-1.10.3.custom.min.css
    	includeCSS.file3 = fileadmin/css/style.css
-   	#includeCSS.file4 = fileadmin/js/bower_components/animo.js/animate+animo.css
+   	
     
 	includeLibs.scriptlibrary = fileadmin/inc/class.tx_FEFunctions.php
 

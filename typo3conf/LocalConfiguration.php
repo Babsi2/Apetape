@@ -89,6 +89,7 @@ return array(
 	),
 	'FE' => array(
 		'pageNotFound_handling' => 'http://localhost/introductionpackage-6.1.6/index.php?id=16',
+		'debug' => '0'
 	),
 	'GFX' => array(
 		'gdlib_png' => 1,
@@ -112,6 +113,10 @@ return array(
 		'encryptionKey' => '7225ded29bf280207e70deb082a5234c901af43b10d57c46e86160b483c4ca4ec786625b1db04fa46bca3a701cdb4a88',
 		'maxFileNameLength' => '100',
 		'sitename' => 'New TYPO3 site',
+		'sqlDebug' => '0',
+		'displayErrors' => '0',
+		'enableDeprecationLog' => 0
 	),
+
 );
 ?>

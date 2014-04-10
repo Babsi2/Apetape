@@ -278,7 +278,7 @@ $TCA['tt_content']['types'][$_EXTKEY.'_background']['showitem']='CType;;14;,head
 t3lib_extMgm::addPlugin(Array('Backgroundelement', $_EXTKEY.'_background'),'CType');
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_path']='layout,select_key';
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_path']='tree,image;Hintergrund';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_path']='tree';
 t3lib_extMgm::addPlugin(Array('Pfad: Ausgabe', $_EXTKEY.'_path'),'list_type');
 
 #############################################################################################################

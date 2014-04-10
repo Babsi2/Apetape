@@ -9,10 +9,10 @@ class tx_content {
 	 * @param	object		$pObj: partent object
 	 * @return	void
 	 */
-	function clearCachePostProc(&$params, &$pObj) {
-		// force refresh minified files (CSS / JS)
-		touch(PATH_site.'fileadmin/min/');
-	}
+	// function clearCachePostProc(&$params, &$pObj) {
+	// 	// force refresh minified files (CSS / JS)
+	// 	touch(PATH_site.'fileadmin/min/');
+	// }
 }
 
 class user_parseLinkReturnLink {

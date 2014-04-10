@@ -17,7 +17,7 @@
 
       $('#content img.zoomed').css('-webkit-transform', 'scale('+(1.00+(spectrum[1])) + ','+(1.00+(spectrum[1]))+')');
       $('#content img.zoomed').css('transform', 'scale('+(1.00+(spectrum[1])) + ','+(1.00+(spectrum[1]))+')');
-      
+      $('#content img.zoomed').css('-ms-transform', 'scale('+(1.00+(spectrum[1])) + ','+(1.00+(spectrum[1]))+')');
     });
 
     return this;

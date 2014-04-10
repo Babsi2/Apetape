@@ -46,13 +46,16 @@ class tx_content_szene extends tslib_pibase {
 
 		if($this->cObj->data['sound']){
 			$sound = '
-				<audio id="player" src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'"></audio>';
+				<audio id="player" src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'"></audio>
+				<button style="position: absolute; z-index: 9999;" id="stop">Stop</button>';
 		}
 
 		if($this->cObj->data['images']){
 			$imageCollection = explode(',', $this->cObj->data['images']);
 			$j = 0;
-			if($this->cObj->data['image_order']){
+			if($this->cObj->data['image_order'] && ($this->cObj->data['pid'] == '81')){
+				$class = 'szene9';
+			}elseif($this->cObj->data['image_order']){
 				$class = 'imageOrder';
 			}else{
 				$class = '';
@@ -67,7 +70,7 @@ class tx_content_szene extends tslib_pibase {
 								
 								'altText' => $imgCol,
 								'titleText' => $imgCol,
-								'params' => 'id="css-filter-blur"'
+								'params' => 'id="css-filter-blur" draggable="true"'
 							)).'
 						</div>
 						<svg id="svg-image-blur">
@@ -179,7 +182,7 @@ class tx_content_szene extends tslib_pibase {
 			}	
 		}
 
-		if($this->cObj->data['image_order']){
+		if($this->cObj->data['image_order'] && ($this->cObj->data['pid'] != '81')){
 			$collection = '
 				<div class="opacityScrollable" id="scrollable">
 					<div class="items">
@@ -199,6 +202,16 @@ class tx_content_szene extends tslib_pibase {
 			$classA = '
 				<a class="prev browse left opacity" title="'.$controlText[1].'"></a>
 				<a class="next browse right opacity" title="'.$controlText[2].'"></a>';
+		}elseif($this->cObj->data['image_order'] && ($this->cObj->data['pid'] == '81')){
+			$collection = '
+				<div class="szene9Scrollable szene9" id="scrollable">
+					<div class="items">
+						'.implode('', $collection).'
+					</div>
+				</div>';
+			$classA = '
+				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'"></a>
+				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'"></a>';
 		}else{
 			$collection = '
 				<div class="scrollable" id="scrollable">

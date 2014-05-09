@@ -93,7 +93,7 @@ page {
 
 		LOGO = TEXT
 		LOGO.preUserFunc = tx_FEFunctions->getLogo
-		
+
 		COPYRIGHT= TEXT
 		COPYRIGHT.preUserFunc = tx_FEFunctions->getCopyright
 		
@@ -105,6 +105,10 @@ page {
 			template = FILE
 			template.file = fileadmin/templates/default.html
 			marks {
+
+				NAVI = TEXT
+				NAVI.preUserFunc = tx_FEFunctions->getContentNavi
+
 				CONTENT0 < styles.content.get
 				CONTENT0.select.where = colPos=0
 			}

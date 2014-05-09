@@ -22,6 +22,12 @@ class tx_FEFunctions implements t3lib_Singleton {
 		$this->view = new View($GLOBALS['TSFE']->config['config']['fefuncConf.'], $this->uObj);
 	}
 
+	public function getContentNavi() {
+		// TODO merge
+//		$render = Render::getInstance();
+		return $this->view->getContentNavi();
+	}
+
 	public function getPageTitle($paramArray=false, $uid=false, $nobase=false) {
 		if (!is_array($paramArray))
 			$paramArray = t3lib_div::_GET();

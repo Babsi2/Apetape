@@ -168,6 +168,57 @@ HTML;
 		
 		return $content;
 	}
+
+	public function getContentNavi() {
+		// print_R("hallo");
+		$uObj = Utils::GetInstance();
+		// $pid = $this->projectPIDs['page_root'];
+		$test = array();
+		$i = 0;
+		$sideIndex = 0;
+		$test[] = $GLOBALS['TSFE']->sys_page->getMenu(1);
+		
+		if ($test) {
+			$subNaviAttribute .= ' data-sub-navi="'.($i + 1).'" ';
+
+			$subMenu = '';
+			foreach ($test[0] as $subNaviItemData) {
+				if ($subNaviItemData['nav_hide'] === 1) {
+					continue;
+				}
+				
+				$language = $subNaviItemData['_PAGES_OVERLAY_LANGUAGE'] ? $subNaviItemData['_PAGES_OVERLAY_LANGUAGE'] : 0;
+				$subNaviItemURL = $this->cObj->getTypoLink_URL($subNaviItemData['uid'],$language);
+				if($subNaviItemData['nav_hide'] == 0){
+					$subMenu .= '
+							<a href="'.$subNaviItemURL.'" class="sub accordion-entry '.$subNaviItemClasss.'">
+								<span class="accordion-bar">
+									<span class="title">'.$subNaviItemData['title'].'</span>
+								</span>
+							</a>
+						';
+				}	
+			}
+
+			if ($subMenu) {
+				$mainMenu .= '
+						<div class="accordion-sub-content">
+							'.$subMenu.'
+						</div>
+					';
+			}
+		}
+
+		$mainMenu .= '</div>';
+
+		$html = '
+				<div class="accordion-menu">
+					'.$mainMenu.'
+				</div>
+			';
+
+		return $javascript.$html;
+	}
 	
 }
 

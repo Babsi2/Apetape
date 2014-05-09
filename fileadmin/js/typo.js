@@ -39,14 +39,14 @@ $(document).ready(function(){
 	});
 
 	$('#content').css('height', $(document).height());
-	$('#content #inhalt .scrollable .items img').css('height', $(document).height()+10);
+	$('#content #inhalt .scrollable .items img').css('height', $(document).height());
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
 
 
-	$('#content #inhalt .no-scrollable .items img').css('height', $(document).height()+10);
+	$('#content #inhalt .no-scrollable .items img').css('height', $(document).height());
 	$('#content #inhalt .no-scrollable .items img').css('width', $(window).width());
 
-	$('#content #inhalt .opacityScrollable .items img').css('height', $(document).height()+10);
+	$('#content #inhalt .opacityScrollable .items img').css('height', $(document).height());
 	$('#content #inhalt .opacityScrollable .items img').css('width', $(window).width());
 
 	$('.scrollable').css('height', $(document).height());
@@ -60,6 +60,21 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#navi').click(function(){
+		if($(this).hasClass('active')){
+			$(this).removeClass('active').css('left','10px');
+			$('#content-navi').css({
+				'overflow':'hidden',
+				'width':'0px'
+			});
+		}else{
+			$(this).addClass('active').css('left','250px');
+			$('#content-navi').css({
+				'overflow':'visible',
+				'width':'240px'
+			});
+		}
+	})
 	function show_position (event) {
 	  // X- und Y-Position des Mauscursors in Abhängigkeit des
 	  // Browsers ermitteln

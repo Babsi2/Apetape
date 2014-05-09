@@ -73,7 +73,7 @@ class tx_content_szene extends tslib_pibase {
 								'params' => 'id="css-filter-blur" draggable="true"'
 							)).'
 						</div>
-						<svg id="svg-image-blur">
+						<svg id="svg-image-blur" style="height: 1000px;">
 						    <filter id="blur-effect-1">
 						        <feGaussianBlur stdDeviation="2" />
 						    </filter>

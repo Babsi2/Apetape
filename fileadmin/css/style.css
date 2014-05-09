@@ -27,10 +27,65 @@ a:hover{
 	color: #fe0002;
 }
 
+#c267, #c264{
+	/*height: 100%;
+	width: 100%;*/
+	position: relative;
+	
+}
+
+#content-navi{
+	width: 0px;
+	overflow: hidden;
+	position: absolute;
+	float: left;
+	top: 55px;
+	left: 0;
+	height: 100%;
+	max-height: 100%;
+	background-color: #000;
+	z-index: 999;
+	-webkit-transition:all 0.6s ease;
+	transition:all 0.6s ease;
+}
+
+#content-navi .accordion-menu{
+	-webkit-transition:all 0.6s ease;
+	transition:all 0.6s ease;
+}
+
+#content-navi .accordion-entry{
+	position: relative;
+	width: 240px;
+	display: block;
+	height: 58px;
+	background-color: #fff;
+	border:	1px solid;
+	-webkit-transition:all 0.6s ease;
+	transition:all 0.6s ease;
+}
+
+#content-navi .accordion-entry .title{
+	text-align: center;
+	line-height: 58px;
+	font-size: 28px;
+}
+
+#content-navi .accordion-sub-content{
+	position: absolute;
+	display: block;
+	z-index: 999;
+	border: 3px solid black;
+	width: 240px;
+	height: auto;
+	-webkit-transition:all 0.6s ease;
+	transition:all 0.6s ease;
+}
+
 #outerWrap #header{
 	display: block;
 	height: 35px;
-	width: 100%;
+	width: auto;
 	position: relative;
 	z-index: 990;
 	padding: 10px;
@@ -46,6 +101,22 @@ a:hover{
 	width: 400px;
 }
 
+#complete_content{
+	position: absolute;
+	top: 0;
+}
+
+#complete_content #navi{
+	position: relative;
+	width: 35px;
+	height: 35px;
+	display: block;
+	background: url(../images/zahnrad.png) no-repeat;
+	z-index: 1000;
+	top: 63px;
+	left: 10px;
+	cursor: pointer;
+}
 #contentWrap #complete_content #content{
 	position: absolute;
 	width: 100%;
@@ -80,7 +151,7 @@ a:hover{
 	display: block;
 }
 
-#contentWrap #complete_content #content #inhalt .image img{
+#complete_content #content #inhalt .image img{
 	display: none;
     height: 100%;
     left: 0;
@@ -90,13 +161,13 @@ a:hover{
     z-index: 980;
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img{
+#complete_content #content #inhalt .scrollable .items img{
 	display: block;
     height: auto;
     width: 100%;
 }
 
-#contentWrap #complete_content #content #inhalt .opacityScrollable .items .imageOrder{
+#complete_content #content #inhalt .opacityScrollable .items .imageOrder{
 	display: none;
     height: auto;
     width: 100%;
@@ -105,7 +176,7 @@ a:hover{
     top:0;
 }
 
-#contentWrap #complete_content #content #inhalt .opacityScrollable .items .imageOrderLast.opacity-1{
+#complete_content #content #inhalt .opacityScrollable .items .imageOrderLast.opacity-1{
 	display: block;
     height: auto;
     width: 100%;
@@ -129,44 +200,44 @@ a:hover{
 	-webkit-transform:scale(1.2,1.2);   
 }*/
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.zoomed-p-h{
+#complete_content #content #inhalt .scrollable .items img.zoomed-p-h{
 	transform:scale(2.5,2.5);
 	-ms-transform:scale(2.5,2.5); /* IE 9 */
 	-webkit-transform:scale(2.5,2.5); /* Safari and Chrome */	    
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.vibe{
+#complete_content #content #inhalt .scrollable .items img.vibe{
 	transform:scale(1.05,1.05);
 	-ms-transform:scale(1.05,1.05); /* IE 9 */
 	-webkit-transform:scale(1.05,1.05); /* Safari and Chrome */	    
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.rotated{
+#complete_content #content #inhalt .scrollable .items img.rotated{
 	transform:rotate(-10deg);
 	-ms-transform:rotate(-10deg); /* IE 9 */
 	-webkit-transform:rotate(-10deg); /* Safari and Chrome */
 
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.strobo{
+#complete_content #content #inhalt .scrollable .items img.strobo{
 	opacity: 0;	    
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.rotatedUZ{
+#complete_content #content #inhalt .scrollable .items img.rotatedUZ{
 	transform:rotate(10deg);
 	-ms-transform:rotate(10deg); /* IE 9 */
 	-webkit-transform:rotate(10deg); /* Safari and Chrome */
 
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.rotated.zoomed{
+#complete_content #content #inhalt .scrollable .items img.rotated.zoomed{
 	transform:rotate(10deg) scale(1.5,1.5);
 	-ms-transform:rotate(10deg) scale(1.5,1.5); /* IE 9 */
 	-webkit-transform:rotate(10deg) scale(1.5,1.5); /* Safari and Chrome */
 
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.opacified{
+#complete_content #content #inhalt .scrollable .items img.opacified{
 	animation: opacity 4s linear;   
 	-webkit-animation: opacity 4s linear;
     -moz-animation: opacity 4s linear;
@@ -174,11 +245,11 @@ a:hover{
     -o-animation: opacity 4s linear; 
 }
 
-#contentWrap #complete_content #content #inhalt #scrollable .items .szene9{
+#complete_content #content #inhalt #scrollable .items .szene9{
 	position: absolute;
 }
 
-#contentWrap #complete_content #content #inhalt #scrollable .items .szene9 img{
+#complete_content #content #inhalt #scrollable .items .szene9 img{
 	max-width: 400px;
 	height: auto;
 }
@@ -191,15 +262,15 @@ a:hover{
     -o-animation: drop 4s linear; 
 }
 
-#contentWrap #complete_content #content #inhalt .scrollable .items img.opacified-o-s{
+#complete_content #content #inhalt .scrollable .items img.opacified-o-s{
 	opacity: 0.7;    
 }
 
-#contentWrap #complete_content #content #inhalt #scrollable .items .opacified-o-n{
+#complete_content #content #inhalt #scrollable .items .opacified-o-n{
 	opacity: 1 !important;
 }
 
-#contentWrap #complete_content #content #inhalt .buttons{
+#complete_content #content #inhalt .buttons{
 	display: block;
 	z-index: 990;
 	height: 25px;
@@ -210,7 +281,7 @@ a:hover{
 	color: #505050;
 }
 
-#contentWrap #complete_content #content #inhalt .buttons .button{
+#complete_content #content #inhalt .buttons .button{
 	float: left;
 	width: 150px;
 	background: #404040;
@@ -222,11 +293,11 @@ a:hover{
 	border-radius: 5px;
 } 
 
-#contentWrap #complete_content #content #inhalt .buttons .button.active{
+#complete_content #content #inhalt .buttons .button.active{
 	background: #ffff01;
 }
 
-#contentWrap #complete_content #content #inhalt .controls{
+#complete_content #content #inhalt .controls{
 	display: block;
 	z-index: 990;
 	height: 96px;
@@ -237,7 +308,7 @@ a:hover{
 	color: #505050;
 }
 
-#contentWrap #complete_content #content #inhalt .control{
+#complete_content #content #inhalt .control{
 	width: 47px;
 	height: 42px;
 	background: url(../images/pfeile.png) no-repeat;
@@ -246,7 +317,7 @@ a:hover{
 	position: relative;
 } 
 
-#contentWrap #complete_content #content #inhalt .browse{
+#complete_content #content #inhalt .browse{
 	width: 50px;
 	height: 45px;
 	bottom: 45px;
@@ -267,18 +338,18 @@ a:hover{
 	z-index: 99999;
 }
 
-#contentWrap #complete_content #content #inhalt .browse.left{
+#complete_content #content #inhalt .browse.left{
 	left: 70px;
 	background: url(../images/pfeile.png) -2px -44px no-repeat;
 } 
 
-#contentWrap #complete_content #content #inhalt .controls .control.top{
+#complete_content #content #inhalt .controls .control.top{
 	background-position:-47px -1px;
 	left: 91px;
 	top: 0;
 } 
 
-#contentWrap #complete_content #content #inhalt .browse.right{
+#complete_content #content #inhalt .browse.right{
 	
 	position: absolute;
 	left: 165px;
@@ -287,29 +358,29 @@ a:hover{
 	background: url(../images/pfeile.png) -93px -44px no-repeat;
 } 
 
-#contentWrap #complete_content #content #inhalt .browse.right.disabled, #contentWrap #complete_content #content #inhalt .browse.left.disabled,
-#contentWrap #complete_content #content #inhalt .controls .control.bottom.disabled, #contentWrap #complete_content #content #inhalt .controls .control.top.disabled{
+#complete_content #content #inhalt .browse.right.disabled, #contentWrap #complete_content #content #inhalt .browse.left.disabled,
+#complete_content #content #inhalt .controls .control.bottom.disabled, #contentWrap #complete_content #content #inhalt .controls .control.top.disabled{
 	opacity: 0.8;
 }
 
-#contentWrap #complete_content #content #inhalt .browse.right.disabled.no-cursor, #contentWrap #complete_content #content #inhalt .browse.left.disabled.no-cursor{
+#complete_content #content #inhalt .browse.right.disabled.no-cursor, #contentWrap #complete_content #content #inhalt .browse.left.disabled.no-cursor{
 	cursor: inherit;
 }
 
-#contentWrap #complete_content #content #inhalt .controls .control.bottom{
+#complete_content #content #inhalt .controls .control.bottom{
 	background-position:-47px -88px;
 	left: 91px;
 	top: 44px;
 } 
 
-#contentWrap #complete_content #content #inhalt .controls .control.left{
+#complete_content #content #inhalt .controls .control.left{
 	border: 1px solid black;
 	background-position:-2px -44px;
 	left: 70px;
 	top: 44px;
 } 
 
-#contentWrap #complete_content #content #inhalt .controls .control.right{
+#complete_content #content #inhalt .controls .control.right{
 	border: 1px solid black;
 	background-position:-92px -44px;
 	left: 165px;
@@ -431,7 +502,7 @@ a:hover{
 		height: 100%;
 	}
 
-	#contentWrap #complete_content #content{
+	#complete_content #content{
 		position: absolute;
 		width: 980px;
 		height: 100%;
@@ -459,7 +530,7 @@ a:hover{
 	  float:left;
 	}
 
-	#contentWrap #complete_content #content #inhalt .image img{
+	#complete_content #content #inhalt .image img{
 		display: none;
 	    height: auto;
 	    left: 0;
@@ -469,13 +540,13 @@ a:hover{
 	    z-index: 980;
 	}
 
-	#contentWrap #complete_content #content #inhalt .scrollable .items img{
+	#complete_content #content #inhalt .scrollable .items img{
 		display: block;
 	    height: auto;
 	    width: 980px;
 	}
 
-	#contentWrap #complete_content #content #inhalt #scrollable .items .szene9 img{
+	#complete_content #content #inhalt #scrollable .items .szene9 img{
 		max-width: 300px;
 		height: auto;
 	}

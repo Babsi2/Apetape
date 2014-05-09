@@ -1,7 +1,11 @@
 $(document).ready(function(){
 	var press = false;
 	var timerId = 0;
+	var timer = 0;
+	var pressHold = 0;
 	
+	
+    
 	$('.buttons .button.Sepia').click(function(){
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
@@ -220,5 +224,5 @@ $(document).ready(function(){
 		}
 		$(this).addClass('active');
 	});
-})
+});
 	

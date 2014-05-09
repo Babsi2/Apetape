@@ -4,6 +4,27 @@ The PAGE OBJECT template.
 Tells the PAGE object to use the parsed HTML template from the automaketemplate extension.
 */
 
+metaMenu = HMENU
+metaMenu{
+	wrap = <ul>|</ul>
+	special = directory
+	special.value = 84
+	1 = TMENU
+	1 {
+		noBlur = 1
+		expAll = 1
+		NO = 1
+		NO {
+			ATagParams = class="metaMenu"
+			wrapItemAndSub = <li class="first">|</li> |*|<li class="spacer"></li><li>|</li> |*| <li class="spacer"></li><li class="last">|</li>
+		}
+		ACT < .NO
+		ACT {
+			ATagParams = class="active"
+			wrapItemAndSub = <li class="first active">|</li> |*|<li class="spacer"></li><li class="active">|</li> |*| <li class="spacer"></li><li class="last active">|</li>
+		}
+	}
+}
 # Make the PAGE object
 page = PAGE
 page {
@@ -35,23 +56,17 @@ page {
 	includeJS.file1 = http://code.jquery.com/jquery-1.11.0.min.js
     includeJS.file2 = http://code.jquery.com/jquery-migrate-1.2.1.min.js
     includeJS.file3 = fileadmin/js/jquery-tools.js
-	includeJS.file4 = fileadmin/js/dancer/src/dancer.js
-	includeJS.file5 = fileadmin/js/dancer/src/support.js
-	includeJS.file6 = fileadmin/js/dancer/src/kick.js
-	includeJS.file7 = fileadmin/js/dancer/src/adapterFlash.js
-	includeJS.file8 = fileadmin/js/dancer/src/adapterMoz.js
-	includeJS.file9 = fileadmin/js/dancer/src/adapterWebAudio.js
-	includeJS.file10 = fileadmin/js/dancer/lib/fft.js
-	includeJS.file11 = fileadmin/js/dancer/lib/flash_detect.js
-	includeJS.file12 = fileadmin/js/dancer/plugins/dancer.rotate.js
-	includeJS.file13 = fileadmin/js/dancer/plugins/dancer.zoom.js
+    includeJS.file4 = fileadmin/js/jquery-ui-1.10.4.custom.js
+   # includeJS.file3 = fileadmin/js/jquery-ui-1.10.4.custom.min.js
 	
-	includeJS.file14 = fileadmin/js/typo.js
-	includeJS.file15 = fileadmin/js/buttons.js
-	includeJS.file16 = fileadmin/js/controls.js
-	includeJS.file17 = fileadmin/js/dancer-script.js
 	
-	includeJS.file18 = fileadmin/js/be.js
+	
+	includeJS.file5 = fileadmin/js/typo.js
+	includeJS.file6 = fileadmin/js/buttons.js
+	includeJS.file7 = fileadmin/js/controls.js
+	includeJS.file8 = fileadmin/js/webAudio.js
+	includeJS.file9 = fileadmin/js/keys.js
+	includeJS.file10 = fileadmin/js/be.js
 	
     includeCSS.file1 = fileadmin/css/jquery-ui-1.10.3.custom.css
     includeCSS.file2 = fileadmin/css/jquery-ui-1.10.3.custom.min.css
@@ -65,6 +80,7 @@ page {
 
 	# Add a TEMPLATE object to the page
 	# We use the template autoparser extension to easily replace parts of the HTML template by dynamic TypoScript objects
+
 	10 = TEMPLATE
 	10 {
 		# Use the HTML template from the automake template plugin
@@ -72,6 +88,8 @@ page {
 		template.file = fileadmin/mastertemplate.html
 
 		marks {
+
+		META < metaMenu
 
 		LOGO = TEXT
 		LOGO.preUserFunc = tx_FEFunctions->getLogo

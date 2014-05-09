@@ -46,7 +46,7 @@ class tx_content_szene extends tslib_pibase {
 
 		if($this->cObj->data['sound']){
 			$sound = '
-				<audio id="player" src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'"></audio>
+				<audio id="player" autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'"></audio>
 				<button style="position: absolute; z-index: 9999;" id="stop">Stop</button>';
 		}
 
@@ -111,7 +111,7 @@ class tx_content_szene extends tslib_pibase {
 			$buttons1 = $stmt->fetchAll();
 			
 			foreach($buttons1 as $button1){
-				$but1 = '<div class="button '.$button1['title'].'">'.$button1['title'].'</div>';
+				$but1 = '<div class="button-1 button '.$button1['title'].'">'.$button1['title'].'</div>';
 			}
 		}
 
@@ -123,7 +123,7 @@ class tx_content_szene extends tslib_pibase {
 			$buttons2 = $stmt->fetchAll();
 			
 			foreach($buttons2 as $button2){
-				$but2 = '<div class="button '.$button2['title'].'">'.$button2['title'].'</div>';
+				$but2 = '<div class="button-2 button '.$button2['title'].'">'.$button2['title'].'</div>';
 			}
 		}
  
@@ -135,7 +135,7 @@ class tx_content_szene extends tslib_pibase {
 			$buttons3 = $stmt->fetchAll();
 			
 			foreach($buttons3 as $button3){
-				$but3 = '<div class="button '.$button3['title'].'">'.$button3['title'].'</div>';
+				$but3 = '<div class="button-3 button '.$button3['title'].'">'.$button3['title'].'</div>';
 			}
 		}
 
@@ -147,7 +147,7 @@ class tx_content_szene extends tslib_pibase {
 			$buttons4 = $stmt->fetchAll();
 			
 			foreach($buttons4 as $button4){
-				$but4 = '<div class="button '.$button4['title'].'">'.$button4['title'].'</div>';
+				$but4 = '<div class="button-4 button '.$button4['title'].'">'.$button4['title'].'</div>';
 			}
 		}
 

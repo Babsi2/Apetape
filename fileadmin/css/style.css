@@ -14,17 +14,36 @@ a{
 	text-align: center;
 }
 
+li{
+	float: left;
+}
+
+li.spacer{
+	width: 28px;
+	height: 10px;
+	display: block;
+}
 a:hover{
 	color: #fe0002;
 }
 
 #outerWrap #header{
 	display: block;
-	width: 35px;
 	height: 35px;
+	width: 100%;
 	position: relative;
 	z-index: 990;
-	margin: 10px;
+	padding: 10px;
+	background: #3ef2ff;
+}
+
+#outerWrap #header .left{
+	float: left;
+}
+
+#outerWrap #header .right{
+	float: right;
+	width: 400px;
 }
 
 #contentWrap #complete_content #content{
@@ -298,11 +317,38 @@ a:hover{
 } 
 
 .szeneMenue{
-	width: 708px;
-	margin: 10% 0 0 -354px;
+	width: 100%;
 	position: absolute;
-	z-index: 3;
-	left: 50%;
+	z-index: 999;
+	bottom: 0;
+}
+
+.ui-accordion .ui-accordion-header{
+	margin: 0px !important;
+	border-color: black !important;
+	border-bottom: none;
+}
+
+.ui-corner-all{
+	border-color: black;
+}
+
+.ui-state-active{
+	border-color: black;
+	border-bottom: 0px;
+}
+
+.ui-accordion-content-active{
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+.szeneMenue .accordion .first{
+	background: #7ef8bf;
+}
+
+.szeneMenue .accordion .second{
+	background: #7143e4;
 }
 
 .menue{

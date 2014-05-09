@@ -33,6 +33,11 @@ $(document).ready(function(){
 
 	$('a.browse, .controls .control').tooltip();
 
+	$('.accordion').accordion({
+		active:false,
+		collapsible: true
+	});
+
 	$('#content').css('height', $(document).height());
 	$('#content #inhalt .scrollable .items img').css('height', $(document).height()+10);
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
@@ -78,57 +83,7 @@ $(document).ready(function(){
 	// festlegen
 	document.body.onmousemove = show_position;
 	document.body.ontouchmove = show_position;
-	// var e = window.event;
-	// var posX = e.clientX;
-	// var posY = e.clientY;
-	// console.log('posX: '+posX+' posY: '+posY);
 
-	// var addEvent = (function () {
-	//   if (document.addEventListener) {
-	//     return function (el, type, fn) {
-	//       if (el && el.nodeName || el === window) {
-	//         el.addEventListener(type, fn, false);
-	//       } else if (el && el.length) {
-	//         for (var i = 0; i < el.length; i++) {
-	//           addEvent(el[i], type, fn);
-	//         }
-	//       }
-	//     };
-	//   } else {
-	//     return function (el, type, fn) {
-	//       if (el && el.nodeName || el === window) {
-	//         el.attachEvent('on' + type, function () { return fn.call(el, window.event); });
-	//       } else if (el && el.length) {
-	//         for (var i = 0; i < el.length; i++) {
-	//           addEvent(el[i], type, fn);
-	//         }
-	//       }
-	//     };
-	//   }
-	// })();
-
-
-	// addEvent(window, 'load', function() {
-	//   var draggableBall = $('.szene9Scrollable.szene9 .items .szene9');
-	//   // var draggableText = document.getElementById('text'); 
-	//   var drop          = document.getElementById('inhalt');
-	 
-	//   function cancel(e) {
-	//     if (e.preventDefault) e.preventDefault();
-	//     return false;
-	//   }
-
-	//   //Tells the browser that we can drop on this target
-	//   addEvent(drop, 'dragover', cancel);  //DOM event
-	//   addEvent(drop, 'dragenter', cancel); //IE event
-		
-	//   addEvent(drop, 'drop', function (e) {
-	//     if (e.preventDefault) e.preventDefault(); // stops the browser from redirecting off to the text.
-	//     this.innerHTML = "<strong>Done!</strong>";
-	// 	  this.style.backgroundColor="#CCCC00"; 
-	    
-	// 		return false;
-	//   });
 });
 
 $(window).resize(function(){

@@ -10171,7 +10171,7 @@ $GLOBALS['TCA'] = array (
           'range' => 
           array (
             'upper' => 1609369200,
-            'lower' => 1394146800,
+            'lower' => 1396908000,
           ),
         ),
       ),

@@ -197,32 +197,32 @@ $(document).ready(function(){
             event = window.event;
         }
         if((event.keyCode == 74 && $('.button-1').hasClass('Opacity')) || (event.keyCode == 75 && $('.button-2').hasClass('Opacity')) || (event.keyCode == 76 && $('.button-3').hasClass('Opacity')) || (event.keyCode == 79 && $('.button-4').hasClass('Opacity')) ){
-            console.log("yeah");
-            // clearTimeout(this.downTimer);
-            // this.downTimer = setTimeout(function() {
-            //     $('#content #inhalt .scrollable .items .active img').toggleClass('opacified-o-s');
-            //     $('.buttons .button.Opacity').addClass('active');
-            //     press = true;  
-                
-            // }, 500);
+             
+            timerId = setTimeout(function() {
+                console.log("press&hold");
+                $('#content #inhalt .scrollable .items .active img').addClass('opacified-o-s');
+                press = true;
+                $('.buttons .button.Opacity').addClass('active'); 
+                console.log(press);  
+            }, 500);
         }
     }).keyup(function(event){
-   //      clearTimeout(this.downTimer);
-	  //   console.log(press);
-	  //   if(press === true){
-	  //   	$('#content #inhalt .scrollable .items .active img').removeClass('opacified-o-s');
-	  //   	$('.buttons .button.Opacity').removeClass('active');
-	  //   	press = false;
-	  //   }else{
-	  //   	console.log('opacity');
-			// $('.buttons .button.Opacity').addClass('active');
-			// $('#content #inhalt .scrollable .items .active img').addClass('opacified');
-			// setTimeout(function(){
-			//    $('.buttons .button.Opacity').toggleClass('active');
-			//    $('#content #inhalt .scrollable .items .active img').toggleClass('opacified');
+        clearTimeout(timerId);
+        console.log(press);
+        if(press === true){
+            $('#content #inhalt .scrollable .items .active img').removeClass('opacified-o-s').removeClass('opacified');
+            $('.buttons .button.Opacity').removeClass('active');
+            press = false;
+        }else{
+            console.log('opacity');
+            $('.buttons .button.Opacity').addClass('active');
+            $('#content #inhalt .scrollable .items .active img').addClass('opacified');
+            setTimeout(function(){
+               $('.buttons .button.Opacity').toggleClass('active');
+               $('#content #inhalt .scrollable .items .active img').toggleClass('opacified').removeClass('opacified-o-s');
 
-			// },4000);
-	  //   }
+            },4000);
+        }
     });
 
 	$(document).keydown(function(event){

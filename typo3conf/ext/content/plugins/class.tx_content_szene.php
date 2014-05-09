@@ -46,8 +46,8 @@ class tx_content_szene extends tslib_pibase {
 
 		if($this->cObj->data['sound']){
 			$sound = '
-				<audio id="player" autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'"></audio>
-				<button style="position: absolute; z-index: 9999;" id="stop">Stop</button>';
+				<audio id="player" controls autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'" style="display: block; position:absolute; z-index: 9999;"></audio>
+				';
 		}
 
 		if($this->cObj->data['images']){

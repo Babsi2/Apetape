@@ -421,10 +421,15 @@ a:hover{
 	background: #7ef8bf;
 }
 
-.accordionMenue .accordion .sction-1{
+.accordionMenue .accordion .section-1{
 	background: #7143e4;
 }
 
+.accordionMenue .accordion .video video{
+	position: relative;
+	left: 50%;
+	margin-left: -480px;
+}
 .menue{
     float: left;
     height: 170px;

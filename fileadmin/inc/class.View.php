@@ -66,14 +66,16 @@ HTML;
 	
 	
 		foreach ($sections as $key => $section) {
-			
-			$video = '
-				<video width="320" height="240" controls>
-				  <source src="'.$section['video'].'" type="video/mp4">
-				Your browser does not support the video tag.
-				</video>
-			';
-			
+			// print_R($section);
+			if($section['video']){
+				$video = '
+					<video width="960" height="720" controls>
+					  <source src="/apetape/fileadmin/user_upload/video/'.$section['video'].'" type="video/mp4">
+					Your browser does not support the video tag.
+					</video>
+				';
+			}
+
 			if($section['title']){
 				
 				$header = '
@@ -87,7 +89,7 @@ HTML;
 			if($video) {
 				$accordionContent[] = $header.'
 					<div class="section-'.$key.'">
-						<div class="text_image">
+						<div class="video">
 							'.$video.'
 						</div>
 						<div class="text_text">
@@ -97,10 +99,6 @@ HTML;
 					</div>
 				';		
 			}
-			else if ($section['content'] == '') {
-				$accordionContent[] = $header.'<div></div>';
-			}
-			
 			else{
 				$accordionContent[] = $header.'
 				<div class="section">

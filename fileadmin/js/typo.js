@@ -36,9 +36,11 @@ $(document).ready(function(){
 
 	$('.accordion').accordion({
 		active:false,
-		collapsible: true
+		collapsible: true,
+		heightStyle: "fill"
 	});
-
+	//$('.accordionMenue .accordion.ui-accordion').css('height', $(window).height() - 55);
+	$('.accordionMenue .section-0.ui-accordion-content').css('height', $(window).height() - 173);
 	// $('#content').css('height', $(window).height()-18);
 	$('#content #inhalt .scrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
@@ -88,6 +90,8 @@ $(document).ready(function(){
 		$('#content-navi').hide();
 		$('#navi').hide();
 	}
+
+
 
 	function show_position (event) {
 	  // X- und Y-Position des Mauscursors in Abhängigkeit des

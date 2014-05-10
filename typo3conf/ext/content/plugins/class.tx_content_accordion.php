@@ -30,7 +30,7 @@ class tx_content_accordion extends tslib_pibase {
 		$this->view = new  View($conf, $this->uObj);
 		#################################################################################
 
-		$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_accordion','pid=:pid','','sorting ASC','');
+		$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_accordion','pid=:pid','','sorting DESC','');
 		$stmt->bindValue(':pid', $this->cObj->data['pid']);
 		$stmt->execute();
 		$accordions = $stmt->fetchAll();

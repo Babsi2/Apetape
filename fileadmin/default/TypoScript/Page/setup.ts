@@ -120,6 +120,8 @@ page {
 		# automaketemplate template in the extension_configuration sysfolder
 	}
 
+	tt_content.list.10 >
+	tt_content.content_szene.10 >
 	
 	
 }

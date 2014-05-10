@@ -10,13 +10,16 @@ t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_background.php','_b
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_szene.php','_szene','CType',1);
 
 // Menu on first page
-t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_menu.php','_menu','list_type',1);
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_accordion.php','_accordion','list_type',1);
 
 // Overlay
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_overlay.php','_overlay','list_type',1);
 
 /// Ausgabe
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_path.php','_path','list_type',1);
+
+// Background Element
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_settings.php','_settings','list_type',1);
 
 
 // clear cache

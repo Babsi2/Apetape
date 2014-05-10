@@ -41,7 +41,7 @@ a:hover{
 	float: left;
 	top: 55px;
 	left: 0;
-	height: 100%;
+	height: 900px;
 	max-height: 100%;
 	background-color: #000;
 	z-index: 999;
@@ -104,6 +104,8 @@ a:hover{
 #complete_content{
 	position: absolute;
 	top: 0;
+	width: 100%;
+	height: 100%;
 }
 
 #complete_content #navi{
@@ -114,10 +116,10 @@ a:hover{
 	background: url(../images/zahnrad.png) no-repeat;
 	z-index: 1000;
 	top: 63px;
-	left: 10px;
+	left: 0px;
 	cursor: pointer;
 }
-#contentWrap #complete_content #content{
+#complete_content #content{
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -275,7 +277,7 @@ a:hover{
 	z-index: 990;
 	height: 25px;
 	position: absolute;
-	bottom: 50px;
+	bottom: 120px;
 	right: 10px;
 	font-size: 34px;
 	color: #505050;
@@ -302,7 +304,7 @@ a:hover{
 	z-index: 990;
 	height: 96px;
 	position: absolute;
-	bottom: 37px;
+	bottom: 120px;
 	left: 26px;
 	font-size: 34px;
 	color: #505050;
@@ -320,7 +322,7 @@ a:hover{
 #complete_content #content #inhalt .browse{
 	width: 50px;
 	height: 45px;
-	bottom: 45px;
+	bottom: 130px;
 	z-index: 990;
 	position: absolute;
 	cursor: pointer;
@@ -339,20 +341,20 @@ a:hover{
 }
 
 #complete_content #content #inhalt .browse.left{
-	left: 70px;
+	left: 30px;
 	background: url(../images/pfeile.png) -2px -44px no-repeat;
 } 
 
 #complete_content #content #inhalt .controls .control.top{
 	background-position:-47px -1px;
-	left: 91px;
+	left: 51px;
 	top: 0;
 } 
 
 #complete_content #content #inhalt .browse.right{
 	
 	position: absolute;
-	left: 165px;
+	left: 125px;
 	width: 50px;
 	height: 45px;
 	background: url(../images/pfeile.png) -93px -44px no-repeat;
@@ -369,7 +371,7 @@ a:hover{
 
 #complete_content #content #inhalt .controls .control.bottom{
 	background-position:-47px -88px;
-	left: 91px;
+	left: 51px;
 	top: 44px;
 } 
 
@@ -387,11 +389,12 @@ a:hover{
 	top: 44px;
 } 
 
-.szeneMenue{
-	width: 100%;
+.accordionMenue{
 	position: absolute;
-	z-index: 999;
 	bottom: 0;
+	display: block;
+	width: 100%;
+	z-index: 1;
 }
 
 .ui-accordion .ui-accordion-header{
@@ -414,11 +417,11 @@ a:hover{
 	border-left: 1px solid black;
 	border-right: 1px solid black;
 }
-.szeneMenue .accordion .first{
+.accordionMenue .accordion .section-0{
 	background: #7ef8bf;
 }
 
-.szeneMenue .accordion .second{
+.accordionMenue .accordion .sction-1{
 	background: #7143e4;
 }
 
@@ -457,6 +460,7 @@ a:hover{
 .menuBackground{
 	position: absolute;
 	z-index: 1;
+	top: 0;
 }
 
 .overlay{

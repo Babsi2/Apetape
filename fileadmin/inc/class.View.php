@@ -64,43 +64,31 @@ HTML;
 	
 	public function renderAccordion($sections, $name) {
 	
+	
 		foreach ($sections as $key => $section) {
 			
-			$image = $this->cObj->IMAGE(array(
-				'file' => (basename($section['image']) == $section['image'] ? 'fileadmin/user_upload/images/content/'.$section['image'] : $section['image']),
-				'file.' => array(
-					'width' => '157c',
-					'height' => '108c'
-				),
-				'altText' => $section['title'],
-				'titleText' => $section['title']
-			));
+			$video = '
+				<video width="320" height="240" controls>
+				  <source src="'.$section['video'].'" type="video/mp4">
+				Your browser does not support the video tag.
+				</video>
+			';
 			
-			if($section['content']){
+			if($section['title']){
 				
 				$header = '
-					<h3 class="helvetica-roman">
-						<div class="title">
-							'.$section['title'].'
-						</div>
+					<h3 class="section-'.$key.'">
+						'.$section['title'].'
 					</h3>
 				';
-			}elseif(!$section['content']){
-				
-				$header = '
-					<div class="hlvetica-roman no-text">
-						<div class="title no-text">
-							'.$section['title'].'
-						</div>
-					</div>';
 			}
 			
 				
-			if($image) {
+			if($video) {
 				$accordionContent[] = $header.'
-					<div class="section">
+					<div class="section-'.$key.'">
 						<div class="text_image">
-							'.$image.'
+							'.$video.'
 						</div>
 						<div class="text_text">
 							'.$this->renderText(array('bodytext' => $section['content'])).'
@@ -183,12 +171,14 @@ HTML;
 
 			$subMenu = '';
 			foreach ($test[0] as $subNaviItemData) {
+				// print_R($subNaviItemData);
 				if ($subNaviItemData['nav_hide'] === 1) {
 					continue;
 				}
 				
 				$language = $subNaviItemData['_PAGES_OVERLAY_LANGUAGE'] ? $subNaviItemData['_PAGES_OVERLAY_LANGUAGE'] : 0;
 				$subNaviItemURL = $this->cObj->getTypoLink_URL($subNaviItemData['uid'],$language);
+				
 				if($subNaviItemData['nav_hide'] == 0){
 					$subMenu .= '
 							<a href="'.$subNaviItemURL.'" class="sub accordion-entry '.$subNaviItemClasss.'">
@@ -200,19 +190,24 @@ HTML;
 				}	
 			}
 
-			if ($subMenu) {
+			if ($subMenu && $GLOBALS['TSFE']->id != 1) {
 				$mainMenu .= '
 						<div class="accordion-sub-content">
 							'.$subMenu.'
 						</div>
 					';
+				
 			}
+		}
+
+		if($GLOBALS['TSFE']->id != 1){
+			$page = 'pageActive';
 		}
 
 		$mainMenu .= '</div>';
 
 		$html = '
-				<div class="accordion-menu">
+				<div class="accordion-menu '.$page.'">
 					'.$mainMenu.'
 				</div>
 			';

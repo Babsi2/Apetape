@@ -31,6 +31,7 @@ function isMobileDevice() {var ua = navigator.userAgent;return ua.search(/iPhone
 
 $(document).ready(function(){
 
+	$('body').css('height', $(window).height());
 	$('a.browse, .controls .control').tooltip();
 
 	$('.accordion').accordion({
@@ -38,18 +39,22 @@ $(document).ready(function(){
 		collapsible: true
 	});
 
-	$('#content').css('height', $(document).height());
-	$('#content #inhalt .scrollable .items img').css('height', $(document).height());
+	// $('#content').css('height', $(window).height()-18);
+	$('#content #inhalt .scrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
 
+	$('#content #inhalt .scrollable-border .items img').css('height', $(window).height());
+	$('#content #inhalt .scrollable-border .items img').css('width', $(window).width());
 
-	$('#content #inhalt .no-scrollable .items img').css('height', $(document).height());
+	$('#content #inhalt .no-scrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .no-scrollable .items img').css('width', $(window).width());
 
-	$('#content #inhalt .opacityScrollable .items img').css('height', $(document).height());
+	$('#content #inhalt .opacityScrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .opacityScrollable .items img').css('width', $(window).width());
 
-	$('.scrollable').css('height', $(document).height());
+	$('#content #inhalt .menuBackground img').css('height', $(window).height());
+
+	$('.scrollable').css('height', $(window).height());
 	$(".scrollable").css('width', $(window).width());
 	$('.scrollable .items div').first().addClass('active');
 	$(".scrollable").scrollable({
@@ -62,7 +67,7 @@ $(document).ready(function(){
 	
 	$('#navi').click(function(){
 		if($(this).hasClass('active')){
-			$(this).removeClass('active').css('left','10px');
+			$(this).removeClass('active').css('left','0px');
 			$('#content-navi').css({
 				'overflow':'hidden',
 				'width':'0px'
@@ -75,6 +80,15 @@ $(document).ready(function(){
 			});
 		}
 	})
+
+	if($('#content-navi .accordion-menu').hasClass('pageActive')){
+		$('#content-navi').show();
+		$('#navi').show();
+	}else{
+		$('#content-navi').hide();
+		$('#navi').hide();
+	}
+
 	function show_position (event) {
 	  // X- und Y-Position des Mauscursors in Abhängigkeit des
 	  // Browsers ermitteln

@@ -65,3 +65,8 @@
 	background-image: url('../../typo3conf/ext/content/tca/tx_path.png') !important;
 }
 	
+.t3-icon-tx_accordion-default {
+	background-position: 0px 0px !important;
+	background-image: url('../../typo3conf/ext/content/tca/tx_accordion.png') !important;
+}
+	

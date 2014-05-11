@@ -53,7 +53,7 @@ $(function () {
     var frequencyData = new Uint8Array(analyser.frequencyBinCount);
     
     // Set up the visualisation elements
-    console.log(frequencyData);
+    
   
     // Get the frequency data and update the visualisation
     function update() {

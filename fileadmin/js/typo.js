@@ -41,6 +41,7 @@ $(document).ready(function(){
 	});
 	//$('.accordionMenue .accordion.ui-accordion').css('height', $(window).height() - 55);
 	$('.accordionMenue .section-0.ui-accordion-content').css('height', $(window).height() - 173);
+	$('.accordionMenue .section-1.ui-accordion-content').css('height', $(window).height() - 173);
 	// $('#content').css('height', $(window).height()-18);
 	$('#content #inhalt .scrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
@@ -118,6 +119,7 @@ $(document).ready(function(){
 	document.body.ontouchmove = show_position;
 
 });
+
 
 $(window).resize(function(){
 	$('#content').css('height', $('.image img').height());

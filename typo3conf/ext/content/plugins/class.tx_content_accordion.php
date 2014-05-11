@@ -35,11 +35,43 @@ class tx_content_accordion extends tslib_pibase {
 		$stmt->execute();
 		$accordions = $stmt->fetchAll();
 		
+		$javascript = t3lib_div::wrapJS('
+			var imageAddr = "http://www.tranquilmusic.ca/images/cats/Cat2.JPG" + "?n=" + Math.random();
+			var startTime, endTime;
+			var downloadSize = 5616998;
+			var download = new Image();
+			download.onload = function () {
+			    endTime = (new Date()).getTime();
+			    showResults();
+			}
+			startTime = (new Date()).getTime();
+			download.src = imageAddr;
+
+			function showResults() {
+			    var duration = (endTime - startTime) / 1000; //Math.round()
+			    var bitsLoaded = downloadSize * 8;
+			    var speedBps = (bitsLoaded / duration).toFixed(2);
+			    var speedKbps = (speedBps / 1024).toFixed(2);
+			    var speedMbps = (speedKbps / 1024).toFixed(2);
+			    alert("Your connection speed is: \n" + 
+			           speedBps + " bps\n"   + 
+			           speedKbps + " kbps\n" + 
+			           speedMbps + " Mbps\n" );
+			}
+		');
+		
 		foreach ($accordions as $as) {
-			$sections[] = array(
-				'title' => $as['title'],
-				'video' => $as['video']
-			);
+			if($as['video']){
+				$sections[] = array(
+					'title' => $as['title'],
+					'video' => $as['video']
+				);
+			}else{
+				$sections[] = array(
+					'title' => $as['title'],
+					'text' => $javascript
+				);
+			}
 		}
 		
 		$content .= $this->view->renderAccordion($sections,'accordion-'.$this->cObj->data['uid']);

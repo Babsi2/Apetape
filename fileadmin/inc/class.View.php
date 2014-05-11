@@ -84,9 +84,9 @@ HTML;
 					</h3>
 				';
 			}
-			
+			// var_dump($video);
 				
-			if($video) {
+			if($section['video'] && $section['title']) {
 				$accordionContent[] = $header.'
 					<div class="section-'.$key.'">
 						<div class="video">
@@ -98,16 +98,16 @@ HTML;
 						<div class="clear"></div>
 					</div>
 				';		
+				
 			}
 			else{
+
 				$accordionContent[] = $header.'
-				<div class="section">
-					<div class="text_text no_image">
-						'.$this->renderText(array('bodytext' => $section['content'])).'
-					</div>
-					<div class="clear"></div>
+				<div class="section-'.$key.'">
+					'.$section['text'].'
 				</div>
 				';	
+				
 			}
 						
 				

@@ -659,6 +659,11 @@ return array (
     'typo3\\cms\\core\\messaging\\flashmessage' => 'C:/xampp/htdocs/Apetape/typo3/sysext/core/Classes/Messaging/FlashMessage.php',
     'typo3\\cms\\core\\messaging\\abstractmessage' => 'C:/xampp/htdocs/Apetape/typo3/sysext/core/Classes/Messaging/AbstractMessage.php',
     'typo3\\cms\\fluid\\core\\compiler\\abstractcompiledtemplate' => 'C:/xampp/htdocs/Apetape/typo3/sysext/fluid/Classes/Core/Compiler/AbstractCompiledTemplate.php',
+    'typo3\\cms\\backend\\toolbar\\shortcuttoolbaritem' => 'C:/xampp/htdocs/Apetape/typo3/sysext/backend/Classes/Toolbar/ShortcutToolbarItem.php',
+    'typo3\\cms\\backend\\toolbar\\clearcachetoolbaritem' => 'C:/xampp/htdocs/Apetape/typo3/sysext/backend/Classes/Toolbar/ClearCacheToolbarItem.php',
+    'typo3\\cms\\backend\\toolbar\\livesearchtoolbaritem' => 'C:/xampp/htdocs/Apetape/typo3/sysext/backend/Classes/Toolbar/LiveSearchToolbarItem.php',
+    'typo3\\cms\\workspaces\\service\\workspaceservice' => 'C:/xampp/htdocs/Apetape/typo3/sysext/workspaces/Classes/Service/WorkspaceService.php',
+    'typo3\\cms\\backend\\view\\logoview' => 'C:/xampp/htdocs/Apetape/typo3/sysext/backend/Classes/View/LogoView.php',
   ),
   1 => 
   array (

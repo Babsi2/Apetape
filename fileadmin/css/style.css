@@ -34,6 +34,17 @@ a:hover{
 	
 }
 
+.waiting{
+	z-index: 999;
+	position: absolute;
+	width: 256px;
+	height: 88px;
+	left: 50%;
+	margin-left: -128px;
+	top: 50%;
+	background: url(../images/loading.GIF) no-repeat;
+}
+
 #content-navi{
 	width: 0px;
 	overflow: hidden;

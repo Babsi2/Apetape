@@ -487,5 +487,16 @@ return array (
     'ext_localconf.php' => 'C:/xampp/htdocs/Apetape/typo3conf/ext/simulatestatic/ext_localconf.php',
     'ext_icon' => 'ext_icon.png',
   ),
+  'cooluri' => 
+  array (
+    'type' => 'L',
+    'siteRelPath' => 'typo3conf/ext/cooluri/',
+    'typo3RelPath' => '../typo3conf/ext/cooluri/',
+    'ext_localconf.php' => 'C:/xampp/htdocs/Apetape/typo3conf/ext/cooluri/ext_localconf.php',
+    'ext_tables.php' => 'C:/xampp/htdocs/Apetape/typo3conf/ext/cooluri/ext_tables.php',
+    'ext_tables.sql' => 'C:/xampp/htdocs/Apetape/typo3conf/ext/cooluri/ext_tables.sql',
+    'ext_tables_static+adt.sql' => 'C:/xampp/htdocs/Apetape/typo3conf/ext/cooluri/ext_tables_static+adt.sql',
+    'ext_icon' => 'ext_icon.gif',
+  ),
 );
 #

@@ -104,7 +104,10 @@ HTML;
 
 				$accordionContent[] = $header.'
 				<div class="section-'.$key.'">
-					'.$section['text'].'
+					<span class="waiting"></span>
+					<div class="text">
+						'.$section['text'].'
+					</div>
 				</div>
 				';	
 				

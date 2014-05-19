@@ -70,6 +70,11 @@
 	background-image: url('../../typo3conf/ext/content/tca/tx_accordion.png') !important;
 }
 	
+.t3-icon-tx_midi-default {
+	background-position: 0px 0px !important;
+	background-image: url('../../typo3conf/ext/content/tca/tx_midi.png') !important;
+}
+	
 .t3-icon-tx_translations-default {
 	background-position: 0px 0px !important;
 	background-image: url('../../typo3conf/ext/translations/tx_translations.gif') !important;

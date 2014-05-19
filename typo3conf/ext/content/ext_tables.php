@@ -241,7 +241,14 @@ $temp = Array (
 			'type' => 'text',
 		)
 	),
-
+	'midi_settings' => array(
+		'exclude' => 1,
+		'label' => 'Midi-Tasten',
+		'config' => array(
+			'type' => 'inline',
+			'foreign_table' => 'tx_midi',
+		)
+	),
 	
 ),
 
@@ -429,6 +436,35 @@ t3lib_extMgm::addToInsertRecords("tx_accordion");
 			),
 			"dynamicConfigFile" => t3lib_extMgm::extPath($_EXTKEY)."tca/tca_accordion.php",
 			"iconfile" => t3lib_extMgm::extRelPath($_EXTKEY)."tca/tx_accordion.png",
+		),
+	);
+
+#############################################################################################################
+
+t3lib_extMgm::allowTableOnStandardPages("tx_midi");
+t3lib_extMgm::addToInsertRecords("tx_midi");
+
+	$TCA["tx_midi"] = Array (
+		"ctrl" => Array (
+			'title' => 'Datensatz: Midi',
+			'label' => 'title',
+			'tstamp' => 'tstamp',
+			'crdate' => 'crdate',
+			'cruser_id' => 'cruser_id',
+			"sortby" => "sorting",
+			"delete" => "deleted",
+			"dividers2tabs" => "1",
+			'type' => 'record_type',
+			'languageField' => 'sys_language_uid',
+		  	'transOrigPointerField' => 'l18n_parent',
+		  	'transOrigDiffSourceField' => 'l18n_diffsource',
+			"enablecolumns" => Array (
+				"disabled" => "hidden",
+				"starttime" => "starttime",
+				"endtime" => "endtime",
+			),
+			"dynamicConfigFile" => t3lib_extMgm::extPath($_EXTKEY)."tca/tca_midi.php",
+			"iconfile" => t3lib_extMgm::extRelPath($_EXTKEY)."tca/tx_midi.png",
 		),
 	);
 

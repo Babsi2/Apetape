@@ -37,8 +37,7 @@ $(document).ready(function(){
 	    this.downTimer = setTimeout(function() {
 	    	timerId = setInterval(function(){
 	    		$('#content #inhalt .scrollable .items .active img').toggleClass('zoomed-p-h');
-	    	},timeoutZoom);
-	    	console.log(timeoutZoom)
+	    	},200);
 	    	$('.buttons .button.Zoom-p-h').addClass('active');
 	    	press = true; 
 	    	console.log('press&hold');  
@@ -223,6 +222,17 @@ $(document).ready(function(){
 			$('.szene9Scrollable.szene9 .items .opacity2').addClass('opacified-o-n');
 		}
 		$(this).addClass('active');
+	});
+
+	$('.wuerd .button.wuerd').click(function(){
+		if($(this).hasClass('active')){
+			$(this).removeClass('active');
+			
+
+		}else{
+			console.log('wuerd');
+			$(this).addClass('active');
+		}
 	});
 });
 	

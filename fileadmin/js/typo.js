@@ -29,6 +29,29 @@ function isMobileDevice() {var ua = navigator.userAgent;return ua.search(/iPhone
     }
 }());
 
+var page = {
+	current: false,
+	next: false,
+	content_open: false
+}
+
+var debugging = false;
+
+function debug(msg) {
+	if (debugging) {
+		console.log(msg);
+	}
+}
+
+function showContent(content) {
+	// Set static constant
+	page.content_open = true;
+	// Re-populate inner content element
+	$("#complete_content").html(content);
+	// Slide down content pane
+	$("#contentWrap").slideDown("slow");
+}
+
 $(document).ready(function(){
 
 	$('body').css('height', $(window).height());
@@ -39,11 +62,12 @@ $(document).ready(function(){
 		collapsible: true,
 		heightStyle: "fill"
 	});
+
 	//$('.accordionMenue .accordion.ui-accordion').css('height', $(window).height() - 55);
-	$('.accordionMenue .section-0.ui-accordion-content').css('height', $(window).height() - 173);
-	$('.accordionMenue .section-1.ui-accordion-content').css('height', $(window).height() - 173);
+	$('.accordionMenue .section-0.ui-accordion-content').css('height', $(window).height() - 349);
+	$('.accordionMenue .section-1.ui-accordion-content').css('height', $(window).height() - 349);
 	// $('#content').css('height', $(window).height()-18);
-	$('#content #inhalt .scrollable .items img').css('height', $(window).height());
+	// $('#content #inhalt .scrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
 
 	$('#content #inhalt .scrollable-border .items img').css('height', $(window).height());
@@ -55,9 +79,9 @@ $(document).ready(function(){
 	$('#content #inhalt .opacityScrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .opacityScrollable .items img').css('width', $(window).width());
 
-	$('#content #inhalt .menuBackground img').css('height', $(window).height());
+	$('.menuBackground img').css('width', $(window).width());
 
-	$('.scrollable').css('height', $(window).height());
+	$('.scrollable').css('height', $(document).height()+30);
 	$(".scrollable").css('width', $(window).width());
 	$('.scrollable .items div').first().addClass('active');
 	$(".scrollable").scrollable({
@@ -67,6 +91,7 @@ $(document).ready(function(){
 			$('.scrollable .items > div:nth-child(' + (this.getIndex()+1) + ')').addClass('active');
 		}
 	});
+	
 	
 	$('#navi').click(function(){
 		if($(this).hasClass('active')){
@@ -92,6 +117,44 @@ $(document).ready(function(){
 		$('#navi').hide();
 	}
 
+	$("a.accLink").address();
+
+	$.address.change(function(event) {
+		debug("address change called");
+		// Set shortcut to URI value
+		var uri = event.value;
+		// Don't run ajax call for index page
+		console.log(event.value);
+		if (uri === "/") {
+			if (page.content_open) {
+				document.title = "MiracleBlue - Home";
+				// $("#nav a.navlink_selected").attr("class","navlink");
+				// $("#nav a.navlink_selected").blur();
+				$("#contentWrap").slideUp("slow");
+			}
+			return;
+		}
+		// Run ajax call to get JSON return data
+		$.getJSON(uri, function(data){
+			// Set document title
+			document.title = data.title;
+			console.log(data);
+			// Toggle navigation bar display
+			// $("#nav a.navlink_selected").attr("class","navlink");
+			// $("#nav a[href='"+uri+"']").attr("class","navlink_selected");
+			// Slide up content pane if it's already open
+			if (page.content_open) {
+				$("#contentWrap").slideUp("slow", function(){
+					// Slide down new content
+					showContent(data.content);
+				});
+			}
+			// Slide down new content
+			else {
+				showContent(data.content);
+			}
+		});
+	}); 
 
 
 	function show_position (event) {
@@ -117,7 +180,6 @@ $(document).ready(function(){
 	// festlegen
 	document.body.onmousemove = show_position;
 	document.body.ontouchmove = show_position;
-
 });
 
 
@@ -125,4 +187,50 @@ $(window).resize(function(){
 	$('#content').css('height', $('.image img').height());
 	$('#content #inhalt .imageCollection img').css('height', $('.image img').height());
 	$(".scrollable").scrollable('height', $('.image img').height());
+	$('.menuBackground img').css('width', $(window).width());
 });
+
+
+
+function loadInteractive(){
+	$(".section-0.ui-accordion-header").click(function(){
+		if($(this).hasClass("ui-accordion-header-active") && !$(".javascript").hasClass("active")){
+			$(".waiting").css("display", "block");
+			// window.location.hash = "/";
+			var imageAddr = "http://www.tranquilmusic.ca/images/cats/Cat2.JPG" + "?n=" + Math.random();
+			var startTime, endTime;
+			var downloadSize = 5616998;
+			var download = new Image();
+			download.onload = function () {
+			    endTime = (new Date()).getTime();
+			    showResults();
+			}
+			startTime = (new Date()).getTime();
+			download.src = imageAddr;
+
+			function showResults() {
+			    var duration = (endTime - startTime) / 1000; //Math.round()
+			    var bitsLoaded = downloadSize * 8;
+			    var speedBps = (bitsLoaded / duration).toFixed(2);
+			    var speedKbps = (speedBps / 1024).toFixed(2);
+			    var speedMbps = (speedKbps / 1024).toFixed(2);
+			   
+				$(".waiting").css("display", "none");
+				if(speedMbps >= 0.50){
+						console.log("zum Video");
+						$(".javascript").addClass("active").append("Sorry but your connection is too slow. You will be redirected to the default video in a few seconds!");
+						clearTimeout(this.downTimer);
+					this.downTimer = setTimeout(function() {
+							
+							$(".section-1.ui-accordion-header").click();
+						},2000);
+						
+				}else{
+					console.log("kann weiter gehen");
+					//window.location.href = "/index.php?id=6";
+					$(".javascript").addClass("active").append("Okey your Connection is fast enough. <a class='accLink' href='/apetape/apetape/kapiteleins.html' address='true'>Here</a> You can go to the interactive show.");
+				}
+			}
+		}
+	});
+}

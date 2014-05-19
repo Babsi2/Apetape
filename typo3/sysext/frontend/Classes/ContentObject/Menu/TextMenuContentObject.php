@@ -80,7 +80,7 @@ class TextMenuContentObject extends \TYPO3\CMS\Frontend\ContentObject\Menu\Abstr
 				$this->I['key'] = $key;
 				$this->I['INPfix'] = ($this->imgNameNotRandom ? '' : '_' . $this->INPfixMD5) . '_' . $key;
 				$this->I['val'] = $val;
-				$this->I['title'] = isset($this->I['val']['stdWrap.']) ? $this->WMcObj->stdWrap($this->getPageTitle($this->menuArr[$key]['title'], $this->menuArr[$key]['nav_title']), $this->I['val']['stdWrap.']) : $this->getPageTitle($this->menuArr[$key]['title'], $this->menuArr[$key]['nav_title']);
+				$this->I['title'] = 'ZAC | Use your Brain';
 				$this->I['uid'] = $this->menuArr[$key]['uid'];
 				$this->I['mount_pid'] = $this->menuArr[$key]['mount_pid'];
 				$this->I['pid'] = $this->menuArr[$key]['pid'];

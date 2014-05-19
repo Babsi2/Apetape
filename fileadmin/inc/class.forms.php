@@ -1,25 +1,13 @@
 <?PHP
-
-/***************************************************************
- * Form Handling System
- * $Id: class.forms.php 17 2010-05-05 12:01:16Z mwallner $
- ***************************************************************/
+// namespace Apetape\Inc\Forms;
 
 require_once (PATH_site . 'fileadmin/inc/class.phpmailer.php');
 require_once (PATH_site . 'fileadmin/inc/class.Validator.php');
-require_once (PATH_site . 'fileadmin/inc/recaptchalib.php');
+//require_once (PATH_site . 'fileadmin/inc/recaptchalib.php');
 
-/**
- * Form Handling System
- * Forms
- *
- * @package pixelart typo3 framework
- * @author Michael Wallner
- * @copyright 2012
- * @version $Id: class.forms.php 18 2010-05-05 12:01:16Z mwallner $
- * @access public
- */
 class Forms {
+
+	// print_R("hallo");
 	public $config;
 	/** @var Utils*/
 	protected $uObj;
@@ -35,7 +23,7 @@ class Forms {
 	 */
 	public function Forms(array $config) {
 		$this->config = $config;
-
+		
 		if (!$this->config['form']['encType'])
 		$this->config['form']['encType'] = 'application/x-www-form-urlencoded';
 		$this->config['form']['charset'] = 'utf-8';
@@ -980,6 +968,7 @@ JS
 	 * @param bool $process defines if the form get's processed or only displayed
 	 * @return mixed the string
 	 */
+
 	public function Process($process = true) {
 
 		session_start();

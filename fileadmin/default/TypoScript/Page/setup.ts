@@ -33,7 +33,7 @@ page {
 
 	# Add the icon that will appear in front of the url in the browser
 	# This icon will also be used for the bookmark menu in browsers
-	#shortcutIcon = {$filepaths.images}favicon.ico
+	shortcutIcon = {$filepaths.images}favicon.ico
 
 	config {
 		#doctype = html5
@@ -48,6 +48,11 @@ page {
 		removeDefaultJS = 1
 		removeDefaultCSS = 1
 		inlineStyle2TempFile = 1
+		simulateStaticDocuments = 0
+		baseURL = http://localhost/apetape/
+		tx_realurl_enable = 1
+		prefixLocalAnchors = all
+		
 	}
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	
@@ -57,16 +62,17 @@ page {
     includeJS.file2 = http://code.jquery.com/jquery-migrate-1.2.1.min.js
     includeJS.file3 = fileadmin/js/jquery-tools.js
     includeJS.file4 = fileadmin/js/jquery-ui-1.10.4.custom.js
-   # includeJS.file3 = fileadmin/js/jquery-ui-1.10.4.custom.min.js
+    includeJS.file5 = fileadmin/js/jquery-ui-1.10.4.custom.min.js
+    includeJS.file6 = fileadmin/js/jquery.address-1.5.js
+    includeJS.file7 = fileadmin/js/jquery.address-1.5.min.js
+    includeJS.file8 = fileadmin/js/jquery.validator.js
 	
-	
-	
-	includeJS.file5 = fileadmin/js/typo.js
-	includeJS.file6 = fileadmin/js/buttons.js
-	includeJS.file7 = fileadmin/js/controls.js
-	includeJS.file8 = fileadmin/js/webAudio.js
-	includeJS.file9 = fileadmin/js/keys.js
-	includeJS.file10 = fileadmin/js/be.js
+	includeJS.file9 = fileadmin/js/typo.js
+	includeJS.file10 = fileadmin/js/buttons.js
+	includeJS.file11 = fileadmin/js/controls.js
+	includeJS.file12 = fileadmin/js/webAudio.js
+	includeJS.file13 = fileadmin/js/be.js
+	includeJS.file14 = fileadmin/js/keys.js
 	
     includeCSS.file1 = fileadmin/css/jquery-ui-1.10.3.custom.css
     includeCSS.file2 = fileadmin/css/jquery-ui-1.10.3.custom.min.css
@@ -97,13 +103,12 @@ page {
 		COPYRIGHT= TEXT
 		COPYRIGHT.preUserFunc = tx_FEFunctions->getCopyright
 		
-		FOOTER = TEXT
-		FOOTER.preUserFunc = tx_FEFunctions->getFooter
+		
 
 		SUBTEMPLATE = TEMPLATE
 		SUBTEMPLATE {
 			template = FILE
-			template.file = fileadmin/templates/default.html
+			template.file.preUserFunc = tx_FEFunctions->getLayout
 			marks {
 
 				NAVI = TEXT
@@ -111,6 +116,15 @@ page {
 
 				CONTENT0 < styles.content.get
 				CONTENT0.select.where = colPos=0
+
+				CONTENT1 < styles.content.get
+				CONTENT1.select.where = colPos=1
+
+				CONTENT2 < styles.content.get
+				CONTENT2.select.where = colPos=2
+
+				FOOTER = TEXT
+				FOOTER.preUserFunc = tx_FEFunctions->getFooter
 			}
 		}
 		# Use the <body> subpart

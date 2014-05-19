@@ -19,8 +19,11 @@ t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_overlay.php','_over
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_path.php','_path','list_type',1);
 
 // Background Element
-t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_settings.php','_settings','list_type',1);
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_settings.php','_settings','CType',1);
 
+
+// Video Loop
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_video_loop.php','_video_loop','CType',1);
 
 // clear cache
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][] = 'EXT:content/class.content.php:&tx_content->clearCachePostProc';
@@ -30,4 +33,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['typo
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['typolinkLinkHandler']['sms'] = 'EXT:content/class.content.php:&user_parseLinkReturnLink';
 
 $TYPO3_CONF_VARS['FE']['eID_include']['download'] = 'EXT:content/download.php';
+
+$TYPO3_CONF_VARS['FE']['eID_include']['complete'] = 'EXT:content/ajax_complete.php';
 ?>

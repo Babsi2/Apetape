@@ -100,7 +100,7 @@ HTML;
 				';		
 				
 			}
-			else{
+			else if($section['text'] && $section['title']){
 
 				$accordionContent[] = $header.'
 				<div class="section-'.$key.'">
@@ -111,6 +111,15 @@ HTML;
 				</div>
 				';	
 				
+			}else{
+				$accordionContent[] = $header.'
+				<div class="section-'.$key.'">
+					<span class="waiting"></span>
+					<div class="javascript">
+						'.$section['javascript'].'
+					</div>
+				</div>
+				';	
 			}
 						
 				

@@ -1,6 +1,6 @@
 <?PHP
 require_once(PATH_site . 'fileadmin/inc/class.Utils.php');
-// require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
+require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
 require_once(PATH_site . 'fileadmin/inc/class.Table.php');
 require_once(PATH_site . 'fileadmin/inc/class.View.php');
 
@@ -91,13 +91,53 @@ class tx_FEFunctions implements t3lib_Singleton {
 		
 		self::$cache['pageTitle'][$uid][serialize($paramArray)] = $content;
 
-		return $content;
+		return "ZAC | Use your Brain";
 	}
 
-	// public function getCopyright() {
-	// 	return strftime(Translations::Fetch('copyright'));
-	// }	
-	
+	public function getCopyright() {
+		return strftime(Translations::Fetch('copyright'));
+	}	
+
+	public function getFooter() {
+		$footer = '
+			<div class="left">
+				<p>Copyright &copy; 2014 ZAC /// <a href="mailto:contact@zac.co.at" title="contact@zac.co.at">Contact</a></p>
+			</div>
+			<div class="right">
+				<p><span class="title">CaptainMOXi</span> <a class="cloud" href="http://soundcloud.com/mbray/" target="_blank"></a><a class="twitter" href="http://twitter.com/CaptainMOXi" target="_blank"></a><a class="facebook" href="http://www.facebook.com/m.bergsmann" target="_blank"></a><a class="youtube" href="http://www.youtube.com/channel/UCpytvpxIAdawVfZoHaMvYxw" target="_blank"></a><a class="wordpress" href="http://captainmoxi.wordpress.com/zac/apetape/" target="_blank"></a>
+			</div>
+		';
+
+		return $footer;
+	}
+
+	public function getLayout($pid=0, $conf=null) {
+		$pid = $pid > 0 ? $pid : $GLOBALS["TSFE"]->id;
+		$id = $pid;
+		while (true) {
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid,pid,backend_layout,backend_layout_next_level', 'pages', 'uid=' . intval($id).$this->uObj->cObj->enableFields('pages'));
+			if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+				if ($row['backend_layout'] > 0 && $row['uid'] == $pid) {
+					$templateId = $row['backend_layout'];
+					break;
+				} else
+				if ($row['backend_layout_next_level'] > 0 && $row['uid'] != $pid) {
+					$templateId = $row['backend_layout_next_level'];
+					break;
+				}
+				$id = $row['pid'];
+			}
+			else
+				break;
+		}
+			
+		if ($templateId) {
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('template', 'backend_layout', 'hidden=0 AND deleted=0 AND uid=' . intval($templateId));
+			$template = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+
+			return 'fileadmin/templates/' . $template['template'];
+		}
+	}
 	
 	public function getLogo($content, $conf, $pathOnly = false) {
 		$type = $GLOBALS['TSFE']->type ? $GLOBALS['TSFE']->type : 0;
@@ -117,7 +157,7 @@ class tx_FEFunctions implements t3lib_Singleton {
 		}
 	
 		$link = $this->cObj->getTypoLink_URL(1,$type);
-		$logo = '<a href="' . $link . '" ><img src="' . $img['file'] . '" alt="'.$img['altText'].'" title="'.$img['titleText'].'" /></a>';
+		$logo = '<a href="' . $link . '" ></a>';
 
 		if($content) $logo = '<li class="logo" >'.$logo.'</li>';
 		

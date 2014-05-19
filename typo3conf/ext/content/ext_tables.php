@@ -115,6 +115,21 @@ $temp = Array (
 		)
 	),
 	
+	"video" => Array (
+		"label" => "Video:",
+		"config" => Array (
+			"type" => "group",
+			"internal_type" => "file",
+			"allowed" => "*",
+			"max_size" => 50000,
+			"uploadfolder" => "fileadmin/user_upload/video",
+			"show_thumbs" => 1,
+			"size" => 1,
+			"minitems" => 0,
+			"maxitems" => 1,
+		)
+	),
+	
 	'link' => Array (
 		'exclude' => 1,
 		'label' => 'Link',
@@ -177,6 +192,15 @@ $temp = Array (
 		)
 	),
 
+	'wuerd' => array(
+		'exclude' => 1,
+		'label' => 'Würd Button',
+		'config' => Array(
+			'type' => 'check',
+			'default' => 0
+		)
+	),
+
 	'controls' => array(
    		'exclude' => 1,
    		'label' => 'Control Effects (folgende Reihenfolge: oben, links, rechts, untent)',
@@ -217,6 +241,8 @@ $temp = Array (
 			'type' => 'text',
 		)
 	),
+
+	
 ),
 
 
@@ -260,7 +286,7 @@ $TCA['tt_content']['types'][$_EXTKEY.'_background']['showitem']='CType;;14;,head
 t3lib_extMgm::addPlugin(Array('Backgroundelement', $_EXTKEY.'_background'),'CType');
 
 # Text Element
-$TCA['tt_content']['types'][$_EXTKEY.'_szene']['showitem']='CType;;14;,header,border, images, image_order, sound, button_effect_one, button_effect_two, button_effect_three, button_effect_four, controls';
+$TCA['tt_content']['types'][$_EXTKEY.'_szene']['showitem']='CType;;14;,header,border, images, image_order, sound, button_effect_one, button_effect_two, button_effect_three, button_effect_four, wuerd, controls';
 t3lib_extMgm::addPlugin(Array('Szenenelement', $_EXTKEY.'_szene'),'CType');
 
 # Accordion
@@ -282,9 +308,12 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_path']='tree'
 t3lib_extMgm::addPlugin(Array('Pfad: Ausgabe', $_EXTKEY.'_path'),'list_type');
 
 # body settings
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_path']='layout,select_key';
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_path']='tree';
-t3lib_extMgm::addPlugin(Array('Tastenbelegung', $_EXTKEY.'_settings'),'list_type');
+$TCA['tt_content']['types'][$_EXTKEY.'_settings']['showitem']='CType;;14;,header,bodytext,config';
+t3lib_extMgm::addPlugin(Array('Tastenbelegung', $_EXTKEY.'_settings'),'CType');
+
+# video loop
+$TCA['tt_content']['types'][$_EXTKEY.'_video_loop']['showitem']='CType;;14;,video';
+t3lib_extMgm::addPlugin(Array('Overlay Video Loop', $_EXTKEY.'_video_loop'),'CType');
 
 #############################################################################################################
 

@@ -1,13 +1,13 @@
 <?php
-require_once(PATH_tslib.'class.tslib_pibase.php');
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
-class tx_content_szene extends tslib_pibase {
+class tx_content_szene extends AbstractPlugin {
 
 		// Default extension plugin variables:
-	var $prefixId = 'tx_content_szene'; // Same as class name
-	var $scriptRelPath = 'plugins/class.tx_content_szene.php'; // Path to this script relative to the extension dir.
-	var $extKey = 'content'; // The extension key.
-	public $pi_checkCHash = TRUE;
+	// var $prefixId = 'tx_content_szene'; // Same as class name
+	// var $scriptRelPath = 'plugins/class.tx_content_szene.php'; // Path to this script relative to the extension dir.
+	// var $extKey = 'content'; // The extension key.
+	// public $pi_checkCHash = TRUE;
 
 	/**
 	 *
@@ -30,6 +30,24 @@ class tx_content_szene extends tslib_pibase {
 		$this->view = new  View($conf, $this->uObj);
 		#################################################################################
 		
+		$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_buttons_manual','server_address=:server_address','','sorting DESC','');
+		$stmt->bindValue(':server_address', $_SERVER['REMOTE_ADDR']);
+		$stmt->execute();
+		$settings = $stmt->fetchAll();
+
+		foreach($settings as $set){
+			$ascButton1 = ord($set['button_1']);
+			$ascButton2 = ord($set['button_2']);
+			$ascButton3 = ord($set['button_3']);
+			$ascButton4 = ord($set['button_4']);
+			$ascButton5 = ord($set['button_5']);
+
+			$ascControl1 = ord($set['control_top']);
+			$ascControl2 = ord($set['control_left']);
+			$ascControl3 = ord($set['control_bottom']);
+			$ascControl4 = ord($set['control_right']);
+		}
+		// print_R("button 1: ".$ascButton1.'\n button 2: '.$ascButton2.'\n button 3: '.$ascButton3.'\n button 4: '.$ascButton4.'\n button 5: '.$ascButton5);
 
 		if($this->cObj->data['border']){
 			$border = explode(',', $this->cObj->data['border']);
@@ -46,7 +64,7 @@ class tx_content_szene extends tslib_pibase {
 
 		if($this->cObj->data['sound']){
 			$sound = '
-				<audio id="player" controls autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'" style="display: block; position:absolute; z-index: 9999;"></audio>
+				<audio id="player" controls autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
 				';
 		}
 
@@ -111,7 +129,7 @@ class tx_content_szene extends tslib_pibase {
 			$buttons1 = $stmt->fetchAll();
 			
 			foreach($buttons1 as $button1){
-				$but1 = '<div class="button-1 button '.$button1['title'].'">'.$button1['title'].'</div>';
+				$but1 = '<div class="button-1 button '.$button1['title'].'" data-button1 = "'.$ascButton1.'">'.$button1['title'].'</div>';
 			}
 		}
 
@@ -123,7 +141,7 @@ class tx_content_szene extends tslib_pibase {
 			$buttons2 = $stmt->fetchAll();
 			
 			foreach($buttons2 as $button2){
-				$but2 = '<div class="button-2 button '.$button2['title'].'">'.$button2['title'].'</div>';
+				$but2 = '<div class="button-2 button '.$button2['title'].'" data-button2 = "'.$ascButton2.'">'.$button2['title'].'</div>';
 			}
 		}
  
@@ -135,7 +153,7 @@ class tx_content_szene extends tslib_pibase {
 			$buttons3 = $stmt->fetchAll();
 			
 			foreach($buttons3 as $button3){
-				$but3 = '<div class="button-3 button '.$button3['title'].'">'.$button3['title'].'</div>';
+				$but3 = '<div class="button-3 button '.$button3['title'].'" data-button3 = "'.$ascButton3.'">'.$button3['title'].'</div>';
 			}
 		}
 
@@ -147,10 +165,17 @@ class tx_content_szene extends tslib_pibase {
 			$buttons4 = $stmt->fetchAll();
 			
 			foreach($buttons4 as $button4){
-				$but4 = '<div class="button-4 button '.$button4['title'].'">'.$button4['title'].'</div>';
+				$but4 = '<div class="button-4 button '.$button4['title'].'" data-button4 = "'.$ascButton4.'">'.$button4['title'].'</div>';
 			}
 		}
 
+		if($this->cObj->data['wuerd']){
+			$wuerd = '
+				<div class="wuerdButton">
+					<div class="button-5 button wuerd" data-button5 = "'.$ascButton5.'">Würd</div>
+				</div>
+			';
+		}
 		// var_dump($this->cObj->data);
 		if($this->cObj->data['controls']){
 		
@@ -182,26 +207,28 @@ class tx_content_szene extends tslib_pibase {
 			}	
 		}
 
+		if($image){
+			$imageBorder = '
+				<div class="scrollable-border" id="scrollable">
+					<div class="items">
+						'.implode('', $image).'
+					</div>
+				</div>
+			';
+		}else{
+			$imageBorder = '';
+		}
+
 		if($this->cObj->data['image_order'] && ($this->cObj->data['pid'] != '81')){
 			$collection = '
 				<div class="opacityScrollable" id="scrollable">
 					<div class="items">
-						<div class="imageOrderLast opacity-1">
-							<div>'
-							.$this->cObj->IMAGE(array(
-								'file' => 'fileadmin/images/rauchwolke-bg.png',
-								
-								'altText' => 'test',
-								'titleText' => 'test',
-							)).'
-							</div>
-						</div>
 						'.implode('', $collection).'
 					</div>
 				</div>';
 			$classA = '
-				<a class="prev browse left opacity" title="'.$controlText[1].'"></a>
-				<a class="next browse right opacity" title="'.$controlText[2].'"></a>';
+				<a class="prev browse left opacity" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
+				<a class="next browse right opacity" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
 		}elseif($this->cObj->data['image_order'] && ($this->cObj->data['pid'] == '81')){
 			$collection = '
 				<div class="szene9Scrollable szene9" id="scrollable">
@@ -210,8 +237,8 @@ class tx_content_szene extends tslib_pibase {
 					</div>
 				</div>';
 			$classA = '
-				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'"></a>
-				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'"></a>';
+				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
+				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
 		}else{
 			$collection = '
 				<div class="scrollable" id="scrollable">
@@ -220,17 +247,11 @@ class tx_content_szene extends tslib_pibase {
 					</div>
 				</div>';
 			$classA = '
-				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'"></a>
-				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'"></a>';
+				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
+				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
 		}
 
-		$content = '    
-			<div class="scrollable-border" id="scrollable">
-				<div class="items">
-					'.implode('', $image).'
-				</div>
-			</div>
-			'.$sound.
+		$content = $imageBorder.$sound.
 			$classA.
 			$collection.'
 			<div class="buttons">
@@ -239,17 +260,13 @@ class tx_content_szene extends tslib_pibase {
 				$but3.
 				$but4.'
 			</div>
+			'.$wuerd.'
 			<div class="controls">
-				<div class="control top '.$upDown.' '.$inactive.'" '.($controlText[0] ? 'title="'.$controlText[0].'"' : '').'></div>
-				<div class="control bottom '.$upDown.' '.$inactive.'" '.($controlText[3] ? 'title="'.$controlText[3].'"' : '').'></div>
+				<div class="control top '.$upDown.' '.$inactive.'" '.($controlText[0] ? 'title="'.$controlText[0].'"' : '').' data-controlTop="'.$ascControl1.'""></div>
+				<div class="control bottom '.$upDown.' '.$inactive.'" '.($controlText[3] ? 'title="'.$controlText[3].'"' : '').' data-controlBottom="'.$ascControl3.'"></div>
 			</div>';
 
 		return $content;
 	}
 	
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/content/plugins/class.tx_content_szene.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/content/plugins/class.tx_content_szene.php']);
-}
-?>

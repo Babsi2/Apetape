@@ -56,6 +56,14 @@ $TCA["tx_accordion"] = Array (
 				"eval" => "required",
 			)
 		),
+
+		"text" => Array(
+			"exclude" => 1,
+			"label" => "Text",
+			"config" => array(
+				"type" => "text",
+			)
+		),
 		
 		"video" => Array (
 			"label" => "Video:",
@@ -74,7 +82,7 @@ $TCA["tx_accordion"] = Array (
 	),
 	"types" => Array (
 		"0" => Array("showitem" => "
-			--div--;Accordion,title, video,
+			--div--;Accordion,title, text, video,
 			")
 	),
 );

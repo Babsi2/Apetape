@@ -241,7 +241,7 @@ class SimpleFileBackend extends \TYPO3\CMS\Core\Cache\Backend\AbstractBackend im
 			throw new \TYPO3\CMS\Core\Cache\Exception('The temporary cache file "' . $temporaryCacheEntryPathAndFilename . '" could not be written.', 1334756737);
 		}
 		$cacheEntryPathAndFilename = $this->cacheDirectory . $entryIdentifier . $this->cacheEntryFileExtension;
-		rename($temporaryCacheEntryPathAndFilename, $cacheEntryPathAndFilename);
+		//rename($temporaryCacheEntryPathAndFilename, $cacheEntryPathAndFilename);
 	}
 
 	/**

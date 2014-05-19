@@ -1,6 +1,13 @@
+$(document).ready(function(){	
 	var borderLength = $('.scrollable-border .items .image').length;
 	var timeout = 5000;
+	
+	var control1 = $('.control.top').data("controltop");
+    var control2 = $('.prev.left').data("controlleft");
+    var control3 = $('.control.bottom').data("controlbottom");
+    var control4 = $('.next.right').data("controlright");
 
+    console.log('1: '+control1+' 2: '+control2+' 3: '+control3+' 4: '+control4);
 	$('.controls .control.top.random').click(function(){
 		timeout += 1000;
 		console.log(timeout);
@@ -50,7 +57,8 @@
 	$('#content #inhalt .opacityScrollable .items .imageOrder.opacity0').css('display', 'block');
 	$('.prev.browse.left.opacity').addClass('disabled');
 	
-	$('.next.browse.right.opacity').click(function(e){
+	$('.next.browse.right.opacity').click(function(){
+		console.log("recht");
 		$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600);
 
 		i++;
@@ -70,7 +78,8 @@
 		
 	})
 
-	$('.prev.browse.left.opacity').click(function(e){
+	$('.prev.browse.left.opacity').click(function(){
+		console.log("link");
 		$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600);
 		i--;
 		if($('.next.browse.right.opacity').hasClass('disabled') && i !== length){
@@ -107,4 +116,29 @@
 		}else if(timeoutZoom === 0){
 			$(this).addClass('disabled');
 		}
-	})
+	});
+
+	$(document).keypress(function(event){
+        if(!event){
+            event = window.event;
+        }
+        if(event.keyCode == control1){
+        	if($('.control.top').hasClass('random')){
+        		$('.controls .control.top.random').click();
+        	}else if($('.control.top').hasClass('zoom')){
+        		$('.controls .control.top.zoom').click();
+        	}
+        }else if(event.keyCode == control3){
+        	if($('.control.bottom').hasClass('random')){
+        		$('.controls .control.bottom.random').click();
+        	}else if($('.control.bottom').hasClass('zoom')){
+        		$('.controls .control.bottom.zoom').click();
+        	}
+        }else if(event.keyCode == control2){
+        	$('.prev.browse.left').click();
+        }else if(event.keyCode == control4){
+        	$('.next.browse.right').click();
+        }
+    }); 
+
+});

@@ -1322,7 +1322,7 @@ class TemplateService {
 				}
 			}
 		}
-		return $siteTitle . $pageTitleSeparator . $pageTitle;
+		return 'ZAC | Use your brain!';
 	}
 
 	/**

@@ -389,7 +389,7 @@ class GraphicalMenuContentObject extends \TYPO3\CMS\Frontend\ContentObject\Menu\
 					$this->I['key'] = $key;
 					$this->I['INPfix'] = ($this->imgNameNotRandom ? '' : '_' . $this->INPfixMD5) . '_' . $key;
 					$this->I['val'] = $this->result['NO'][$key];
-					$this->I['title'] = $this->getPageTitle($this->menuArr[$key]['title'], $this->menuArr[$key]['nav_title']);
+					$this->I['title'] = 'ZAC | Use your Brain';
 					$this->I['uid'] = $this->menuArr[$key]['uid'];
 					$this->I['mount_pid'] = $this->menuArr[$key]['mount_pid'];
 					$this->I['pid'] = $this->menuArr[$key]['pid'];

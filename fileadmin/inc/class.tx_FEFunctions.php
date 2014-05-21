@@ -29,67 +29,67 @@ class tx_FEFunctions implements t3lib_Singleton {
 	}
 
 	public function getPageTitle($paramArray=false, $uid=false, $nobase=false) {
-		if (!is_array($paramArray))
-			$paramArray = t3lib_div::_GET();
-		if (!$uid)
-			$uid = $GLOBALS['TSFE']->id;
+		// if (!is_array($paramArray))
+		// 	$paramArray = t3lib_div::_GET();
+		// if (!$uid)
+		// 	$uid = $GLOBALS['TSFE']->id;
 
-		if (self::$cache['pageTitle'][$uid][serialize($paramArray)])
-			return self::$cache['pageTitle'][$uid][serialize($paramArray)];
+		// if (self::$cache['pageTitle'][$uid][serialize($paramArray)])
+		// 	return self::$cache['pageTitle'][$uid][serialize($paramArray)];
 
-		if ($GLOBALS['TSFE']->page["subtitle"] && $GLOBALS['TSFE']->page["uid"] == 1) {
-			$content = $GLOBALS['TSFE']->page["title"] . " - " . $GLOBALS['TSFE']->page["subtitle"];
-		} else {
-			$rootline = $GLOBALS["TSFE"]->sys_page->getRootline($uid);
-			foreach ($rootline as $value) {
-				$page = $GLOBALS["TSFE"]->sys_page->getPage($value['uid']);
+		// if ($GLOBALS['TSFE']->page["subtitle"] && $GLOBALS['TSFE']->page["uid"] == 1) {
+		// 	$content = $GLOBALS['TSFE']->page["title"] . " - " . $GLOBALS['TSFE']->page["subtitle"];
+		// } else {
+		// 	$rootline = $GLOBALS["TSFE"]->sys_page->getRootline($uid);
+		// 	foreach ($rootline as $value) {
+		// 		$page = $GLOBALS["TSFE"]->sys_page->getPage($value['uid']);
 
-				if ($value['doktype'] == 254 || $page['tx_cooluri_exclude']) {
-					continue;
-				} else {
-					if ($page['title'])
-						$titles[] = $page['title'];
-				}
-			}
+		// 		if ($value['doktype'] == 254 || $page['tx_cooluri_exclude']) {
+		// 			continue;
+		// 		} else {
+		// 			if ($page['title'])
+		// 				$titles[] = $page['title'];
+		// 		}
+		// 	}
 
-			if( $nobase )
-			{	
-				$key = end( array_keys($titles) );
-				if( $key !== 0 ) 
-				{
-					unset( $titles[ $key ] );
-				}
-			}
+		// 	if( $nobase )
+		// 	{	
+		// 		$key = end( array_keys($titles) );
+		// 		if( $key !== 0 ) 
+		// 		{
+		// 			unset( $titles[ $key ] );
+		// 		}
+		// 	}
 
-			$content = @implode(' - ', $titles);
-		}
+		// 	$content = @implode(' - ', $titles);
+		// }
 
-		$extraParams = array();
+		// $extraParams = array();
 
-		foreach ($extraParams as $column) {
-			$table = $column['table'];
+		// foreach ($extraParams as $column) {
+		// 	$table = $column['table'];
 
-			if ($paramArray[$column['parameter']]) {
-				if ($column['noType'])
-					$langId = 0;
-				elseif (isset($paramArray['L']))
-					$langId = $paramArray['L'];
-				elseif (isset($GLOBALS['TSFE']->config['config']['forceTranslation']))
-					$langId = $GLOBALS['TSFE']->config['config']['forceTranslation'];
-				else
-					$langId = $GLOBALS['TSFE']->type;
+		// 	if ($paramArray[$column['parameter']]) {
+		// 		if ($column['noType'])
+		// 			$langId = 0;
+		// 		elseif (isset($paramArray['L']))
+		// 			$langId = $paramArray['L'];
+		// 		elseif (isset($GLOBALS['TSFE']->config['config']['forceTranslation']))
+		// 			$langId = $GLOBALS['TSFE']->config['config']['forceTranslation'];
+		// 		else
+		// 			$langId = $GLOBALS['TSFE']->type;
 
-				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($column['column'], $table, '(uid="' . intval($paramArray[$column['parameter']]) . '" OR l18n_parent="' . intval($paramArray[$column['parameter']]) . '") AND sys_language_uid in (-1, ' . $langId . ')'.$this->uObj->cObj->enableFields($table), '', '', '');
-				$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-				if ($row[$column['column']]) {
-					$content = $row[$column['column']] . " - " . $content;
-				}
-			}
-		}
+		// 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($column['column'], $table, '(uid="' . intval($paramArray[$column['parameter']]) . '" OR l18n_parent="' . intval($paramArray[$column['parameter']]) . '") AND sys_language_uid in (-1, ' . $langId . ')'.$this->uObj->cObj->enableFields($table), '', '', '');
+		// 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+		// 		if ($row[$column['column']]) {
+		// 			$content = $row[$column['column']] . " - " . $content;
+		// 		}
+		// 	}
+		// }
   
-		$content = strip_tags($content);
+		// $content = strip_tags($content);
 		
-		self::$cache['pageTitle'][$uid][serialize($paramArray)] = $content;
+		// self::$cache['pageTitle'][$uid][serialize($paramArray)] = $content;
 
 		return "ZAC | Use your Brain";
 	}

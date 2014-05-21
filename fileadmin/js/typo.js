@@ -43,14 +43,15 @@ function debug(msg) {
 	}
 }
 
-function showContent(content) {
-	// Set static constant
-	page.content_open = true;
-	// Re-populate inner content element
-	$("#complete_content").html(content);
-	// Slide down content pane
-	$("#contentWrap").slideDown("slow");
-}
+// function showContent(content) {
+// 	// Set static constant
+// 	page.content_open = true;
+// 	console.log(content);
+// 	// Re-populate inner content element
+// 	//$("#complete_content").html(content);
+// 	// Slide down content pane
+// 	//$("#contentWrap").slideDown("slow");
+// }
 
 $(document).ready(function(){
 
@@ -116,45 +117,57 @@ $(document).ready(function(){
 		$('#content-navi').hide();
 		$('#navi').hide();
 	}
+	// var currentTime = $('#player')[0].currentTime;
+	// var duration = document.getElementById('player').duration;
+	// console.log(currentTime);
+	// console.log(duration);
+	// if($('#player')[0].currentTime == $('#player')[0].duration){
+	// 	console.log('finish');
+	// }
+	// $("a.sub.accordion-entry").address();
 
-	$("a.accLink").address();
-
-	$.address.change(function(event) {
-		debug("address change called");
-		// Set shortcut to URI value
-		var uri = event.value;
-		// Don't run ajax call for index page
-		console.log(event.value);
-		if (uri === "/") {
-			if (page.content_open) {
-				document.title = "MiracleBlue - Home";
-				// $("#nav a.navlink_selected").attr("class","navlink");
-				// $("#nav a.navlink_selected").blur();
-				$("#contentWrap").slideUp("slow");
-			}
-			return;
-		}
+	// $.address.change(function(event) {
+	// 	debug("address change called");
+	// 	// Set shortcut to URI value
+	// 	console.log(event);
+	// 	var uri = event.value;
+	// 	// Don't run ajax call for index page
+		
+	// 	if (uri == "/") {
+	// 		if (page.content_open) {
+	// 			console.log("yeah");
+	// 			document.title = "MiracleBlue - Home";
+	// 			// $("#nav a.navlink_selected").attr("class","navlink");
+	// 			// $("#nav a.navlink_selected").blur();
+	// 			// $("#contentWrap").slideUp("slow");
+	// 		}
+	// 		return;
+	// 	}else{
+	// 		console.log("puff");
+	// 		$.getJSON(uri, function(data){
+	// 			// Set document title
+	// 			console.log("data");
+	// 			document.title = data.title;
+	// 			console.log(data.content);
+	// 			// Toggle navigation bar display
+	// 			// $("#nav a.navlink_selected").attr("class","navlink");
+	// 			// $("#nav a[href='"+uri+"']").attr("class","navlink_selected");
+	// 			// Slide up content pane if it's already open
+	// 			if (page.content_open) {
+	// 				// $("#contentWrap").slideUp("slow", function(){
+	// 					// Slide down new content
+	// 					showContent(data.content);
+	// 				// });
+	// 			}
+	// 			// Slide down new content
+	// 			else {
+	// 				showContent(data.content);
+	// 			}
+	// 		});
+	// 	}
 		// Run ajax call to get JSON return data
-		$.getJSON(uri, function(data){
-			// Set document title
-			document.title = data.title;
-			console.log(data);
-			// Toggle navigation bar display
-			// $("#nav a.navlink_selected").attr("class","navlink");
-			// $("#nav a[href='"+uri+"']").attr("class","navlink_selected");
-			// Slide up content pane if it's already open
-			if (page.content_open) {
-				$("#contentWrap").slideUp("slow", function(){
-					// Slide down new content
-					showContent(data.content);
-				});
-			}
-			// Slide down new content
-			else {
-				showContent(data.content);
-			}
-		});
-	}); 
+		
+	// }); 
 
 
 	function show_position (event) {

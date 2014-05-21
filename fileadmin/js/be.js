@@ -1,5 +1,4 @@
 
-console.log("hallo");
 function getXY(id,x,y,table,offset,offsetCoords,xField,yField) {
 
 	document.editform["data["+table+"]["+id+"]["+xField+"]_hr"].value = (x)-offsetCoords;
@@ -11,8 +10,6 @@ function getXY(id,x,y,table,offset,offsetCoords,xField,yField) {
 }
 
 function getXYText(id,x,y,table,field) {
-	console.log("hallo");
-	console.log(id);
 	dot = document.createElement('div');
 	dot.setAttribute('style','background:url(../fileadmin/images/be_dot.gif);position:absolute;top:'+y+'px;left:'+x+'px;width:3px; height:3px;');
 	document.getElementById('teamPositionMap').appendChild(dot);

@@ -24,6 +24,7 @@ $(function () {
     // fixes from Paul Irish and Tino Zijdel
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+    
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -52,8 +53,8 @@ $(function () {
     analyser.fftSize = 64;
     var frequencyData = new Uint8Array(analyser.frequencyBinCount);
     
+    // console.log(analyser);
     // Set up the visualisation elements
-    
   
     // Get the frequency data and update the visualisation
     function update() {
@@ -71,9 +72,10 @@ $(function () {
         rotateTime = (values/length)*10;
         // console.log(analyser.getByteFrequencyData(frequencyData));
         $('#content #inhalt .scrollable .items .active img.zoomed').css('-webkit-transform', 'scale('+(1.00+(frequencyData[0]/3000*5+0.1)) + ','+(1.00+(frequencyData[0]/3000*5+0.1))+')');
-        
-        // $('#content img.unzoomed').css('-webkit-transform', 'scale(1.00, 1.00)');
-           
+        // console.log($('#player')[0].ended);
+        // if($('#player')[0].ended === true){
+        //     change();
+        // }
     };
 
     // Hook up the audio routing...
@@ -83,13 +85,46 @@ $(function () {
     var source = context.createMediaElementSource(this);
     source.connect(analyser);
     analyser.connect(context.destination);
+    
   });
 
     // Kick it off...
     update();
 });
 
+function change(){
+    console.log("change");
+    if(location.href == "/apetape/kapitel-1.html"){
+        window.location.href = "/apetape/kapitel-2.html"
+    }else if(location.href == "/apetape/kapitel-2.html"){
+        window.location.href = "/apetape/kapitel-3.html";
+    }else if(location.href == "/apetape/kapitel-3.html"){
+        window.location.href = "/apetape/kapitel-4.html";
+    }else if(location.href == "/apetape/kapitel-4.html"){
+        window.location.href = "/apetape/kapitel-5.html";
+    }else if(location.href == "/apetape/kapitel-5.html"){
+        window.location.href = "/apetape/kapitel-6.html";
+    }else if(location.href == "/apetape/kapitel-6.html"){
+        window.location.href = "/apetape/kapitel-7.html";
+    }else if(location.href == "/apetape/kapitel-7.html"){
+        window.location.href = "/apetape/kapitel-8.html";
+    }else if(location.href == "/apetape/kapitel-8.html"){
+        window.location.href = "/apetape/kapitel-9.html";
+    }
+    
+}
 $(document).ready(function(){
+    if($('#player')[0] !== undefined){
+        timerId = setInterval(function(){
+            if($('#player')[0].ended == false){
+                console.log($('#player')[0].ended);
+            }else{
+                console.log("I am True");
+                change();
+            }
+        },300);
+    }
+
     $('#content .buttons .button.Zoom').click(function(){
         if($(this).hasClass('active')){
             $(this).removeClass('active');
@@ -104,7 +139,7 @@ $(document).ready(function(){
             // $('#content img').removeClass('unzoomed');
         }
     });
-
+    
     $(document).keydown(function(event){
         if(!event){
             event = window.event;
@@ -177,34 +212,5 @@ $(document).ready(function(){
         }
     }); 
 
-    // $(document).keydown(function(event){
-    //     if(!event){
-    //         event = window.event;
-    //     }
-    //     if((event.keyCode == 74 && $('.button-1').hasClass('Rotate')) || (event.keyCode == 75 && $('.button-2').hasClass('Rotate')) || (event.keyCode == 76 && $('.button-3').hasClass('Rotate')) || (event.keyCode == 153 && $('.button-4').hasClass('Rotate')) ){
-            
-    //         clearTimeout(this.downTimer);
-    //         this.downTimer = setTimeout(function() {
-    //             var timerId = setInterval(function(){
-    //                 var whichQuote = get_randomRotate();
-    //                 // console.log(rotateTime);
-    //                 if(whichQuote === 1){
-    //                     $('#content #inhalt .scrollable .items .active img').toggleClass('rotated');
-    //                 }else if(whichQuote === 0){
-    //                     $('#content #inhalt .scrollable .items .active img').toggleClass('rotatedUZ');
-    //                 }
-    //             },rotateTime);
-    //             $('.buttons .button.Rotate').addClass('active');
-    //             press = true;  
-    //         }, 100);
-    //     }
-    // }).keyup(function(event){
-    //     clearInterval(timerId);
-    //     clearTimeout(this.downTimer);
-    //     $('.buttons .button.Rotate').removeClass('active');
-    //     if(press === true){
-    //         $('#content #inhalt .scrollable .items .active img').removeClass('rotated').removeClass('rotatedUZ');
-    //         press = false;
-    //     }
-    // }); 
+     
 })

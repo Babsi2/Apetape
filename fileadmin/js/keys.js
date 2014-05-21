@@ -9,7 +9,7 @@ $(document).ready(function(){
     var button2Key = $('.button-2').data("button2");
     var button3Key = $('.button-3').data("button3");
     var button4Key = $('.button-4').data("button4");
-
+    var button5Key = $('.button-5').data("button5");
    
 
     if(button1Key != ''){
@@ -34,6 +34,12 @@ $(document).ready(function(){
         key4 = button4Key;
     }else{
         key4 = 79;
+    }
+
+    if(button5Key != ''){
+        key5 = button5Key;
+    }else{
+        key5 = 32;
     }
 
     $(document).keydown(function(event){

@@ -7,7 +7,7 @@ $(document).ready(function(){
     var control3 = $('.control.bottom').data("controlbottom");
     var control4 = $('.next.right').data("controlright");
 
-    console.log('1: '+control1+' 2: '+control2+' 3: '+control3+' 4: '+control4);
+    
 	$('.controls .control.top.random').click(function(){
 		timeout += 1000;
 		console.log(timeout);
@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 	$('.controls .control.bottom.random').click(function(){
 		timeout -= 1000;
-		console.log(timeout);
+		
 		if($('.controls .control.top').hasClass('disabled') && timeout < 10000){
 			$('.controls .control.top').removeClass('disabled');
 		}else if(timeout === 0){
@@ -58,7 +58,7 @@ $(document).ready(function(){
 	$('.prev.browse.left.opacity').addClass('disabled');
 	
 	$('.next.browse.right.opacity').click(function(){
-		console.log("recht");
+		
 		$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600);
 
 		i++;
@@ -74,12 +74,12 @@ $(document).ready(function(){
 		}else{
 			$('#content #inhalt .opacityScrollable .items .imageOrder.opacity'+i).fadeIn(600);
 		}
-		console.log(i);
+		
 		
 	})
 
 	$('.prev.browse.left.opacity').click(function(){
-		console.log("link");
+		
 		$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600);
 		i--;
 		if($('.next.browse.right.opacity').hasClass('disabled') && i !== length){
@@ -94,13 +94,13 @@ $(document).ready(function(){
 		}else{
 			$('#content #inhalt .opacityScrollable .items .imageOrder.opacity'+i).fadeIn(600);
 		}
-		console.log(i);
+		
 	})
 
 	var timeoutZoom = 1000;
 	$('.controls .control.top.zoom').click(function(){
 		timeoutZoom += 100;
-		console.log(timeoutZoom);
+		
 		if($('.controls .control.bottom.zoom').hasClass('disabled') && timeoutZoom > 0){
 			$('.controls .control.bottom.zoom').removeClass('disabled');
 		}else if(timeoutZoom === 1000){
@@ -110,7 +110,7 @@ $(document).ready(function(){
 	})
 	$('.controls .control.bottom.zoom').click(function(){
 		timeoutZoom -= 100;
-		console.log(timeoutZoom);
+		
 		if($('.controls .control.top.zoom').hasClass('disabled') && timeoutZoom < 1000){
 			$('.controls .control.top.zoom').removeClass('disabled');
 		}else if(timeoutZoom === 0){

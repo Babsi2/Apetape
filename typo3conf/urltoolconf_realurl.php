@@ -113,7 +113,7 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl'] = array (
 // if you don't want .html-URLs set the following to "false" (e.g. 'defaultToHTMLsuffixOnPrev' => false,)
 // then you get http://www.yourdomain.com/imprint/ instead of http://www.yourdomain.com/imprint.html
 //
-            'defaultToHTMLsuffixOnPrev' => true,
+            'defaultToHTMLsuffixOnPrev' => false,
             'index' => array (
                 'rss.xml' => array (
                     'keyValues' => array (

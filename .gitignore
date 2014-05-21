@@ -3,3 +3,6 @@
 /_.htaccess
 /typo3conf/AdditionalConfiguration.php
 /ChangeLog
+/t3lib
+/typo3temp
+/sftp-config.json

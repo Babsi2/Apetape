@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "realurl".
  *
- * Auto generated 12-05-2014 08:41
+ * Auto generated 20-05-2014 09:37
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next
@@ -41,8 +41,6 @@ $EM_CONF[$_EXTKEY] = array (
 		),
 		'conflicts' => 
 		array (
-			'cooluri' => '',
-			'simulatestatic' => '',
 		),
 		'suggests' => 
 		array (

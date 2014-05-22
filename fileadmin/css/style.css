@@ -273,10 +273,10 @@ li.spacer{
 
 
 #complete_content{
-	position: fixed;
+	position: absolute;
 	top: 0;
 	width: 100%;
-	height: 100%;
+	/*height: 100%;*/
 }
 
 #complete_content #navi{
@@ -313,6 +313,7 @@ li.spacer{
 	position: absolute;
 	top: 0;
 	height: 100%;
+	width:100%;
 }
 
 #inhalt{
@@ -375,44 +376,44 @@ li.spacer{
 	-webkit-transform:scale(1.2,1.2);   
 }*/
 
-#complete_content #content #inhalt .scrollable .items img.zoomed-p-h{
+#complete_content #content #inhalt .opacityScrollable .items img.zoomed-p-h{
 	transform:scale(2.5,2.5);
 	-ms-transform:scale(2.5,2.5); /* IE 9 */
 	-webkit-transform:scale(2.5,2.5); /* Safari and Chrome */	    
 }
 
-#complete_content #content #inhalt .scrollable .items img.vibe{
+#complete_content #content #inhalt .opacityScrollable .items img.vibe{
 	transform:scale(1.05,1.05);
 	-ms-transform:scale(1.05,1.05); /* IE 9 */
 	-webkit-transform:scale(1.05,1.05); /* Safari and Chrome */	    
 }
 
-#complete_content #content #inhalt .scrollable .items img.rotated{
+#complete_content #content #inhalt .opacityScrollable .items img.rotated{
 	transform:rotate(-10deg);
 	-ms-transform:rotate(-10deg); /* IE 9 */
 	-webkit-transform:rotate(-10deg); /* Safari and Chrome */
 
 }
 
-#complete_content #content #inhalt .scrollable .items img.strobo{
+#complete_content #content #inhalt .opacityScrollable .items img.strobo{
 	opacity: 0;	    
 }
 
-#complete_content #content #inhalt .scrollable .items img.rotatedUZ{
+#complete_content #content #inhalt .opacityScrollable .items img.rotatedUZ{
 	transform:rotate(10deg);
 	-ms-transform:rotate(10deg); /* IE 9 */
 	-webkit-transform:rotate(10deg); /* Safari and Chrome */
 
 }
 
-#complete_content #content #inhalt .scrollable .items img.rotated.zoomed{
+#complete_content #content #inhalt .opacityScrollable .items img.rotated.zoomed{
 	transform:rotate(10deg) scale(1.5,1.5);
 	-ms-transform:rotate(10deg) scale(1.5,1.5); /* IE 9 */
 	-webkit-transform:rotate(10deg) scale(1.5,1.5); /* Safari and Chrome */
 
 }
 
-#complete_content #content #inhalt .scrollable .items img.opacified{
+#complete_content #content #inhalt .opacityScrollable .items img.opacified{
 	animation: opacity 4s linear;   
 	-webkit-animation: opacity 4s linear;
     -moz-animation: opacity 4s linear;
@@ -445,7 +446,7 @@ li.spacer{
 	z-index: 11;
 }
 
-#complete_content #content #inhalt .scrollable .items img.opacified-o-s{
+#complete_content #content #inhalt .opacityScrollable .items img.opacified-o-s{
 	opacity: 0.7;    
 }
 
@@ -457,7 +458,7 @@ li.spacer{
 	display: block;
 	z-index: 990;
 	height: 25px;
-	position: absolute;
+	position: fixed;
 	bottom: 60px;
 	right: 10px;
 	font-size: 34px;
@@ -492,7 +493,7 @@ li.spacer{
 	display: block;
 	z-index: 990;
 	height: 130px;
-	position: absolute;
+	position: fixed;
 	bottom: 20px;
 	left: 75px;
 	font-size: 34px;
@@ -513,7 +514,7 @@ li.spacer{
 	height: 45px;
 	bottom: 67px;
 	z-index: 990;
-	position: absolute;
+	position: fixed;
 	cursor: pointer;
 }
 
@@ -542,7 +543,7 @@ li.spacer{
 
 #complete_content #content #inhalt .browse.right{
 	
-	position: absolute;
+	/*position: absolute;*/
 	left: 125px;
 	width: 50px;
 	height: 45px;

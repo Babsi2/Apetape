@@ -56,7 +56,6 @@ class tx_content_szene extends AbstractPlugin {
 				'file' => (basename($b) == $b ? 'fileadmin/user_upload/images/rahmen/'.$b : $b),
 				
 				'altText' => 'border',
-				'titleText' => 'border'
 			)).'</div>';
 			}
 			
@@ -64,7 +63,7 @@ class tx_content_szene extends AbstractPlugin {
 
 		if($this->cObj->data['sound']){
 			$sound = '
-				<audio id="player" controls autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'" style="display: block; position:absolute; left:300px; top:200px; z-index: 9999;"></audio>
+				<audio id="player" controls autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
 				';
 		}
 

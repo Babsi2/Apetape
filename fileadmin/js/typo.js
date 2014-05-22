@@ -55,6 +55,51 @@ function debug(msg) {
 
 $(document).ready(function(){
 
+	if (!navigator.requestMIDIAccess) {
+     	    navigator.requestMIDIAccess = navigator.requestMIDIAccess 
+                            || navigator.webkitRequestMIDIAccess
+                            || navigator.mozRequestMIDIAccess 
+                            || navigator.msRequestMIDIAccess;    
+ 	}
+
+	if (!navigator.getMIDIAccess) {
+     	    navigator.getMIDIAccess = navigator.getMIDIAccess 
+                            || navigator.webkitGetMIDIAccess
+                            || navigator.mozGetMIDIAccess 
+                            || navigator.msGetMIDIAccess;    
+ 	}
+	var midi = null;  // global MIDIAccess object
+
+	function onMIDISuccess( midiAccess ) {
+	  
+	  console.log( "MIDI ready!" );
+	  midi = midiAccess;  
+	  var inputs = midi.inputs();
+	  var outputs = midi.outputs();
+	 console.log(inputs[0]);
+	 console.log(outputs[0]);
+	    inputs[0].onMIDIMessage = function receiveMidi(message) {
+  	      console.log(message.data);
+	    };
+	  
+	  outputs[0].onMIDIMessage = function receivedMidi(message){
+	    console.log(message.data);
+	  }
+	}
+	function onMIDIFailure(msg) {
+	console.log( "Failed to get MIDI access - " + msg );
+	}
+	navigator.requestMIDIAccess().then( onMIDISuccess, onMIDIFailure );
+
+	
+	//navigator.getMIDIAccess(function(midiAccess) {
+	  //var inputs = midiAccess.enumerateInputs()
+	    //, outputs = midiAccess.enumerateOutputs()
+	    //;
+
+	   //alert(inputs);
+	//});
+
 	$('body').css('height', $(window).height());
 	$('a.browse, .controls .control').tooltip();
 
@@ -72,7 +117,7 @@ $(document).ready(function(){
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
 
 	$('#content #inhalt .scrollable-border .items img').css('height', $(window).height());
-	$('#content #inhalt .scrollable-border .items img').css('width', $(window).width());
+	//$('#content #inhalt .scrollable-border .items img').css('width', $(window).width());
 
 	$('#content #inhalt .no-scrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .no-scrollable .items img').css('width', $(window).width());
@@ -80,7 +125,7 @@ $(document).ready(function(){
 	$('#content #inhalt .opacityScrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .opacityScrollable .items img').css('width', $(window).width());
 
-	$('.menuBackground img').css('width', $(window).width());
+	//$('.menuBackground img').css('width', $(window).width());
 
 	$('.scrollable').css('height', $(document).height()+30);
 	$(".scrollable").css('width', $(window).width());

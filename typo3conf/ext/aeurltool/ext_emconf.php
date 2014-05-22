@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "aeurltool".
  *
- * Auto generated 12-05-2014 08:11
+ * Auto generated 20-05-2014 09:38
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next

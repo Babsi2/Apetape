@@ -34,7 +34,7 @@ $TYPO3_CONF_VARS['EXTCONF']['realurl'] = array(
                 'spaceCharacter' => '-',
                 'languageGetVar' => 'L',
                 'expireDays' => 7,
-                'rootpage_id' => 90,
+                'rootpage_id' => 84,
                 'firstHitPathCache' => 1,
             ),
             'fixedPostVars' => array(),

@@ -9,11 +9,11 @@ $(document).ready(function(){
 	$('.buttons .button.Sepia').click(function(){
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
-			$('#content #inhalt .scrollable .items .active img').removeClass('sepia');
+			$('#content #inhalt .opacityScrollable .items .active img').removeClass('sepia');
 		}else{
 			console.log('sepia');
 			$(this).addClass('active');
-			$('#content #inhalt .scrollable .items .active img').addClass('sepia');
+			$('#content #inhalt .opacityScrollable .items .active img').addClass('sepia');
 			
 		}
 	});
@@ -21,13 +21,13 @@ $(document).ready(function(){
 	$('.buttons .button.Blau').click(function(){
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
-			$('#content #inhalt .scrollable .items .active img').removeClass('blau');
+			$('#content #inhalt .opacityScrollable .items .active img').removeClass('blau');
 
 		}else{
 			console.log('blau');
 			$(this).addClass('active');
-			$('#content #inhalt .scrollable .items .active img').addClass('blau');
-			$('#content #inhalt .scrollable .items .active img').removeClass('sepia');
+			$('#content #inhalt .opacityScrollable .items .active img').addClass('blau');
+			$('#content #inhalt .opacityScrollable .items .active img').removeClass('sepia');
 			$('.buttons .button.Sepia').removeClass('active');
 		}
 	});
@@ -36,8 +36,8 @@ $(document).ready(function(){
 	    clearTimeout(this.downTimer);
 	    this.downTimer = setTimeout(function() {
 	    	timerId = setInterval(function(){
-	    		$('#content #inhalt .scrollable .items .active img').toggleClass('zoomed-p-h');
-	    	},200);
+	    		$('#content #inhalt .opacityScrollable .items .active img').toggleClass('zoomed-p-h');
+	    	},400);
 	    	$('.buttons .button.Zoom-p-h').addClass('active');
 	    	press = true; 
 	    	console.log('press&hold');  
@@ -48,7 +48,7 @@ $(document).ready(function(){
 	    console.log(press);
 	    $(this).removeClass('active');
 	    if(press === true){
-	    	$('#content #inhalt .scrollable .items .active img').removeClass('zoomed-p-h');
+	    	$('#content #inhalt .opacityScrollable .items .active img').removeClass('zoomed-p-h');
 	    	press = false;
 	    }
 	});
@@ -57,7 +57,7 @@ $(document).ready(function(){
 	    clearTimeout(this.downTimer);
 	    this.downTimer = setTimeout(function() {
 	    	timerId = setInterval(function(){
-	    		$('#content #inhalt .scrollable .items .active img').toggleClass('vibe');
+	    		$('#content #inhalt .opacityScrollable .items .active img').toggleClass('vibe');
 	    	},100);
 	    	$('.buttons .button.Vibe').addClass('active');
 	    	press = true; 
@@ -69,7 +69,7 @@ $(document).ready(function(){
 	    console.log(press);
 	    $(this).removeClass('active');
 	    if(press === true){
-	    	$('#content #inhalt .scrollable .items .active img').removeClass('vibe');
+	    	$('#content #inhalt .opacityScrollable .items .active img').removeClass('vibe');
 	    	press = false;
 	    }
 	});
@@ -78,7 +78,7 @@ $(document).ready(function(){
 	    clearTimeout(this.downTimer);
 	    this.downTimer = setTimeout(function() {
 	    	timerId = setInterval(function(){
-	    		$('#content #inhalt .scrollable .items .active img').toggleClass('strobo');
+	    		$('#content #inhalt .opacityScrollable .items .active img').toggleClass('strobo');
 	    	},50);
 	    	$('.buttons .button.Stroboskop').addClass('active');
 	    	press = true; 
@@ -90,7 +90,7 @@ $(document).ready(function(){
 	    console.log(press);
 	    $(this).removeClass('active');
 	    if(press === true){
-	    	$('#content #inhalt .scrollable .items .active img').removeClass('strobo');
+	    	$('#content #inhalt .opacityScrollable .items .active img').removeClass('strobo');
 	    	press = false;
 	    }
 	});
@@ -98,7 +98,7 @@ $(document).ready(function(){
 	$('.buttons .button.Blur-O-S').mousedown(function(e) {
 	    clearTimeout(this.downTimer);
 	    this.downTimer = setTimeout(function() {
-	    	$('#content #inhalt .scrollable .items .active img').addClass('blured');
+	    	$('#content #inhalt .opacityScrollable .items .active img').addClass('blured');
 	    	press = true; 
 	    	$('.buttons .button.Blur-O-S').addClass('active');
 	    	console.log('press&hold');  
@@ -107,16 +107,16 @@ $(document).ready(function(){
 	    clearTimeout(this.downTimer);
 	    console.log(press);
 	    if(press === true){
-	    	$('#content #inhalt .scrollable .items .active img').removeClass('blured');
+	    	$('#content #inhalt .opacityScrollable .items .active img').removeClass('blured');
 	    	$(this).removeClass('active');
 	    	press = false;
 	    }else{
 	    	console.log('blur');
 			$(this).addClass('active');
-			$('#content #inhalt .scrollable .items .active img').addClass('blured');
+			$('#content #inhalt .opacityScrollable .items .active img').addClass('blured');
 			setTimeout(function(){
 			   $('.buttons .button.Blur-O-S').toggleClass('active');
-			   $('#content #inhalt .scrollable .items .active img').toggleClass('blured');
+			   $('#content #inhalt .opacityScrollable .items .active img').toggleClass('blured');
 
 			},4000);
 	    }
@@ -137,7 +137,7 @@ $(document).ready(function(){
 	$('.buttons .button.Opacity').mousedown(function(e) {
 	    clearTimeout(this.downTimer);
 	    this.downTimer = setTimeout(function() {
-	    	$('#content #inhalt .scrollable .items .active img').addClass('opacified-o-s');
+	    	$('#content #inhalt .opacityScrollable .items .active img').addClass('opacified-o-s');
 	    	press = true;
 	    	$('.buttons .button.Opacity').addClass('active'); 
 	    	console.log('press&hold');  
@@ -146,16 +146,16 @@ $(document).ready(function(){
 	    clearTimeout(this.downTimer);
 	    console.log(press);
 	    if(press === true){
-	    	$('#content #inhalt .scrollable .items .active img').removeClass('opacified-o-s');
+	    	$('#content #inhalt .opacityScrollable .items .active img').removeClass('opacified-o-s');
 	    	$(this).removeClass('active');
 	    	press = false;
 	    }else{
 	    	console.log('opacity');
 			$(this).addClass('active');
-			$('#content #inhalt .scrollable .items .active img').addClass('opacified');
+			$('#content #inhalt .opacityScrollable .items .active img').addClass('opacified');
 			setTimeout(function(){
 			   $('.buttons .button.Opacity').toggleClass('active');
-			   $('#content #inhalt .scrollable .items .active img').toggleClass('opacified');
+			   $('#content #inhalt .opacityScrollable .items .active img').toggleClass('opacified');
 
 			},4000);
 	    }
@@ -164,12 +164,12 @@ $(document).ready(function(){
 	$('.buttons .button.Opacity').on('touchstart', function(){ 
 		clearTimeout(this.downTimer);
 	    this.downTimer = setTimeout(function() {
-	    	$('#content #inhalt .scrollable .items .active img').addClass('opacified-o-s');
+	    	$('#content #inhalt .opacityScrollable .items .active img').addClass('opacified-o-s');
 	    	$('.buttons .button.Opacity').addClass('active');  
 	    }, 500);
 	}).on('touchend', function(){
 		clearTimeout(this.downTimer);
-    	$('#content #inhalt .scrollable .items .active img').removeClass('opacified-o-s');
+    	$('#content #inhalt .opacityScrollable .items .active img').removeClass('opacified-o-s');
     	$(this).removeClass('active');
 	});
 

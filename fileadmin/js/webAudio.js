@@ -94,24 +94,7 @@ $(function () {
 
 function change(){
     console.log("change");
-    if(location.href == "/apetape/kapitel-1.html"){
-        window.location.href = "/apetape/kapitel-2.html"
-    }else if(location.href == "/apetape/kapitel-2.html"){
-        window.location.href = "/apetape/kapitel-3.html";
-    }else if(location.href == "/apetape/kapitel-3.html"){
-        window.location.href = "/apetape/kapitel-4.html";
-    }else if(location.href == "/apetape/kapitel-4.html"){
-        window.location.href = "/apetape/kapitel-5.html";
-    }else if(location.href == "/apetape/kapitel-5.html"){
-        window.location.href = "/apetape/kapitel-6.html";
-    }else if(location.href == "/apetape/kapitel-6.html"){
-        window.location.href = "/apetape/kapitel-7.html";
-    }else if(location.href == "/apetape/kapitel-7.html"){
-        window.location.href = "/apetape/kapitel-8.html";
-    }else if(location.href == "/apetape/kapitel-8.html"){
-        window.location.href = "/apetape/kapitel-9.html";
-    }
-    
+    window.location.href = "/apetape/szene-3.html";
 }
 $(document).ready(function(){
     if($('#player')[0] !== undefined){

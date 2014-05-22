@@ -30,6 +30,8 @@ class tx_content_video_loop extends tslib_pibase {
 		$this->view = new  View($conf, $this->uObj);
 		#################################################################################
 		
+		$filetype = filetype("/apetape/fileadmin/user_upload/video/".$this->cObj->data['video']);
+		print_R($filetype);
 		$video = '
 			<video autoplay loop>
 			  <source src="/apetape/fileadmin/user_upload/video/'.$this->cObj->data['video'].'" type="video/mp4">

@@ -1,0 +1,4 @@
+20-05-14 09:32: This installation hasn't been migrated to FAL for the field $GLOBALS[TCA][pages][columns][media] yet. Please do so before TYPO3 v7.
+20-05-14 09:32: This installation hasn't been migrated to FAL for the field $TCA[tt_content][columns][image] yet. Please do so before TYPO3 v7.
+20-05-14 09:32: This installation hasn't been migrated to FAL for the field $TCA[tt_content][columns][media] yet. Please do so before TYPO3 v7.
+20-05-14 09:32: This installation hasn't been migrated to FAL for the field $TCA[pages_language_overlay][columns][media] yet. Please do so before TYPO3 v7.

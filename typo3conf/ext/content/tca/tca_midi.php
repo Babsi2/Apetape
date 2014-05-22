@@ -107,9 +107,39 @@ $TCA["tx_midi"] = Array (
 			)
 		),
 
-		"szene7" => Array (
+		"szene71" => Array (
 			"exclude" => 1,
-			"label" => "Szene 7: ",
+			"label" => "Szene 7.1: ",
+			"config" => Array (
+				"type" => "input",
+				"size" => "30",
+				"eval" => "required",
+			)
+		),
+
+		"szene72" => Array (
+			"exclude" => 1,
+			"label" => "Szene 7.2: ",
+			"config" => Array (
+				"type" => "input",
+				"size" => "30",
+				"eval" => "required",
+			)
+		),
+
+		"szene73" => Array (
+			"exclude" => 1,
+			"label" => "Szene 7.3: ",
+			"config" => Array (
+				"type" => "input",
+				"size" => "30",
+				"eval" => "required",
+			)
+		),
+
+		"szene74" => Array (
+			"exclude" => 1,
+			"label" => "Szene 7.4: ",
 			"config" => Array (
 				"type" => "input",
 				"size" => "30",
@@ -138,7 +168,7 @@ $TCA["tx_midi"] = Array (
 		),
 	),
 	"types" => Array (
-		"0" => Array("showitem" => "szene1, szene2, szene3, szene4, szene5, szene6, szene7, szene8, szene9")
+		"0" => Array("showitem" => "szene1, szene2, szene3, szene4, szene5, szene6, szene71, szene72, szene73, szene74, szene8, szene9")
 	),
 );
 

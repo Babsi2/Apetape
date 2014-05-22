@@ -4,27 +4,7 @@ The PAGE OBJECT template.
 Tells the PAGE object to use the parsed HTML template from the automaketemplate extension.
 */
 
-metaMenu = HMENU
-metaMenu{
-	wrap = <ul>|</ul>
-	special = directory
-	special.value = 84
-	1 = TMENU
-	1 {
-		noBlur = 1
-		expAll = 1
-		NO = 1
-		NO {
-			ATagParams = class="metaMenu"
-			wrapItemAndSub = <li class="first">|</li> |*|<li class="spacer"></li><li>|</li> |*| <li class="spacer"></li><li class="last">|</li>
-		}
-		ACT < .NO
-		ACT {
-			ATagParams = class="active"
-			wrapItemAndSub = <li class="first active">|</li> |*|<li class="spacer"></li><li class="active">|</li> |*| <li class="spacer"></li><li class="last active">|</li>
-		}
-	}
-}
+
 # Make the PAGE object
 page = PAGE
 page {
@@ -33,7 +13,7 @@ page {
 
 	# Add the icon that will appear in front of the url in the browser
 	# This icon will also be used for the bookmark menu in browsers
-	shortcutIcon = {$filepaths.images}favicon.ico
+	shortcutIcon = fileadmin/images/favicon.ico
 
 	config {
 		#doctype = html5
@@ -95,8 +75,7 @@ page {
 
 		marks {
 
-		META < metaMenu
-
+		
 		LOGO = TEXT
 		LOGO.preUserFunc = tx_FEFunctions->getLogo
 

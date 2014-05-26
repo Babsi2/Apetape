@@ -37,7 +37,7 @@ $(document).ready(function(){
 	    this.downTimer = setTimeout(function() {
 	    	timerId = setInterval(function(){
 	    		$('#content #inhalt .opacityScrollable .items .active img').toggleClass('zoomed-p-h');
-	    	},400);
+	    	},800);
 	    	$('.buttons .button.Zoom-p-h').addClass('active');
 	    	press = true; 
 	    	console.log('press&hold');  
@@ -78,7 +78,7 @@ $(document).ready(function(){
 	    clearTimeout(this.downTimer);
 	    this.downTimer = setTimeout(function() {
 	    	timerId = setInterval(function(){
-	    		$('#content #inhalt .opacityScrollable .items .active img').toggleClass('strobo');
+	    		$('#content #inhalt .overlayBlack').toggleClass('dropped').css('z-index', 11);
 	    	},50);
 	    	$('.buttons .button.Stroboskop').addClass('active');
 	    	press = true; 
@@ -90,7 +90,7 @@ $(document).ready(function(){
 	    console.log(press);
 	    $(this).removeClass('active');
 	    if(press === true){
-	    	$('#content #inhalt .opacityScrollable .items .active img').removeClass('strobo');
+	    	$('#content #inhalt .overlayBlack').removeClass('strobo');
 	    	press = false;
 	    }
 	});
@@ -120,6 +120,40 @@ $(document).ready(function(){
 
 			},4000);
 	    }
+	});
+
+	$(".buttons .button.Split").click(function(){
+		if($(this).hasClass("active")){
+			$(this).removeClass("active");
+			$("#imageRed").css("display", "none");
+			$('#imageGreen').css('display', 'none');
+		}else{
+			$(this).addClass("active");
+			$("#imageRed")..css({
+				'display':'block',
+				'-webkit-transition-property':'-webkit-transform',
+				'-webkit-transition-duration':'0.5s',
+				'-webkit-transition-timing-function':'ease-out',
+				'-webkit-transform':'scale(2.5,2.5)'
+			});;
+			$('#imageGreen').css({
+				'display':'block',
+				'-webkit-transition-property':'-webkit-transform',
+				'-webkit-transition-duration':'0.5s',
+				'-webkit-transition-timing-function':'ease-out',
+				'-webkit-transform':'scale(2.5,2.5)'
+			});
+			this.downTimer = setTimeout(function(){
+				$("#imageRed").css({
+					'-webkit-transform':'scale(1,1)'
+
+				});
+				$('#imageGreen').css({
+					'-webkit-transform':'scale(1,1)'
+				})
+				
+			},100);
+		}
 	});
 
 	$('.buttons .button.Opacity-on-off').click(function(){

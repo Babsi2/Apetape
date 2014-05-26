@@ -54,7 +54,7 @@ function debug(msg) {
 // }
 
 $(document).ready(function(){
-
+	
 	if (!navigator.requestMIDIAccess) {
      	    navigator.requestMIDIAccess = navigator.requestMIDIAccess 
                             || navigator.webkitRequestMIDIAccess
@@ -238,15 +238,19 @@ $(document).ready(function(){
 	// festlegen
 	document.body.onmousemove = show_position;
 	document.body.ontouchmove = show_position;
+
+	$(window).resize(function(){
+		$('#content').css('height', $('.image img').height());
+		$('#content #inhalt .imageCollection img').css('height', $('.image img').height());
+		$(".scrollable").scrollable('height', $('.image img').height());
+		$('#content #inhalt .opacityScrollable .items img').css('height', $(window).height());
+		$('#content #inhalt .opacityScrollable .items img').css('width', $(window).width());
+		$('.menuBackground img').css('width', $(window).width());
+	});
 });
 
 
-$(window).resize(function(){
-	$('#content').css('height', $('.image img').height());
-	$('#content #inhalt .imageCollection img').css('height', $('.image img').height());
-	$(".scrollable").scrollable('height', $('.image img').height());
-	$('.menuBackground img').css('width', $(window).width());
-});
+
 
 
 

@@ -94,6 +94,7 @@ $(function () {
 
 function change(){
     console.log("change");
+    $('body').addClass('szeneChange');
     window.location.href = "/apetape/szene-3.html";
 }
 $(document).ready(function(){
@@ -111,14 +112,14 @@ $(document).ready(function(){
     $('#content .buttons .button.Zoom').click(function(){
         if($(this).hasClass('active')){
             $(this).removeClass('active');
-            $('#content #inhalt .scrollable .items .active img').removeClass('zoomed').removeAttr('style');
-            $('#content #inhalt .scrollable .items .active img').css('height', $(document).height()+10);
-            $('#content #inhalt .scrollable .items .active img').css('width', $(window).width());
+            $('#content #inhalt .opacityScrollable .items .active img').removeClass('zoomed').removeAttr('style');
+            $('#content #inhalt .opacityScrollable .items .active img').css('height', $(document).height()+10);
+            $('#content #inhalt .opacityScrollable .items .active img').css('width', $(window).width());
             // $('#content img').addClass('unzoomed');
         }else{
             // console.log('zoom');
             $(this).addClass('active');
-            $('#content #inhalt .scrollable .items .active img').addClass('zoomed');
+            $('#content #inhalt .opacityScrollable .items .active img').addClass('zoomed');
             // $('#content img').removeClass('unzoomed');
         }
     });
@@ -130,14 +131,14 @@ $(document).ready(function(){
         if((event.keyCode == 74 && $('.button-1').hasClass('Zoom')) || (event.keyCode == 75 && $('.button-2').hasClass('Zoom')) || (event.keyCode == 76 && $('.button-3').hasClass('Zoom')) || (event.keyCode == 153 && $('.button-4').hasClass('Zoom'))){
             if($('#content .buttons .button.Zoom').hasClass('active')){
                 $('#content .buttons .button.Zoom').removeClass('active');
-                $('#content #inhalt .scrollable .items .active img').removeClass('zoomed').removeAttr('style');
-                $('#content #inhalt .scrollable .items .active img').css('height', $(document).height()+10);
-                $('#content #inhalt .scrollable .items .active img').css('width', $(window).width());
+                $('#content #inhalt .opacityScrollable .items .active img').removeClass('zoomed').removeAttr('style');
+                $('#content #inhalt .opacityScrollable .items .active img').css('height', $(document).height()+10);
+                $('#content #inhalt .opacityScrollable .items .active img').css('width', $(window).width());
                 // $('#content img').addClass('unzoomed');
             }else{
                 // console.log('zoom');
                 $('#content .buttons .button.Zoom').addClass('active');
-                $('#content #inhalt .scrollable .items .active img').addClass('zoomed');
+                $('#content #inhalt .opacityScrollable .items .active img').addClass('zoomed');
                 // $('#content img').removeClass('unzoomed');
             }
         }
@@ -150,9 +151,9 @@ $(document).ready(function(){
                 var whichQuote = get_randomRotate();
                 // console.log(rotateTime);
                 if(whichQuote === 1){
-                    $('#content #inhalt .scrollable .items .active img').toggleClass('rotated');
+                    $('#content #inhalt .opacityScrollable .items .active img').toggleClass('rotated');
                 }else if(whichQuote === 0){
-                    $('#content #inhalt .scrollable .items .active img').toggleClass('rotatedUZ');
+                    $('#content #inhalt .opacityScrollable .items .active img').toggleClass('rotatedUZ');
                 }
             },rotateTime);
             $('.buttons .button.Rotate').addClass('active');
@@ -163,7 +164,7 @@ $(document).ready(function(){
         clearTimeout(this.downTimer);
         $(this).removeClass('active');
         if(press === true){
-            $('#content #inhalt .scrollable .items .active img').removeClass('rotated').removeClass('rotatedUZ');
+            $('#content #inhalt .opacityScrollable .items .active img').removeClass('rotated').removeClass('rotatedUZ');
             press = false;
         }
     });

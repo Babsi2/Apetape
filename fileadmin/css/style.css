@@ -10,7 +10,7 @@ p{
 
 }
 h1,h2 {
-	font-family: Arial Narrow;
+	font-family: Arial Narrow, Arial;
 	color: #000;
 	margin-top: 55px;
 }
@@ -42,6 +42,14 @@ body img{
 
 body .bodytext img{
 	width: auto;
+}
+
+body.szeneChange{
+	animation: change 8s linear;   
+	-webkit-animation: change 8s linear;
+    -moz-animation: change 8s linear;
+    -ms-animation: change 8s linear;
+    -o-animation: change 8s linear; 
 }
 
 #logo{
@@ -281,12 +289,12 @@ li.spacer{
 
 #complete_content #navi{
 	position: relative;
-	width: 35px;
-	height: 35px;
+	width: 100px;
+	height: 100px;
 	display: block;
 	background: url(../images/zahnrad.png) no-repeat;
 	z-index: 1000;
-	top: 200px;
+	top: 210px;
 	left: 20px;
 	cursor: pointer;
 }
@@ -389,14 +397,18 @@ li.spacer{
 }
 
 #complete_content #content #inhalt .opacityScrollable .items img.rotated{
-	transform:rotate(-10deg);
-	-ms-transform:rotate(-10deg); /* IE 9 */
-	-webkit-transform:rotate(-10deg); /* Safari and Chrome */
+	transform:rotate(-360deg);
+	-ms-transform:rotate(-360deg); /* IE 9 */
+	-webkit-transform:rotate(-360deg); /* Safari and Chrome */
 
 }
 
 #complete_content #content #inhalt .opacityScrollable .items img.strobo{
-	opacity: 0;	    
+	animation: strobo 1s linear;   
+	-webkit-animation: strobo 1s linear;
+    -moz-animation: strobo 1s linear;
+    -ms-animation: strobo 1s linear;
+    -o-animation: strobo 1s linear;    
 }
 
 #complete_content #content #inhalt .opacityScrollable .items img.rotatedUZ{
@@ -440,9 +452,9 @@ li.spacer{
 
 .overlay_video_loop video{
 	width: 100%;
-	height: 100%;
+	height: auto;
 	opacity: 0.4;
-	position: absolute;
+	position: fixed;
 	z-index: 11;
 }
 
@@ -459,8 +471,8 @@ li.spacer{
 	z-index: 990;
 	height: 25px;
 	position: fixed;
-	bottom: 60px;
-	right: 10px;
+	bottom: 152px;
+	right: 30px;
 	font-size: 34px;
 	color: #505050;
 }
@@ -472,21 +484,80 @@ li.spacer{
 #complete_content #content #inhalt .buttons .button, .wuerdButton .wuerd{
 	float: left;
 	width: 150px;
-	background: #404040;
-	text-align: center;
+	text-indent: -9999;
 	padding: 0 5px;
 	margin-left: 5px;
 	cursor: pointer;
-	text-shadow: 1px 1px 0px #202020, -1px -1px 0px #606060;
 	border-radius: 5px;
+	height: 150px;
 } 
 
 .wuerdButton .wuerd{
-	width: 300px;
+	background: url(../images/effekts/Wuerd_PLaceholder.jpg) no-repeat;
+}
+
+.buttons .button.Blau{
+	background: url(../images/effekts/Blau.png) no-repeat;
+}
+
+.buttons .button.Blur-O-S{
+	background: url(../images/effekts/Blur.png) no-repeat;
+}
+
+.buttons .button.Zoom-p-h{
+	background: url(../images/effekts/Zoom_P-H.gif) no-repeat;
+}
+
+.buttons .button.Drop{
+	background: url(../images/effekts/Drop.png) no-repeat;
+}
+
+.buttons .button.Gif-1{
+	background: url(../images/effekts/Gif-1_Placeholder.png) no-repeat;
+}
+
+.buttons .button.Gif-2{
+	background: url(../images/effekts/Gif-2_Placeholder.png) no-repeat;
+}
+
+.buttons .button.Gif-3{
+	background: url(../images/effekts/Gif-3_Placeholder.png) no-repeat;
+}
+
+.buttons .button.Opacity{
+	background: url(../images/effekts/Opacity.gif) no-repeat;
+}
+
+.buttons .button.Opacity-On-Off{
+	background: url(../images/effekts/Opacity_on-off.png) no-repeat;
+}
+
+.buttons .button.Rotate{
+	background: url(../images/effekts/Rotate.gif) no-repeat;
+}
+
+.buttons .button.Sepia{
+	background: url(../images/effekts/Sepia.png) no-repeat;
+}
+
+.buttons .button.Stroboskop{
+	background: url(../images/effekts/Strobe.gif) no-repeat;
+}
+
+.buttons .button.Vibe{
+	background: url(../images/effekts/Vibe.gif) no-repeat;
+}
+
+.buttons .button.Zoom{
+	background: url(../images/effekts/Zoom_on-off.png) no-repeat;
+}
+
+.buttons .button.Split{
+	background: url(../images/effekts/Split.gif) no-repeat;
 }
 
 #complete_content #content #inhalt .buttons .button.active{
-	background: #ffff01;
+	
 }
 
 #complete_content #content #inhalt .controls{
@@ -494,16 +565,15 @@ li.spacer{
 	z-index: 990;
 	height: 130px;
 	position: fixed;
-	bottom: 20px;
+	bottom: 40px;
 	left: 75px;
 	font-size: 34px;
 	color: #505050;
 }
 
 #complete_content #content #inhalt .control{
-	width: 47px;
-	height: 42px;
-	background: url(../images/pfeile.png) no-repeat;
+	width: 50px;
+	height: 50px;
 	text-align: center;
 	cursor: pointer;
 	position: relative;
@@ -511,7 +581,7 @@ li.spacer{
 
 #complete_content #content #inhalt .browse{
 	width: 50px;
-	height: 45px;
+	height: 50px;
 	bottom: 67px;
 	z-index: 990;
 	position: fixed;
@@ -531,12 +601,12 @@ li.spacer{
 }
 
 #complete_content #content #inhalt .browse.left{
-	left: 30px;
-	background: url(../images/pfeile.png) -2px -44px no-repeat;
+	left: 36px;
+	background: url(../images/controls/arrow_stone_left.png) no-repeat;
 } 
 
 #complete_content #content #inhalt .controls .control.top{
-	background-position:-47px -1px;
+	background: url(../images/controls/arrow_stone_up.png) no-repeat;
 	left: 3px;
 	top: 0;
 } 
@@ -546,13 +616,13 @@ li.spacer{
 	/*position: absolute;*/
 	left: 125px;
 	width: 50px;
-	height: 45px;
-	background: url(../images/pfeile.png) -93px -44px no-repeat;
+	height: 50px;
+	background: url(../images/controls/arrow_stone_right.png) no-repeat;
 } 
 
-#complete_content #content #inhalt .browse.right.disabled, #contentWrap #complete_content #content #inhalt .browse.left.disabled,
-#complete_content #content #inhalt .controls .control.bottom.disabled, #contentWrap #complete_content #content #inhalt .controls .control.top.disabled{
-	opacity: 0.8;
+#complete_content #content #inhalt .browse.right.disabled, #complete_content #content #inhalt .browse.left.disabled,
+#complete_content #content #inhalt .controls .control.bottom.disabled, #complete_content #content #inhalt .controls .control.top.disabled{
+	opacity: 0.5;
 }
 
 #complete_content #content #inhalt .browse.right.disabled.no-cursor, #contentWrap #complete_content #content #inhalt .browse.left.disabled.no-cursor{
@@ -560,22 +630,8 @@ li.spacer{
 }
 
 #complete_content #content #inhalt .controls .control.bottom{
-	background-position:-47px -88px;
+	background: url(../images/controls/arrow_stone_down.png) no-repeat;
 	left: 3px;
-	top: 44px;
-} 
-
-#complete_content #content #inhalt .controls .control.left{
-	border: 1px solid black;
-	background-position:-2px -44px;
-	left: 70px;
-	top: 44px;
-} 
-
-#complete_content #content #inhalt .controls .control.right{
-	border: 1px solid black;
-	background-position:-92px -44px;
-	left: 165px;
 	top: 44px;
 } 
 
@@ -677,13 +733,28 @@ li.spacer{
 
 .overlay{
 	opacity: 1;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
 	background: #fff;
 	/*z-index: 11;*/
+}
+
+.overlayBlack{
+	opacity: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: #000;
+	/*z-index: 11;*/
+}
+
+.overlayBlack.dropped{
+	opacity: 1;
 }
 
 .path{
@@ -807,3 +878,24 @@ li.spacer{
 100% { opacity: 0; }
 }
 
+@-webkit-keyframes change {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}
+@-moz-keyframes change {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}
+@-ms-keyframes change {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}
+@-o-keyframes change {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}
+
+@keyframes change {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}

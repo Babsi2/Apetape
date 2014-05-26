@@ -59,7 +59,7 @@ $TCA["tx_path"] = Array (
 		),
 		
 		"image" => Array (
-			"label" => "Bild für Pfad:",
+			"label" => "Hauptbild für Pfad:",
 			"config" => Array (
 				"type" => "group",
 				"internal_type" => "file",
@@ -73,6 +73,35 @@ $TCA["tx_path"] = Array (
 			)
 		),
 		
+		"blue_image" => Array (
+			"label" => "grünes Splitbild für Pfad:",
+			"config" => Array (
+				"type" => "group",
+				"internal_type" => "file",
+				"allowed" => "*",
+				"max_size" => 50000,
+				"uploadfolder" => "fileadmin/user_upload/path",
+				"show_thumbs" => 1,
+				"size" => 1,
+				"minitems" => 0,
+				"maxitems" => 1,
+			)
+		),
+
+		"red_image" => Array (
+			"label" => "rotes Splitbild für Pfad:",
+			"config" => Array (
+				"type" => "group",
+				"internal_type" => "file",
+				"allowed" => "*",
+				"max_size" => 50000,
+				"uploadfolder" => "fileadmin/user_upload/path",
+				"show_thumbs" => 1,
+				"size" => 1,
+				"minitems" => 0,
+				"maxitems" => 1,
+			)
+		),
 		// "image_detail" => Array (
 		// 	"label" => "Bild für Detailseite:",
 		// 	"config" => Array (
@@ -105,7 +134,7 @@ $TCA["tx_path"] = Array (
 	),
 	"types" => Array (
 		"0" => Array("showitem" => "
-			--div--;Übersicht,title, image;;;;1-1-1,position_image,position,
+			--div--;Übersicht,title, image;;;;1-1-1, red_image;;;;1-1-1, blue_image;;;;1-1-1, position_image,position,
 			")
 	),
 );

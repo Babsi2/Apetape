@@ -306,6 +306,11 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_overlay']
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_overlay']='';
 t3lib_extMgm::addPlugin(Array('Overlay', $_EXTKEY.'_overlay'),'list_type');
 
+#OverlayBlack element
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_overlayBlack']='';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_overlayBlack']='';
+t3lib_extMgm::addPlugin(Array('OverlayBlack', $_EXTKEY.'_overlayBlack'),'list_type');
+
 # body background
 $TCA['tt_content']['types'][$_EXTKEY.'_background']['showitem']='CType;;14;,header,image';
 t3lib_extMgm::addPlugin(Array('Backgroundelement', $_EXTKEY.'_background'),'CType');

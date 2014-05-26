@@ -197,6 +197,45 @@ $(document).ready(function(){
         }
     }); 
 
+    $(document).keydown(function(){
+        if(!event){
+            event = window.event;
+        }
+        if((event.keyCode == key1 && $('.button-1').hasClass('Split')) || (event.keyCode == key2 && $('.button-2').hasClass('Split')) || (event.keyCode == key3 && $('.button-3').hasClass('Split')) || (event.keyCode == key4 && $('.button-4').hasClass('Split'))){
+            if($(".buttons .button.Split").hasClass("active")){
+                $(".buttons .button.Split").removeClass("active");
+                $("#imageRed").css("display", "none");
+                $('#imageGreen').css('display', 'none');
+            }else{
+                $(".buttons .button.Split").addClass("active");
+                $("#imageRed")..css({
+                    'display':'block',
+                    '-webkit-transition-property':'-webkit-transform',
+                    '-webkit-transition-duration':'0.5s',
+                    '-webkit-transition-timing-function':'ease-out',
+                    '-webkit-transform':'scale(2.5,2.5)'
+                });;
+                $('#imageGreen').css({
+                    'display':'block',
+                    '-webkit-transition-property':'-webkit-transform',
+                    '-webkit-transition-duration':'0.5s',
+                    '-webkit-transition-timing-function':'ease-out',
+                    '-webkit-transform':'scale(2.5,2.5)'
+                });
+                this.downTimer = setTimeout(function(){
+                    $("#imageRed").css({
+                        '-webkit-transform':'scale(1,1)'
+
+                    });
+                    $('#imageGreen').css({
+                        '-webkit-transform':'scale(1,1)'
+                    })
+                    
+                },100);
+            }
+        }
+    });
+
 	$(document).keydown(function(event){
         if(!event){
             event = window.event;

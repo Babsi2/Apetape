@@ -15,6 +15,9 @@ t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_accordion.php','_ac
 // Overlay
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_overlay.php','_overlay','list_type',1);
 
+// OverlayBlack
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_overlayBlack.php','_overlayBlack','list_type',1);
+
 /// Ausgabe
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_path.php','_path','list_type',1);
 

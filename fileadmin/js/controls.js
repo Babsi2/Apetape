@@ -58,6 +58,7 @@ $(document).ready(function(){
 
 	var i = 0;
 	var length = $('#content #inhalt .opacityScrollable .items .imageOrder').length-1;
+	
 	$('#content #inhalt .opacityScrollable .items .imageOrder.opacity0').css('display', 'block').addClass('active');
 	$('.prev.browse.left.opacity').addClass('disabled');
 	

@@ -37,5 +37,5 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['typo
 
 $TYPO3_CONF_VARS['FE']['eID_include']['download'] = 'EXT:content/download.php';
 
-$TYPO3_CONF_VARS['FE']['eID_include']['complete'] = 'EXT:content/ajax_complete.php';
+$TYPO3_CONF_VARS['FE']['eID_include']['complete'] = 'EXT:content/ajax.php';
 ?>

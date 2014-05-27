@@ -72,10 +72,6 @@ $(function () {
         rotateTime = (values/length)*10;
         // console.log(analyser.getByteFrequencyData(frequencyData));
         $('#content #inhalt .scrollable .items .active img.zoomed').css('-webkit-transform', 'scale('+(1.00+(frequencyData[0]/3000*5+0.1)) + ','+(1.00+(frequencyData[0]/3000*5+0.1))+')');
-        // console.log($('#player')[0].ended);
-        // if($('#player')[0].ended === true){
-        //     change();
-        // }
     };
 
     // Hook up the audio routing...
@@ -95,8 +91,17 @@ $(function () {
 function change(){
     console.log("change");
     $('body').addClass('szeneChange');
-    window.location.href = "/apetape/szene-3.html";
+    showNextPage();
+   // window.location.href = "/apetape/szene-3.html";
 }
+
+function showNextPage() {
+    $.post( "index.php?eID=complete&link="+window.location.href, { func: "getVisuals" }, function( data ) {
+      $('#inhalt').html( data ); 
+     
+    }, "html");
+}
+
 $(document).ready(function(){
     if($('#player')[0] !== undefined){
         timerId = setInterval(function(){
@@ -115,12 +120,9 @@ $(document).ready(function(){
             $('#content #inhalt .opacityScrollable .items .active img').removeClass('zoomed').removeAttr('style');
             $('#content #inhalt .opacityScrollable .items .active img').css('height', $(document).height()+10);
             $('#content #inhalt .opacityScrollable .items .active img').css('width', $(window).width());
-            // $('#content img').addClass('unzoomed');
         }else{
-            // console.log('zoom');
             $(this).addClass('active');
             $('#content #inhalt .opacityScrollable .items .active img').addClass('zoomed');
-            // $('#content img').removeClass('unzoomed');
         }
     });
     
@@ -134,12 +136,9 @@ $(document).ready(function(){
                 $('#content #inhalt .opacityScrollable .items .active img').removeClass('zoomed').removeAttr('style');
                 $('#content #inhalt .opacityScrollable .items .active img').css('height', $(document).height()+10);
                 $('#content #inhalt .opacityScrollable .items .active img').css('width', $(window).width());
-                // $('#content img').addClass('unzoomed');
             }else{
-                // console.log('zoom');
                 $('#content .buttons .button.Zoom').addClass('active');
                 $('#content #inhalt .opacityScrollable .items .active img').addClass('zoomed');
-                // $('#content img').removeClass('unzoomed');
             }
         }
     }); 

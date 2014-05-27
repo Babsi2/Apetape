@@ -80,9 +80,9 @@ class tx_content_path extends tslib_pibase {
 
 				    <image id="image" x="10" y="10" width="628" height="628" xlink:href="fileadmin/user_upload/path/'.$row['image'].'" />
 
-				    <image id="imageRed" x="30" y="10" width="68" height="68" style="display:none;" xlink:href="fileadmin/user_upload/path/'.$row['red_image'].'"/>
+				    <image id="imageRed" x="30" y="10" width="628" height="628" style="display:none;" xlink:href="fileadmin/user_upload/path/'.$row['red_image'].'"/>
 
-				    <image id="imageGreen" x="50" y="10" width="68" height="68" style="display:none;" xlink:href="fileadmin/user_upload/path/'.$row['blue_image'].'"/>
+				    <image id="imageGreen" x="50" y="10" width="628" height="628" style="display:none;" xlink:href="fileadmin/user_upload/path/'.$row['blue_image'].'"/>
 				     
 				    <animateMotion begin="1s" path="M '.$m.implode('',$q).'Z" dur="5s" rotate="auto" repeatCount="indefinite" fill="freeze" xlink:href="#image" />
 

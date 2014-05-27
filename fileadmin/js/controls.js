@@ -1,6 +1,6 @@
 $(document).ready(function(){	
 	var borderLength = $('.scrollable-border .items .image').length;
-	var timeout = 5000;
+	var timeout = 500;
 	
 	var control1 = $('.control.top').data("controltop");
     var control2 = $('.prev.left').data("controlleft");
@@ -8,22 +8,26 @@ $(document).ready(function(){
     var control4 = $('.next.right').data("controlright");
 
     
-	$('.controls .control.top.random').click(function(){
-		timeout += 1000;
+	$('.controls .control.bottom.random').click(function(){
+		timeout += 100;
 		console.log(timeout);
-		if($('.controls .control.bottom').hasClass('disabled') && timeout > 0){
-			$('.controls .control.bottom').removeClass('disabled');
-		}else if(timeout === 10000){
+		if($('.controls .control.top').hasClass('disabled') && timeout > 0){
+			
+			$('.controls .control.top').removeClass('disabled');
+		}else if(timeout === 2000){
 			$(this).addClass('disabled');
+			timeout = 2000;
 		}
 		
 	})
 
-	$('.controls .control.bottom.random').click(function(){
-		timeout -= 1000;
+	$('.controls .control.top.random').click(function(){
 		
-		if($('.controls .control.top').hasClass('disabled') && timeout < 10000){
-			$('.controls .control.top').removeClass('disabled');
+		timeout -= 100;
+		console.log(timeout);
+		if($('.controls .control.bottom').hasClass('disabled') && timeout < 2000){
+			
+			$('.controls .control.bottom').removeClass('disabled');
 		}else if(timeout === 0){
 			$(this).addClass('disabled');
 		}

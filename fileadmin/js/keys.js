@@ -208,7 +208,7 @@ $(document).ready(function(){
                 $('#imageGreen').css('display', 'none');
             }else{
                 $(".buttons .button.Split").addClass("active");
-                $("#imageRed")..css({
+                $("#imageRed").css({
                     'display':'block',
                     '-webkit-transition-property':'-webkit-transform',
                     '-webkit-transition-duration':'0.5s',
@@ -351,5 +351,52 @@ $(document).ready(function(){
             console.log("würd");
         }
     }); 
+
+    $(document).keydown(function(event){
+        if(!event){
+            event = window.event;
+        }
+        switch (event.keyCode){
+            case 49:
+                window.location.href="/apetape/apetape/kapitel-1";
+                $('body').addClass('szeneChange');
+                break;
+            case 50:
+                window.location.href="/apetape/apetape/kapitel-2";
+                $('body').addClass('szeneChange');
+                break;
+            case 51:
+                window.location.href="/apetape/apetape/kapitel-3";
+                $('body').addClass('szeneChange');
+                break;
+            case 52:
+                window.location.href="/apetape/apetape/kapitel-4";
+                $('body').addClass('szeneChange');
+                break;
+            case 53:
+                window.location.href="/apetape/apetape/kapitel-5";
+                $('body').addClass('szeneChange');
+                break;
+            case 54:
+                window.location.href="/apetape/apetape/kapitel-6";
+                $('body').addClass('szeneChange');
+                break;
+            case 55:
+                window.location.href="/apetape/apetape/kapitel-7";
+                $('body').addClass('szeneChange');
+                break;
+            case 56:
+                window.location.href="/apetape/apetape/kapitel-8";
+                $('body').addClass('szeneChange');
+                break;
+            case 57:
+                window.location.href="/apetape/apetape/kapitel-9";
+                $('body').addClass('szeneChange');
+                break;
+            case 9:
+                $('#complete_content #content #inhalt .path').css('display', 'block');
+        }
+        
+    })
 });
 

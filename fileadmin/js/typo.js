@@ -229,8 +229,8 @@ $(document).ready(function(){
 	  // Ausgabemeldung zusammenstellen
 	  // var out = 'Mausposition: ' + x + ', ' + y;
 	  // Ausgabe im dafür vorgesehenen SPAN-Element
-	  $('.szene9Scrollable.szene9 .items .szene9').css('left', x);
-	  $('.szene9Scrollable.szene9 .items .szene9').css('top', y);
+	  $('.szene9Scrollable.szene9 .items .szene9 img').css('left', x);
+	  $('.szene9Scrollable.szene9 .items .szene9 img').css('top', y);
 	  // document.getElementById ('info').firstChild.data = out;
 	}
 

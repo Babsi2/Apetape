@@ -43,16 +43,15 @@ page {
     includeJS.file3 = fileadmin/js/jquery-tools.js
     includeJS.file4 = fileadmin/js/jquery-ui-1.10.4.custom.js
     includeJS.file5 = fileadmin/js/jquery-ui-1.10.4.custom.min.js
-    includeJS.file6 = fileadmin/js/jquery.address-1.5.js
-    includeJS.file7 = fileadmin/js/jquery.address-1.5.min.js
-    includeJS.file8 = fileadmin/js/jquery.validator.js
+    includeJS.file6 = fileadmin/js/jquery.scrollIntoView.js
+    includeJS.file7 = fileadmin/js/jquery.validator.js
 	
+	includeJS.file8 = fileadmin/js/webAudio.js
 	includeJS.file9 = fileadmin/js/typo.js
 	includeJS.file10 = fileadmin/js/buttons.js
 	includeJS.file11 = fileadmin/js/controls.js
-	includeJS.file12 = fileadmin/js/webAudio.js
-	includeJS.file13 = fileadmin/js/be.js
-	includeJS.file14 = fileadmin/js/keys.js
+	includeJS.file12 = fileadmin/js/be.js
+	includeJS.file13 = fileadmin/js/keys.js
 	
     includeCSS.file1 = fileadmin/css/jquery-ui-1.10.3.custom.css
     includeCSS.file2 = fileadmin/css/jquery-ui-1.10.3.custom.min.css

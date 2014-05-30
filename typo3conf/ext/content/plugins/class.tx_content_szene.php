@@ -36,11 +36,11 @@ class tx_content_szene extends AbstractPlugin {
 		$settings = $stmt->fetchAll();
 
 		foreach($settings as $set){
-			$ascButton1 = ord($set['button_1']);
-			$ascButton2 = ord($set['button_2']);
-			$ascButton3 = ord($set['button_3']);
-			$ascButton4 = ord($set['button_4']);
-			$ascButton5 = ord($set['button_5']);
+			$ascButton1 = ord(strtoupper($set['button_1']));
+			$ascButton2 = ord(strtoupper($set['button_2']));
+			$ascButton3 = ord(strtoupper($set['button_3']));
+			$ascButton4 = ord(strtoupper($set['button_4']));
+			$ascButton5 = ord(strtoupper($set['button_5']));
 
 			$ascControl1 = ord($set['control_top']);
 			$ascControl2 = ord($set['control_left']);
@@ -62,10 +62,20 @@ class tx_content_szene extends AbstractPlugin {
 		}
 
 		if($this->cObj->data['sound']){
+			$sounds = explode(',', $this->cObj->data['sound']);
+
 			$sound = '
-				<audio id="player" controls autoplay src="fileadmin/user_upload/music/'.$this->cObj->data['sound'].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
-				';
+				<audio controls id="player" >
+				  <source src="fileadmin/user_upload/music/'.$sounds[0].'" type="audio/mpeg">
+				  <source src="fileadmin/user_upload/music/'.$sounds[1].'" type="audio/ogg">
+				 				Your browser does not support the audio element.
+				</audio>';
+				// <audio id="player" controls src="fileadmin/user_upload/music/'.$sounds[1].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
+				// '.t3lib_div::wrapJS('
+				// 	document.getElementById("player").play();
+				// ');
 		}
+
 
 		if($this->cObj->data['images']){
 			$imageCollection = explode(',', $this->cObj->data['images']);
@@ -90,29 +100,6 @@ class tx_content_szene extends AbstractPlugin {
 								'params' => 'id="css-filter-blur" draggable="true"'
 							)).'
 						</div>
-						<svg id="svg-image-blur" style="height: 1000px;">
-						    <filter id="blur-effect-1">
-						        <feGaussianBlur stdDeviation="2" />
-						    </filter>
-						    <filter id="sepia">
-								<feColorMatrix values="0.393 0.769 0.189 0 0 0.349 0.686 0.168 0 0 0.272 0.534 0.131 0 0 0 0 0 1 0" type="matrix">
-							</filter>
-							<filter id="hue-rotate">
-								<feColorMatrix values="180" type="hueRotate">
-							</filter>
-						</svg>
-						<style>
-							#css-filter-blur { 
-							  -webkit-transition: all 0.3s ease-out; 
-							     -moz-transition: all 0.3s ease-out; 
-							      -ms-transition: all 0.3s ease-out; 
-							       -o-transition: all 0.3s ease-out; 
-							          transition: all 0.3s ease-out;
-							}
-							#css-filter-blur.blured { -webkit-filter: blur(2px); filter: url(#blur-effect-1); }
-							#css-filter-blur.sepia { -webkit-filter: sepia(100%); filter: url(#sepia);}
-							#css-filter-blur.blau { -webkit-filter: hue-rotate(180deg); filter: url(#hue-rotate);}
-				    	</style>
 			    	</div>';
 
 			    $j++;
@@ -218,7 +205,7 @@ class tx_content_szene extends AbstractPlugin {
 			$imageBorder = '';
 		}
 
-		if($this->cObj->data['image_order'] && ($this->cObj->data['pid'] != '81')){
+		if($this->cObj->data['image_order'] && ($this->cObj->data['pid'] != '81') && ($this->cObj->data['pid'] != '79')){
 			$collection = '
 				<div class="opacityScrollable" id="scrollable">
 					<div class="items">
@@ -238,6 +225,16 @@ class tx_content_szene extends AbstractPlugin {
 			$classA = '
 				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
 				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
+		}elseif($this->cObj->data['pid'] == '79'){
+			$collection = '
+				<div class="opacityScrollable szene7" id="scrollable">
+					<div class="items">
+						'.implode('', $collection).'
+					</div>
+				</div>';
+			$classA = '
+				<a class="prev browse left opacity" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
+				<a class="next browse right opacity" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
 		}else{
 			$collection = '
 				<div class="scrollable" id="scrollable">

@@ -1,28 +1,7 @@
 <?php
-// if (!defined('PATH_typo3conf'))
-// 	die('Could not access this script directly!');
+if (!defined('PATH_typo3conf'))
+	die('Could not access this script directly!');
 
-// // require_once t3lib_extMgm::extPath('content', 'res/class.CompleteAjax.php');
-// // $controllers = array(
-// // 	'completeajax',
-// // );
-
-// //include('../../../fileadmin/inc/class.View.php');
-//include('../../../fileadmin/inc/class.Utils.php');
-
-// 		// $this->uObj = utils::GetInstance($this->cObj);
-// 		// $this->view = new  View($conf, $this->uObj);
-// 		/**
-// 	 *
-// 	 * @var Utils 
-// 	 */
-// 	$Utils;
-
-// 	/**
-// 	 *
-// 	 * @var tslib_cObj 
-// 	 */
-// 	$cObj;
 require_once PATH_site.'fileadmin/inc/class.Utils.php';
 require_once PATH_site.'fileadmin/inc/class.View.php';
 
@@ -70,12 +49,17 @@ $arr->execute();
 $menues = $arr->fetchAll();
 //print_R(array_reverse($menues));
 $page_menues = array_reverse($menues);
+$clicked = $_GET['click'];
+$path = $_GET['path'];
 foreach($page_menues as $i => $pm){
-	if(strtolower($pm['title']) == $page_link){
+	if(strtolower($pm['title']) == $page_link && $clicked==='false'){
 		$i += 1;
 		$pm_new = $page_menues[$i];
 		$pid = $pm_new['uid'];
 		$title = $pm_new['title'];
+	}else if(strtolower($pm['title']) == $page_link && $clicked==='true'){
+		$pid = $pm['uid'];
+		$title = $pm['title'];
 	}else{
 		$pid = '';
 		$title = '';
@@ -87,17 +71,68 @@ foreach($page_menues as $i => $pm){
 	$pages = $stmt->fetchAll();
 
 	foreach($pages as $page){
-		//print_R($page);
+		// print_R($page);
 		$links_new = explode(' ',strtolower($title));
 		$link_new = implode('-',$links_new);
-		$page_url = '
-			<script>
-				jQuery(document).ready(function(){
-					window.history.pushState("", "", "apetape/'.$link_new.'");
-					$("#content #inhalt .opacityScrollable .items .imageOrder.opacity0").css("display", "block").addClass("active");
+		$navi = '
+		$("#navi").click(function(){
+			if($("#navi").hasClass("active")){
+				$("#navi").removeClass("active").css("left","30px");
+				$("#content-navi").css({
+					"overflow":"hidden",
+					"width":"0px"
 				});
-			</script>
+			}else{
+				$("#navi").addClass("active").css("left", "250px");
+				$("#content-navi").css({
+					"overflow":"visible",
+					"width":"240px"
+				});
+			}
+		});
+
+			if($("#navi").hasClass("active")){
+				$("#navi").removeClass("active").css("left","30px");
+				$("#content-navi").css({
+					"overflow":"hidden",
+					"width":"0px"
+				});
+			}
 		';
+		$javascript = '
+			getButtons();
+			getTypo();
+			getControls();
+			getKeys();
+			getAudio();
+		';
+		if($title == "kapitel 2"){
+			$page_url = '
+				<script>
+					jQuery(document).ready(function(){
+						$("#content").removeClass("szeneChangeFast");
+						$("#content").removeClass("szeneBegin");
+						history.pushState(null,null,"apetape/'.$link_new.'");
+						'.$navi.'
+						$("#content #inhalt .opacityScrollable .items .imageOrder.opacity0").css("display", "block").addClass("active");
+						'.$javascript.'
+					});
+				</script>
+			';
+		}else{
+			$page_url = '
+				<script>
+					jQuery(document).ready(function(){
+						$("#content").removeClass("szeneChangeFast").addClass("szeneBegin");
+						history.pushState(null,null,"apetape/'.$link_new.'");
+						'.$navi.'
+						$("#content #inhalt .opacityScrollable .items .imageOrder.opacity0").css("display", "block").addClass("active");
+						'.$javascript.'
+					});
+				</script>
+			';
+		}
+		
 		if($page['border']){
 			$border = explode(',', $page['border']);
 			foreach($border as $i => $b){
@@ -110,23 +145,32 @@ foreach($page_menues as $i => $pm){
 		}
 
 		if($page['sound']){
+			$sounds = explode(',', $page['sound']);
 			$sound = '
-				<audio id="player" controls autoplay src="fileadmin/user_upload/music/'.$page['sound'].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
-				';
+				<audio controls autoplay id="player">
+				  <source src="fileadmin/user_upload/music/'.$sounds[0].'" type="audio/mpeg">
+				  <source src="fileadmin/user_upload/music/'.$sounds[1].'" type="audio/ogg">
+				 				Your browser does not support the audio element.
+				</audio>';
+				// <audio id="player" controls src="fileadmin/user_upload/music/'.$sounds[1].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
+				// '.t3lib_div::wrapJS('
+				// 	document.getElementById("player").play();
+				// ');
 		}
 
 		if($page['images']){
-			print_R($page['images']);
+
 			$imageCollection = explode(',', $page['images']);
+			//print_R($imageCollection);
 			$j = 0;
-			if($page['image_order'] && ($page['pid'] == '81')){
+			if($page['image_order'] == 1 && ($page['pid'] == '81')){
 				$class = 'szene9';
 			}elseif($page['image_order']){
 				$class = 'imageOrder';
 			}else{
 				$class = '';
 			}
-
+			$collection = array();
 			foreach($imageCollection as $imgCol){
 				$collection[] = '
 					<div class="opacity'.$j.' '.$class.'">
@@ -144,24 +188,12 @@ foreach($page_menues as $i => $pm){
 								<feColorMatrix values="180" type="hueRotate">
 							</filter>
 						</svg>
-						<style>
-							#css-filter-blur { 
-							  -webkit-transition: all 0.3s ease-out; 
-							     -moz-transition: all 0.3s ease-out; 
-							      -ms-transition: all 0.3s ease-out; 
-							       -o-transition: all 0.3s ease-out; 
-							          transition: all 0.3s ease-out;
-							}
-							#css-filter-blur.blured { -webkit-filter: blur(2px); filter: url(#blur-effect-1); }
-							#css-filter-blur.sepia { -webkit-filter: sepia(100%); filter: url(#sepia);}
-							#css-filter-blur.blau { -webkit-filter: hue-rotate(180deg); filter: url(#hue-rotate);}
-				    	</style>
 			    	</div>';
 
 			    $j++;
 			}
 		}
-
+		//print_R($collection);
 
 		if($page['button_effect_one']){
 			//print_r($page['button_effect_one']);
@@ -237,7 +269,7 @@ foreach($page_menues as $i => $pm){
 					}
 					// print_R($ctl['uid']);
 					if($ctl['uid'] == 3 || $ctl['uid'] == 4){
-						$upDown = 'path';
+						$upDown = 'pfad';
 					}elseif($ctl['uid'] == 5 || $ctl['uid'] == 6){
 						$upDown = 'zoom';
 					}elseif($ctl['uid'] == 7 || $ctl['uid'] == 8){
@@ -247,6 +279,125 @@ foreach($page_menues as $i => $pm){
 					}
 				}
 			}	
+		}
+
+		if($page['list_type'] == "content_overlay"){
+			$overlay = '
+				<div class="overlay"></div>
+			';
+		}else if($page['list_type'] == "content_overlayBlack"){
+			$overlay = '
+				<div class="overlayBlack"></div>
+			';
+		}
+
+		if($page['CType'] == "content_video_loop"){
+			$video = '
+				<video autoplay loop style="display:block;">
+				  <source src="/apetape/fileadmin/user_upload/video/'.$page['video'].'" type="video/mp4">
+				Your browser does not support the video tag.
+				</video>
+			';
+
+			$videoOverlay = '<div class="overlay_video_loop">'.$video.'</div>';
+		}
+
+		if($page['CType'] == "content_text" && $title == 'Kapitel 9'){
+			
+			
+			if ($page['header']) {
+				$h1 = '<h1>' . nl2br($page['header']) . '</h1>';
+			}
+			if ($page['subheader']) {
+				$h2 = '<h2>' . nl2br($page['subheader']) . '</h2>';
+			}
+				
+			if ($page['bodytext']) {
+				$textContent .= '<div class="bodytext">' .$page['bodytext']. '</div>';
+			}
+		
+			$js = '<script>
+					jQuery(document).ready(function(){
+						function bottom() {
+							window.setTimeout(function(){
+								$("#bottom").scrollIntoView(180000, "linear");
+							}, 3000);
+						};
+						bottom();
+
+						window.setTimeout(function(){
+							$("#conten #inhalt .overlayBlack").css("opacity",1);
+				                if($("#content #inhalt .overlayBlack").hasClass("thatsIt")){
+				                    $("#content #inhalt .overlayBlack").removeClass("thatsIt");
+				                }else{
+				                    $("#content #inhalt .overlayBlack").addClass("thatsIt");
+				                }
+						}, 250000);
+					});
+				</script>';
+
+			$contentText = $js.'<div class="text">'.$h1.$h2.$textContent.'</div>';
+		}
+		if($page['list_type'] == "content_path" && $page['pid'] == 79 && $path == 'true'){
+			$res = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*', 'tx_path','pid=:pid','','','');
+			$res->bindValue(':pid', $page['pid']);
+			$res->execute();
+			$row = $res->fetch();
+
+			$coordinates = explode(',',$row['position']);
+			// print_R($coordinates);
+
+			
+			for($i=0; $i < count($coordinates); $i++){
+				$sum[] = $coordinates[$i].','.$coordinates[$i+1];
+				$i++;
+			}
+
+			// print_R($sum);
+
+			for($j=0; $j<count($sum); $j++){
+				if($j == 0){
+					$m = $sum[0];
+				}else{
+					$q[] = 'Q'.$sum[$j].' '.$sum[$j+1];
+					$j++;
+				}
+			}
+
+
+			$path = '
+				<div class="path" style="z-index:979; display:block;">
+					<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+					<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+					    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+					<svg xmlns="http://www.w3.org/2000/svg"
+					     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+					         width="1920" height="1000"
+					         viewBox="0 0 1920 1000"  >
+
+					  <!-- Background -->
+					  <!--<rect x="0" y="0" width="100%" height="100%" fill="url(#rulerPattern)" stroke="black" />-->
+
+					  <!-- Transform Animation Example -->
+
+					  
+
+					    <image id="image" x="10" y="10" width="628" height="628" xlink:href="fileadmin/user_upload/path/'.$row['image'].'" />
+
+					    <image id="imageRed" x="30" y="10" width="628" height="628" style="display:none;" xlink:href="fileadmin/user_upload/path/'.$row['red_image'].'"/>
+
+					    <image id="imageGreen" x="50" y="10" width="628" height="628" style="display:none;" xlink:href="fileadmin/user_upload/path/'.$row['blue_image'].'"/>
+					     
+					    <animateMotion begin="1s" path="M '.$m.implode('',$q).'Z" dur="5s" rotate="auto" repeatCount="indefinite" fill="freeze" xlink:href="#image" />
+
+					    <animateMotion begin="1s" path="M '.$m.implode('',$q).'Z" dur="20s"  repeatCount="indefinite" fill="freeze" xlink:href="#imageRed" />
+
+					    <animateMotion begin="1s" path="M '.$m.implode('',$q).'Z" dur="10s"  repeatCount="indefinite" fill="freeze" xlink:href="#imageGreen" />
+
+					</svg>
+				</div>';
+		}else{
+			$path = '';
 		}
 
 		if($image){
@@ -262,17 +413,17 @@ foreach($page_menues as $i => $pm){
 		}
 
 		if($page['image_order'] && ($page['pid'] != '81')){
-			$collection = '
+			$collectionAll = '
 				<div class="opacityScrollable" id="scrollable">
 					<div class="items">
-						'.implode('', $collection).'
+						'.implode('',$collection).'
 					</div>
 				</div>';
 			$classA = '
 				<a class="prev browse left opacity" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
 				<a class="next browse right opacity" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
-		}elseif($page['image_order'] && ($page['pid'] == '81')){
-			$collection = '
+		}elseif($title == 'Kapitel 9'){
+			$collectionAll = '
 				<div class="szene9Scrollable szene9" id="scrollable">
 					<div class="items">
 						'.implode('', $collection).'
@@ -281,9 +432,9 @@ foreach($page_menues as $i => $pm){
 			$classA = '
 				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
 				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
-		}else{
-			$collection = '
-				<div class="scrollable" id="scrollable">
+		}elseif($page['pid'] == '79'){
+			$collectionAll = '
+				<div class="opacityScrollable szene7" id="scrollable">
 					<div class="items">
 						'.implode('', $collection).'
 					</div>
@@ -291,13 +442,25 @@ foreach($page_menues as $i => $pm){
 			$classA = '
 				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
 				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
+		}else{
+			$collectionAll = '
+				<div class="scrollable" id="scrollable">
+					<div class="items">
+						'.implode('',$collection).'
+					</div>
+				</div>';
+			$classA = '
+				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
+				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
 		}
+
+		
 	}
 }		
 
 	$content = $imageBorder.$sound.
 		$classA.
-		$collection.'
+		$collectionAll.'
 		<div class="buttons">
 			'.$but1.
 			$but2.
@@ -311,7 +474,7 @@ foreach($page_menues as $i => $pm){
 		</div>'
 	;
 
-	print_R($content.$page_url);
+	print($content.$path.$overlay.$videoOverlay.$contentText.$page_url);
 	
 	
 	

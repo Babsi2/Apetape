@@ -52,53 +52,7 @@ function debug(msg) {
 // 	// Slide down content pane
 // 	//$("#contentWrap").slideDown("slow");
 // }
-
-$(document).ready(function(){
-	
-	if (!navigator.requestMIDIAccess) {
-     	    navigator.requestMIDIAccess = navigator.requestMIDIAccess 
-                            || navigator.webkitRequestMIDIAccess
-                            || navigator.mozRequestMIDIAccess 
-                            || navigator.msRequestMIDIAccess;    
- 	}
-
-	if (!navigator.getMIDIAccess) {
-     	    navigator.getMIDIAccess = navigator.getMIDIAccess 
-                            || navigator.webkitGetMIDIAccess
-                            || navigator.mozGetMIDIAccess 
-                            || navigator.msGetMIDIAccess;    
- 	}
-	var midi = null;  // global MIDIAccess object
-
-	function onMIDISuccess( midiAccess ) {
-	  
-	  console.log( "MIDI ready!" );
-	  midi = midiAccess;  
-	  var inputs = midi.inputs();
-	  var outputs = midi.outputs();
-	 console.log(inputs[0]);
-	 console.log(outputs[0]);
-	    inputs[0].onMIDIMessage = function receiveMidi(message) {
-  	      console.log(message.data);
-	    };
-	  
-	  outputs[0].onMIDIMessage = function receivedMidi(message){
-	    console.log(message.data);
-	  }
-	}
-	function onMIDIFailure(msg) {
-	console.log( "Failed to get MIDI access - " + msg );
-	}
-	navigator.requestMIDIAccess().then( onMIDISuccess, onMIDIFailure );
-
-	
-	//navigator.getMIDIAccess(function(midiAccess) {
-	  //var inputs = midiAccess.enumerateInputs()
-	    //, outputs = midiAccess.enumerateOutputs()
-	    //;
-
-	   //alert(inputs);
-	//});
+function getTypo(){
 
 	$('body').css('height', $(window).height());
 	$('a.browse, .controls .control').tooltip();
@@ -113,7 +67,7 @@ $(document).ready(function(){
 	$('.accordionMenue .section-0.ui-accordion-content').css('height', $(window).height() - 349);
 	$('.accordionMenue .section-1.ui-accordion-content').css('height', $(window).height() - 349);
 	// $('#content').css('height', $(window).height()-18);
-	// $('#content #inhalt .scrollable .items img').css('height', $(window).height());
+	$('#content #inhalt .scrollable .items img').css('height', $(window).height());
 	$('#content #inhalt .scrollable .items img').css('width', $(window).width());
 
 	$('#content #inhalt .scrollable-border .items img').css('height', $(window).height());
@@ -138,23 +92,64 @@ $(document).ready(function(){
 		}
 	});
 	
+	if($(window).width() > 980){
+		$('#navi').click(function(){
+			if($(this).hasClass('active')){
+				$(this).removeClass('active').css('left','36px');
+				$('#content-navi').css({
+					'overflow':'hidden',
+					'width':'0px'
+				});
+			}else{
+				$(this).addClass('active').css('left','250px');
+				$('#content-navi').css({
+					'overflow':'visible',
+					'width':'240px'
+				});
+			}
+		})
+	}else{
+		$('#navi').click(function(){
+			if($(this).hasClass('active')){
+				$(this).removeClass('active').css('left','36px');
+				$('#content-navi').css({
+					'overflow':'hidden',
+					'width':'0px'
+				});
+			}else{
+				$(this).addClass('active').css('left','150px');
+				$('#content-navi').css({
+					'overflow':'visible',
+					'width':'140px'
+				});
+			}
+		})
+	}
 	
-	$('#navi').click(function(){
-		if($(this).hasClass('active')){
-			$(this).removeClass('active').css('left','0px');
-			$('#content-navi').css({
-				'overflow':'hidden',
-				'width':'0px'
-			});
+
+	
+	$('#contentWrap #content-navi .accordion-menu .accordion-sub-content a').click(function(event){
+		console.log($(this)[0].href);
+		event.preventDefault();
+		var oldRef = $(this)[0].href;
+		var ref = oldRef.substring(0, oldRef.length - 5);
+		console.log(ref);
+		if(ref == "http://localhost/apetape/apetape/einstellungen"){
+			$('#content').removeClass('szeneBegin').removeClass('szeneChangeFast');
+			window.location.href="apetape/einstellungen";
+		}else if(ref == "http://localhost/apetape/apetape/kapitel-2"){
+			$.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
+		      $('#inhalt').html( data ); 
+		     
+		    });
 		}else{
-			$(this).addClass('active').css('left','250px');
-			$('#content-navi').css({
-				'overflow':'visible',
-				'width':'240px'
-			});
+			$('#content').removeClass('szeneBegin').addClass('szeneChangeFast');
+			$.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
+		      $('#inhalt').html( data ); 
+		     
+		    });
 		}
 	})
-
 	if($('#content-navi .accordion-menu').hasClass('pageActive')){
 		$('#content-navi').show();
 		$('#navi').show();
@@ -162,58 +157,6 @@ $(document).ready(function(){
 		$('#content-navi').hide();
 		$('#navi').hide();
 	}
-	// var currentTime = $('#player')[0].currentTime;
-	// var duration = document.getElementById('player').duration;
-	// console.log(currentTime);
-	// console.log(duration);
-	// if($('#player')[0].currentTime == $('#player')[0].duration){
-	// 	console.log('finish');
-	// }
-	// $("a.sub.accordion-entry").address();
-
-	// $.address.change(function(event) {
-	// 	debug("address change called");
-	// 	// Set shortcut to URI value
-	// 	console.log(event);
-	// 	var uri = event.value;
-	// 	// Don't run ajax call for index page
-		
-	// 	if (uri == "/") {
-	// 		if (page.content_open) {
-	// 			console.log("yeah");
-	// 			document.title = "MiracleBlue - Home";
-	// 			// $("#nav a.navlink_selected").attr("class","navlink");
-	// 			// $("#nav a.navlink_selected").blur();
-	// 			// $("#contentWrap").slideUp("slow");
-	// 		}
-	// 		return;
-	// 	}else{
-	// 		console.log("puff");
-	// 		$.getJSON(uri, function(data){
-	// 			// Set document title
-	// 			console.log("data");
-	// 			document.title = data.title;
-	// 			console.log(data.content);
-	// 			// Toggle navigation bar display
-	// 			// $("#nav a.navlink_selected").attr("class","navlink");
-	// 			// $("#nav a[href='"+uri+"']").attr("class","navlink_selected");
-	// 			// Slide up content pane if it's already open
-	// 			if (page.content_open) {
-	// 				// $("#contentWrap").slideUp("slow", function(){
-	// 					// Slide down new content
-	// 					showContent(data.content);
-	// 				// });
-	// 			}
-	// 			// Slide down new content
-	// 			else {
-	// 				showContent(data.content);
-	// 			}
-	// 		});
-	// 	}
-		// Run ajax call to get JSON return data
-		
-	// }); 
-
 
 	function show_position (event) {
 	  // X- und Y-Position des Mauscursors in Abhängigkeit des
@@ -222,8 +165,8 @@ $(document).ready(function(){
 	  	var x = event.touches[0].pageX;
 		var y = event.touches[0].pageY;
 	  }else{
-	  	x = document.all ? event.offsetX : event.pageX;
-	    y = document.all ? event.offsetY : event.pageY;
+	  	x = event.pageX;
+	    y = event.pageY - $(window).scrollTop();
 	  }
 	  
 	  // Ausgabemeldung zusammenstellen
@@ -239,6 +182,7 @@ $(document).ready(function(){
 	document.body.onmousemove = show_position;
 	document.body.ontouchmove = show_position;
 
+	$('#complete_content #content #inhalt .text').css('display', 'block	');
 	$(window).resize(function(){
 		$('#content').css('height', $('.image img').height());
 		$('#content #inhalt .imageCollection img').css('height', $('.image img').height());
@@ -247,12 +191,19 @@ $(document).ready(function(){
 		$('#content #inhalt .opacityScrollable .items img').css('width', $(window).width());
 		$('.menuBackground img').css('width', $(window).width());
 	});
+
+
+}
+$(document).ready(function(){
+	
+	getTypo();
 });
 
-
-
-
-
+function bottom() {
+	window.setTimeout(function(){
+		$('#bottom').scrollIntoView(180000, 'linear');
+	}, 3000);
+};
 
 function loadInteractive(){
 	$(".section-0.ui-accordion-header").click(function(){
@@ -290,11 +241,15 @@ function loadInteractive(){
 				}else{
 					console.log("kann weiter gehen");
 					//window.location.href = "/index.php?id=6";
-					$(".javascript").addClass("active").append("Okey your Connection is fast enough. <a class='accLink' href='/apetape/apetape/kapiteleins.html' address='true'>Here</a> You can go to the interactive show.");
+					$(".javascript").addClass("active").append("Okey your Connection is fast enough. <a class='accLink' href='/apetape/apetape/kapiteleins.html'>Here</a> You can go to the interactive show.");
 				}
 			}
 		}
 	});
+}
+
+function changeChapter(){
+	console.log("hallo Kapitel 7");
 }
 
 

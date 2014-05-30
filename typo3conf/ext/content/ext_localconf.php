@@ -28,6 +28,9 @@ t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_settings.php','_set
 // Video Loop
 t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_video_loop.php','_video_loop','CType',1);
 
+// Text Element
+t3lib_extMgm::addPItoST43($_EXTKEY,'plugins/class.tx_content_text.php','_text','CType',1);
+
 // clear cache
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][] = 'EXT:content/class.content.php:&tx_content->clearCachePostProc';
 // custom link parser for tel

@@ -86,12 +86,12 @@ $temp = Array (
 			'type' => 'group',
 			'internal_type' => 'file',
 
-			'allowed' => 'MP3',
+			'allowed' => 'MP3, WAV, OGG',
 			'max_size' => 500000,
 			'uploadfolder' => 'fileadmin/user_upload/music',
-			'size' => 1,
-			'minitems' => 1,
-			'maxitems' => 1,
+			'size' => 2,
+			'minitems' => 0,
+			'maxitems' => 2,
 		),
 	),
 	
@@ -326,6 +326,10 @@ t3lib_extMgm::addPlugin(Array('Tastenbelegung', $_EXTKEY.'_settings'),'CType');
 # video loop
 $TCA['tt_content']['types'][$_EXTKEY.'_video_loop']['showitem']='CType;;14;,video';
 t3lib_extMgm::addPlugin(Array('Overlay Video Loop', $_EXTKEY.'_video_loop'),'CType');
+
+# video loop
+$TCA['tt_content']['types'][$_EXTKEY.'_text']['showitem']='CType;;14;,header,subheader,bodytext;;;richtext[]:rte_transform[mode=ts];';
+t3lib_extMgm::addPlugin(Array('Textelement', $_EXTKEY.'_text'),'CType');
 
 #############################################################################################################
 

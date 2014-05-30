@@ -2,10 +2,12 @@
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 // use Apetape\Inc\Forms;
-require_once(PATH_site . 'fileadmin/inc/class.tx_FEFunctions.php');
-require_once(PATH_site . 'fileadmin/inc/class.forms.php');
+require_once(PATH_site . 'fileadmin/inc/class.FormHelper.php');
+require_once(PATH_site . 'fileadmin/inc/class.Forms.php');
+require_once(PATH_site . 'fileadmin/inc/class.Utils.php');
 require_once(PATH_site . 'fileadmin/inc/class.Templates.php');
 require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
+require_once(PATH_site . 'fileadmin/inc/class.View.php');
 
 class tx_content_settings extends AbstractPlugin
 {
@@ -34,7 +36,28 @@ class tx_content_settings extends AbstractPlugin
       'header' => $this->cObj->data['header'],
       'bodytext' => $this->cObj->data['bodytext'],
     );
-    $contentTop = '<div class="contact">'.$this->view->renderText($data).'</div>';
+
+    $stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_buttons_manual','server_address=:server_address AND deleted=0 AND hidden=0','','sorting ASC','');
+    $stmt->bindValue(':server_address', $_SERVER['REMOTE_ADDR']);
+    $stmt->execute();
+    $key = $stmt->fetch();
+
+   
+    $button1 = $key['button_1'] ? $key['button_1'] : 'J';
+    $button2 = $key['button_2'] ? $key['button_2'] : 'K';
+    $button3 = $key['button_3'] ? $key['button_3'] : 'L';
+    $button4 = $key['button_4'] ? $key['button_4'] : 'O';
+    $actualKeys[] = 
+      '<div class="acutalKeys">Die bisherigen Tastenbelegungen sind:</div>
+      <div class="actualButton-1">Button 1: '.$button1.'</div>
+      <div class="actualButton-2">Button 2: '.$button2.'</div> 
+      <div class="actualButton-3">Button 3: '.$button3.'</div> 
+      <div class="actualButton-4">Button 4: '.$button4.'</div>
+      </br></br>' 
+    ;
+    
+    //print_R($keys);
+    $contentTop = '<div class="contact">'.$this->view->renderText($data).'</div><div class="keys">'.implode('', $actualKeys).'</div>';
     
     // $mail = Templates::Fetch('contact_email');
     // $mail2 = Templates::Fetch('contact_email_customer');
@@ -54,20 +77,8 @@ class tx_content_settings extends AbstractPlugin
           'type' => 'const',
         )
       ),
-      'type' => array(
-        'value' => '0',
-        'config' => array(
-          'type' => 'const',
-        )
-      ),
       'pid' => array(
         'value' => ($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $this->cObj->data['pid']),
-        'config' => array(
-          'type' => 'const',
-        )
-      ),
-      'module_sys_dmail_html' => array(
-        'value' => '1',
         'config' => array(
           'type' => 'const',
         )
@@ -178,7 +189,7 @@ class tx_content_settings extends AbstractPlugin
             'template' => 'FILE:typo3conf/ext/content/res/form.html',
             'submit' => array(
               'text' => '<span>'.Translations::Fetch('submit').'</span>',
-              'type' => 'button'
+              'type' => 'button',
             ),
             'submitAttributes' => array(
               'class' => 'submit',
@@ -204,7 +215,7 @@ class tx_content_settings extends AbstractPlugin
           ),
           'defaults' => array(
             'onfocus' => array(
-              'input' => 'this.select();',
+              'input' => 'this.select()',
             ),
             'class' => array(
               'select' => 'styled formfield meta-bold',
@@ -229,13 +240,13 @@ class tx_content_settings extends AbstractPlugin
           
           'columns' => $columns,
           'tables' => array(
-            'tx_buttons_manual' => array('columns' => 'tstamp,crdate,type,pid,module_sys_dmail_html,sys_language_uid,server_address,button_1,button_2,button_3,button_4,button_5,control_top,control_left,control_bottom,control_right'),
+            'tx_buttons_manual' => array('exists' => 'server_address, pid', 'columns' => 'tstamp,pid,sys_language_uid,server_address,button_1,button_2,button_3,button_4,button_5,control_top,control_left,control_bottom,control_right'),
           ),
         ));
-
+    print_R($_POST['columns']);
     $content .= '<div class="form-container" >' . $forms->process() . '</div>';
-
-    return '<div class="formheader scrollwrap">' . $contentTop . '</div>' . $content;
+    // $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id)
+    return '<div class="settings"><div class="formheader scrollwrap">' . $contentTop . '</div>' . $content.'</div>';
   }
   
 }

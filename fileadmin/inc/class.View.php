@@ -45,14 +45,14 @@ class View extends pBase {
 	public function renderText($data) {
 
 		if ($data['header']) {
-			$h1 = '<h1 class="trade-gothic">' . nl2br($data['header']) . '</h1>';
+			$h1 = '<h1>' . nl2br($data['header']) . '</h1>';
 		}
 		if ($data['subheader']) {
 			$h2 = '<h2>' . nl2br($data['subheader']) . '</h2>';
 		}
 			
 		if ($data['bodytext']) {
-			$textContent .= '<div class="text">' . $this->prepareText($data['bodytext']) . '</div>';
+			$textContent .= '<div class="bodytext">' . $this->prepareText($data['bodytext']) . '</div>';
 		}
 		
 		return <<< HTML

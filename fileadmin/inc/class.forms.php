@@ -970,7 +970,7 @@ JS
 	 */
 
 	public function Process($process = true) {
-
+		
 		session_start();
 
 		$this->callProcessCallbacks($this->config['form']['initProcess']);
@@ -1024,9 +1024,7 @@ JS
 
 				if ($this->config['form']['successMessage'])
 					$content .= $this->replaceWithValues($this->config['form']['successMessage']);
-                    if ($this->config['form']['successParam']) {
-                        $content.= t3lib_div::wrapJS("_gaq.push(['_trackPageview', '".$_SERVER['REQUEST_URI']."?success=".$this->config['form']['successParam']."']);");
-                    }
+                    
 				else
 					$content = $successFull;
 				}

@@ -1,9 +1,11 @@
 var timeout = 500;
 var i = 0;
-var length = $('#content #inhalt .opacityScrollable .items .imageOrder').length-1;
+
 var timeoutZoom = 1000;
 
 function getControls(){
+	var length = $('#content #inhalt .opacityScrollable .items .imageOrder').length-1;
+
 	var borderLength = $('.scrollable-border .items .image').length;
 	
 	
@@ -12,7 +14,6 @@ function getControls(){
     var control3 = $('.control.bottom').data("controlbottom") ? $('.control.bottom').data("controlbottom") : 83;
     var control4 = $('.next.right').data("controlright") ? $('.next.right').data("controlright") : 68;
 
-    console.log(control1+' '+control2+' '+control3+' '+control4);
 	$('.controls .control.bottom.random').click(function(){
 		clickBottomRandom();
 	});
@@ -47,17 +48,17 @@ function getControls(){
 	$('.prev.browse.left.opacity').addClass('disabled');
 	
 	$('.next.browse.right.opacity').click(function(){
-		clickRight();
+		clickRight(length);
 	})
 
 	$('.prev.browse.left.opacity').click(function(){
-		clickLeft();
+		clickLeft(length);
 	})
 
-	
 	$('.controls .control.top.zoom').click(function(){
 		clickTopZoom();
 	})
+	
 	$('.controls .control.bottom.zoom').click(function(){
 		clickBottomZoom();
 	});
@@ -67,25 +68,21 @@ function getControls(){
             event = window.event;
         }
         if(event.keyCode == control1){
-        	console.log("top");
         	if($('.control.top').hasClass('random')){
         		clickTopRandom();
         	}else if($('.control.top').hasClass('zoom')){
         		clickTopZoom();
         	}
         }else if(event.keyCode == control3){
-        	console.log("bottom");
         	if($('.control.bottom').hasClass('random')){
         		clickBottomRandom();
         	}else if($('.control.bottom').hasClass('zoom')){
         		clickBottomZoom();
         	}
         }else if(event.keyCode == control2){
-        	console.log("left");
-        	clickLeft();
+        	clickLeft(length);
         }else if(event.keyCode == control4){
-        	console.log("right");
-        	clickRight();
+        	clickRight(length);
         }
     }); 
 }
@@ -96,7 +93,6 @@ $(document).ready(function(){
 
 function clickTopZoom(){
 	timeoutZoom += 100;
-		
 	if($('.controls .control.bottom.zoom').hasClass('disabled') && timeoutZoom > 0){
 		$('.controls .control.bottom.zoom').removeClass('disabled');
 	}else if(timeoutZoom === 1000){
@@ -106,7 +102,6 @@ function clickTopZoom(){
 
 function clickBottomZoom(){
 	timeoutZoom -= 100;
-		
 	if($('.controls .control.top.zoom').hasClass('disabled') && timeoutZoom < 1000){
 		$('.controls .control.top.zoom').removeClass('disabled');
 	}else if(timeoutZoom === 0){
@@ -127,7 +122,6 @@ function clickTopRandom(){
 
 function clickBottomRandom(){
 	timeout += 100;
-	console.log(timeout);
 	if($('.controls .control.top').hasClass('disabled') && timeout > 0){
 		
 		$('.controls .control.top').removeClass('disabled');
@@ -137,7 +131,7 @@ function clickBottomRandom(){
 	}
 };
 
-function clickLeft(){
+function clickLeft(length){
 	$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600).removeClass('active');
 	i--;
 	if($('.next.browse.right.opacity').hasClass('disabled') && i <= length){
@@ -154,7 +148,7 @@ function clickLeft(){
 	}
 };
 
-function clickRight(){
+function clickRight(length){
 	$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600).removeClass('active');
 
 	i++;

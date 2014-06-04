@@ -3,8 +3,7 @@
 	/**
 	 * Class for generating HTML-Tables
 	 * 
-	 * @author Michael Wallner
-	 * @copyright 2010 pixelart GmbH
+	 * @author Barbara Huber
 	 * @version $Id$
 	 * @access public
 	 */

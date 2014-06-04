@@ -3,13 +3,11 @@
 	* Base Class that all pixelart specific classes should extend
 	* It contains some general behavior for better coding und debugging
 	*
-	* $Id: class.pBase.php 14 2010-01-13 13:53:42Z mwallner $
 	*
-	* Check for the newest version at http://forge.pixelart.at/redmine/repositories/show/framework
 	***************************************************************/
 	
 	/**
-	 * Base pixelart class
+	 * Base class
 	 */
 	abstract class pBase { 
 		/////////////////////////////////////////////////////////////////////////////

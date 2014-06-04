@@ -1,7 +1,7 @@
 <?php
 /**
  * Klasse um Captchas zu generieren
- * @author Daniel Franek
+ * @author Barbara Huber
  * @uses PHP>=5
  **/
 class captcha {

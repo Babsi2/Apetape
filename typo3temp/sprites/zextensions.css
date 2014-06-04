@@ -85,3 +85,28 @@
 	background-image: url('../../typo3conf/ext/translations/tx_templates.gif') !important;
 }
 	
+.t3-icon-tx_powermail_domain_model_forms-default {
+	background-position: 0px 0px !important;
+	background-image: url('../../typo3conf/ext/powermail/Resources/Public/Icons/tx_powermail_domain_model_forms.gif') !important;
+}
+	
+.t3-icon-tx_powermail_domain_model_pages-default {
+	background-position: 0px 0px !important;
+	background-image: url('../../typo3conf/ext/powermail/Resources/Public/Icons/tx_powermail_domain_model_pages.gif') !important;
+}
+	
+.t3-icon-tx_powermail_domain_model_fields-default {
+	background-position: 0px 0px !important;
+	background-image: url('../../typo3conf/ext/powermail/Resources/Public/Icons/tx_powermail_domain_model_fields.gif') !important;
+}
+	
+.t3-icon-tx_powermail_domain_model_mails-default {
+	background-position: 0px 0px !important;
+	background-image: url('../../typo3conf/ext/powermail/Resources/Public/Icons/tx_powermail_domain_model_mails.gif') !important;
+}
+	
+.t3-icon-tx_powermail_domain_model_answers-default {
+	background-position: 0px 0px !important;
+	background-image: url('../../typo3conf/ext/powermail/Resources/Public/Icons/tx_powermail_domain_model_answers.gif') !important;
+}
+	

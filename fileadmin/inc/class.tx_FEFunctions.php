@@ -1,6 +1,6 @@
 <?PHP
 require_once(PATH_site . 'fileadmin/inc/class.Utils.php');
-require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
+//require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
 require_once(PATH_site . 'fileadmin/inc/class.Table.php');
 require_once(PATH_site . 'fileadmin/inc/class.View.php');
 
@@ -94,17 +94,14 @@ class tx_FEFunctions implements t3lib_Singleton {
 		return "ZAC | Use your Brain";
 	}
 
-	public function getCopyright() {
-		return strftime(Translations::Fetch('copyright'));
-	}	
-
+	
 	public function getFooter() {
 		$footer = '
 			<div class="left">
 				<p>Copyright &copy; 2014 ZAC /// <a href="mailto:contact@zac.co.at" title="contact@zac.co.at">Contact</a></p>
 			</div>
 			<div class="right">
-				<p><span class="title">CaptainMOXi</span> <a class="cloud" href="http://soundcloud.com/mbray/" target="_blank"></a><a class="twitter" href="http://twitter.com/CaptainMOXi" target="_blank"></a><a class="facebook" href="http://www.facebook.com/m.bergsmann" target="_blank"></a><a class="youtube" href="http://www.youtube.com/channel/UCpytvpxIAdawVfZoHaMvYxw" target="_blank"></a><a class="wordpress" href="http://captainmoxi.wordpress.com/zac/apetape/" target="_blank"></a>
+				<p><span class="title">CaptainMOXi</span> <a class="cloud" href="https://soundcloud.com/reyomoxi/apetape-preview" target="_blank"></a><a class="twitter" href="http://twitter.com/CaptainMOXi" target="_blank"></a><a class="facebook" href="http://www.facebook.com/m.bergsmann" target="_blank"></a><a class="youtube" href="http://www.youtube.com/channel/UCpytvpxIAdawVfZoHaMvYxw" target="_blank"></a><a class="wordpress" href="http://captainmoxi.wordpress.com/zac/apetape/" target="_blank"></a>
 			</div>
 		';
 

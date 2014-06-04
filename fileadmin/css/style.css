@@ -290,19 +290,19 @@ li.spacer{
 }
 
 #content.szeneChangeFast{
- animation: change 0.2s linear;   
- -webkit-animation: change 0.2s linear;
-    -moz-animation: change 0.2s linear;
-    -ms-animation: change 0.2s linear;
-    -o-animation: change 0.2s linear; 
+ animation: change 2s linear;   
+ -webkit-animation: change 2s linear;
+    -moz-animation: change 2s linear;
+    -ms-animation: change 2s linear;
+    -o-animation: change 2s linear; 
 }
 
 #content.szeneBegin{
- animation: begin 0.8s linear;   
- -webkit-animation: begin 0.8s linear;
-    -moz-animation: begin 0.8s linear;
-    -ms-animation: begin 0.8s linear;
-    -o-animation: begin 0.8s linear; 
+ animation: begin 4s linear;   
+ -webkit-animation: begin 4s linear;
+    -moz-animation: begin 4s linear;
+    -ms-animation: begin 4s linear;
+    -o-animation: begin 4s linear; 
 }
 
 #complete_content #navi{
@@ -487,15 +487,15 @@ li.spacer{
 	-webkit-filter: sepia(100%);
 }
 
-#content #inhalt .opacityScrollable .items .active img.blau, #content #inhalt .scrollable .items .active img.blau{
-	-webkit-filter: hue-rotate(180deg);
+#content #inhalt .opacityScrollable .items .active img.contrast, #content #inhalt .scrollable .items img.contrast{
+	-webkit-filter: contrast(200%);
 }
 
-#complete_content #content #inhalt #scrollable .items .szene9{
+#complete_content #content #inhalt .szene9 .items{
 	position: absolute;
 }
 
-#complete_content #content #inhalt #scrollable .items .szene9 img{
+#complete_content #content #inhalt .szene9 .items img{
 	max-width: 200px;
 	height: auto;
 }
@@ -565,7 +565,7 @@ li.spacer{
 	background: url(../images/effekts/Wuerd_PLaceholder.jpg) no-repeat;
 }
 
-.buttons .button.Blau{
+.buttons .button.Contrast{
 	background: url(../images/effekts/Blau.png) no-repeat;
 }
 
@@ -704,6 +704,10 @@ li.spacer{
 	left: 3px;
 	top: 44px;
 } 
+
+.accLink{
+	cursor: pointer;
+}
 
 .accordionMenue{
 	position: fixed;
@@ -849,6 +853,30 @@ li.spacer{
 	transition:20s ease-in-out;
 }
 
+.powermail_fieldset, .powermail_create{
+	position: absolute;
+	border: none;
+	top: 436px;
+	left: 183;
+}
+
+.powermail_all_label{
+	float: left;
+	margin-right: 10px;
+}
+
+.tx-powermail h3{
+	display:none;
+}
+
+.keys .keyRow{
+	width: 360px;
+}
+
+.keys .keyColumn{
+	float: left;
+	margin-right: 50px;
+}
 @media only screen and (max-device-width: 980px) {
 	.szeneMenue{
 		width: 708px;

@@ -92,9 +92,12 @@ function change(){
     console.log("change");
     console.log(window.location.href);
     $('#content').addClass('szeneChangeFast');
-    $.post( "index.php?eID=complete&link="+window.location.href+"&click=false&path=true", function( data ) {
+    $.post( window.location.href+"/index.php?eID=complete&link="+window.location.href+"&click=false&path=true", function( data ) {
       $('#inhalt').html( data ); 
     });
+	//if(window.location.href == "http://www.zac.co.at/apetape/kapitel-1"){
+	//	window.location.href = "/apetape/kapitel-2";
+	//}
 }
 
 function getAudio(){

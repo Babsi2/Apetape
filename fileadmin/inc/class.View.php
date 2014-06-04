@@ -174,7 +174,7 @@ HTML;
 		$test = array();
 		$i = 0;
 		$sideIndex = 0;
-		$test[] = $GLOBALS['TSFE']->sys_page->getMenu(1);
+		$test[] = $GLOBALS['TSFE']->sys_page->getMenu(2);
 		
 		if ($test) {
 			$subNaviAttribute .= ' data-sub-navi="'.($i + 1).'" ';

@@ -88,15 +88,15 @@ function getKeys(){
            console.log("sepia");
             if($('#content .buttons .button.Sepia').hasClass('active')){
                 $('#content .buttons .button.Sepia').removeClass('active');
-                $('#content #inhalt .opacityScrollable .items .active img').removeClass('sepia');
-                $('#content #inhalt .scrollable .items .active img').removeClass('sepia');
+                $('#content #inhalt .opacityScrollable .items img').removeClass('sepia');
+                $('#content #inhalt .scrollable .items img').removeClass('sepia');
             }else{
                 // console.log('zoom');
                 $('#content .buttons .button.Sepia').addClass('active');
-                $('#content #inhalt .opacityScrollable .items .active img').addClass('sepia');
-                $('#content #inhalt .scrollable .items .active img').addClass('sepia');
-                $('#content #inhalt .opacityScrollable .items .active img').removeClass('blau');
-                $('#content #inhalt .scrollable .items .active img').removeClass('blau');
+                $('#content #inhalt .opacityScrollable .items img').addClass('sepia');
+                $('#content #inhalt .scrollable .items img').addClass('sepia');
+                $('#content #inhalt .opacityScrollable .items img').removeClass('contrast');
+                $('#content #inhalt .scrollable .items img').removeClass('contrast');
                 // $('#content img').removeClass('unzoomed');
             }
         }
@@ -106,19 +106,19 @@ function getKeys(){
         if(!event){
             event = window.event;
         }
-        if((event.keyCode == key1 && $('.button-1').hasClass('Blau')) || (event.keyCode == key2 && $('.button-2').hasClass('Blau')) || (event.keyCode == key3 && $('.button-3').hasClass('Blau')) || (event.keyCode == key4 && $('.button-4').hasClass('Blau'))){
+        if((event.keyCode == key1 && $('.button-1').hasClass('Contrast')) || (event.keyCode == key2 && $('.button-2').hasClass('Contrast')) || (event.keyCode == key3 && $('.button-3').hasClass('Contrast')) || (event.keyCode == key4 && $('.button-4').hasClass('Contrast'))){
            console.log("blau");
-            if($('#content .buttons .button.Blau').hasClass('active')){
-                $('#content .buttons .button.Blau').removeClass('active');
-                $('#content #inhalt .opacityScrollable .items .active img').removeClass('blau');
-                $('#content #inhalt .scrollable .items .active img').removeClass('blau');
+            if($('#content .buttons .button.Contrast').hasClass('active')){
+                $('#content .buttons .button.Contrast').removeClass('active');
+                $('#content #inhalt .opacityScrollable .items img').removeClass('contrast');
+                $('#content #inhalt .scrollable .items img').removeClass('contrast');
             }else{
                 // console.log('zoom');
-                $('#content .buttons .button.Blau').addClass('active');
-                $('#content #inhalt .opacityScrollable .items .active img').addClass('blau');
-                $('#content #inhalt .scrollable .items .active img').addClass('blau');
-                $('#content #inhalt .opacityScrollable .items .active img').removeClass('sepia');
-                $('#content #inhalt .scrollable .items .active img').removeClass('sepia');
+                $('#content .buttons .button.Contrast').addClass('active');
+                $('#content #inhalt .opacityScrollable .items img').addClass('contrast');
+                $('#content #inhalt .scrollable .items img').addClass('contrast');
+                $('#content #inhalt .opacityScrollable .items img').removeClass('sepia');
+                $('#content #inhalt .scrollable .items img').removeClass('sepia');
                 // $('#content img').removeClass('unzoomed');
             }
         }
@@ -137,7 +137,7 @@ function getKeys(){
                   
                     $('#content #inhalt .opacityScrollable .items .active img').toggleClass('zoomed-p-h');
                     $('#content #inhalt .scrollable .items .active img').toggleClass('zoomed-p-h');
-                },500);
+                },200);
                 $('.buttons .button.Zoom-p-h').addClass('active');
                 press = true;  
             }, 100);
@@ -172,8 +172,9 @@ function getKeys(){
         clearInterval(timerId);
         clearTimeout(this.downTimer);
         $('.buttons .button.Vibe').removeClass('active');
-        $('#content #inhalt .opacityScrollable .items .active img').removeClass('vibe');
-        $('#content #inhalt .scrollable .items .active img').removeClass('vibe');
+            $('#content #inhalt .opacityScrollable .items .active img').removeClass('vibe');
+            $('#content #inhalt .scrollable .items .active img').removeClass('vibe');
+        
     }); 
     
     $(document).keydown(function(event){
@@ -197,7 +198,10 @@ function getKeys(){
         clearInterval(timerId);
         clearTimeout(this.downTimer);
         $('.buttons .button.Stroboskop').removeClass('active');
-        $('#content #inhalt .overlayBlack').removeClass('dropped');
+        if(!($('.buttons .button.Stroboskop').hasClass('active'))){
+            $('#content #inhalt .overlayBlack').removeClass('dropped');
+        }
+        
     }); 
 
     $(document).keydown(function(){
@@ -285,8 +289,8 @@ function getKeys(){
             
             clearTimeout(this.downTimer);
             this.downTimer = setTimeout(function() {
-                $('#content #inhalt .opacityScrollable .items .active img').addClass('opacified-o-s');
-                $('#content #inhalt .scrollable .items .active img').addClass('opacified-o-s');
+                $('#content #inhalt .opacityScrollable .items .active img').addClass('opacified');
+                $('#content #inhalt .scrollable .items .active img').addClass('opacified');
                 $('.buttons .button.Opacity').addClass('active');
                 press = true;  
             }, 100);
@@ -295,8 +299,8 @@ function getKeys(){
         clearInterval(timerId);
         clearTimeout(this.downTimer);
         $('.buttons .button.Opacity').removeClass('active');
-        $('#content #inhalt .opacityScrollable .items .active img').removeClass('opacified-o-s');
-        $('#content #inhalt .scrollable .items .active img').removeClass('opacified-s-s');
+        $('#content #inhalt .opacityScrollable .items .active img').removeClass('opacified');
+        $('#content #inhalt .scrollable .items .active img').removeClass('opacified');
     }); 
     
 
@@ -360,33 +364,6 @@ function getKeys(){
             console.log("würd");
         }
     }); 
-}
-$(document).ready(function(){
-
-    getKeys();
-    function overlayChange(link){
-        var oldRef = link;
-        var ref = oldRef.substring(0, oldRef.length - 5);
-        console.log(ref);
-        if(ref == "http://localhost/apetape/apetape/einstellungen"){
-            $('#content').removeClass('szeneBegin').removeClass('szeneChangeFast');
-            $.post( "index.php?eID=settings&link="+ref, function( data ) {
-              $('#inhalt').html( data ); 
-             
-            }, "html");
-        }else if(ref == "http://localhost/apetape/apetape/kapitel-2"){
-            $.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
-              $('#inhalt').html( data ); 
-             
-            });
-        }else{
-            $('#content').removeClass('szeneBegin').addClass('szeneChangeFast');
-            $.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
-              $('#inhalt').html( data ); 
-             
-            });
-        }
-    }
 
     $(document).keydown(function(event){
         if(!event){
@@ -449,5 +426,33 @@ $(document).ready(function(){
         }
         
     })
+}
+$(document).ready(function(){
+
+    getKeys();
+    function overlayChange(link){
+        var oldRef = link;
+        var ref = oldRef.substring(0, oldRef.length - 5);
+        console.log(ref);
+        if(ref == "http://localhost/apetape/apetape/einstellungen"){
+            $('#content').removeClass('szeneBegin').removeClass('szeneChangeFast');
+            $.post( "index.php?eID=settings&link="+ref, function( data ) {
+              $('#inhalt').html( data ); 
+             
+            }, "html");
+        }else if(ref == "http://localhost/apetape/apetape/kapitel-2"){
+            $.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
+              $('#inhalt').html( data ); 
+             
+            });
+        }else{
+            $('#content').removeClass('szeneBegin').addClass('szeneChangeFast');
+            $.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
+              $('#inhalt').html( data ); 
+             
+            });
+        }
+    }
+
 });
 

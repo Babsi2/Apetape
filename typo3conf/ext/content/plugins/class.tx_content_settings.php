@@ -1,24 +1,14 @@
 <?php
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-// use Apetape\Inc\Forms;
-require_once(PATH_site . 'fileadmin/inc/class.FormHelper.php');
-require_once(PATH_site . 'fileadmin/inc/class.Forms.php');
 require_once(PATH_site . 'fileadmin/inc/class.Utils.php');
 require_once(PATH_site . 'fileadmin/inc/class.Templates.php');
-require_once(PATH_site . 'fileadmin/inc/class.Translations.php');
 require_once(PATH_site . 'fileadmin/inc/class.View.php');
 
-class tx_content_settings extends AbstractPlugin
-{
-  var $prefixId = 'tx_content_settings';
-  var $scriptRelPath = 'plugins/class.tx_content_settings';
-  var $extKey = 'content';
-  var $pi_checkCHash = TRUE;
-  
+class tx_content_settings extends AbstractPlugin{
 
   /**
-   * @var Render
+   * @var View
    */
   protected $view;
 
@@ -37,216 +27,69 @@ class tx_content_settings extends AbstractPlugin
       'bodytext' => $this->cObj->data['bodytext'],
     );
 
-    $stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_buttons_manual','server_address=:server_address AND deleted=0 AND hidden=0','','sorting ASC','');
+    $stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_mails','sender_ip=:server_address AND deleted=0 AND hidden=0','','ASC','');
     $stmt->bindValue(':server_address', $_SERVER['REMOTE_ADDR']);
     $stmt->execute();
-    $key = $stmt->fetch();
+    $mail = $stmt->fetch();
 
-   
-    $button1 = $key['button_1'] ? $key['button_1'] : 'J';
-    $button2 = $key['button_2'] ? $key['button_2'] : 'K';
-    $button3 = $key['button_3'] ? $key['button_3'] : 'L';
-    $button4 = $key['button_4'] ? $key['button_4'] : 'O';
+    $stm = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_answers','mail=:server_address AND deleted=0 AND hidden=0','','ASC','');
+    $stm->bindValue(':server_address', $mail['uid']);
+    $stm->execute();
+    $answers = $stm->fetchAll();
+    
+    if(!$answers){
+      $button1 = 'U';
+      $button2 = 'I';
+      $button3 = 'O';
+      $button4 = 'P';
+      $controlTop = 'W';
+      $controlLeft = 'A';
+      $controlRight = 'D';
+      $controlBottom = 'S';
+    }
+        
+      
+    foreach($answers as $answer){
+      $key = strtoupper($answer['value']) ? strtoupper($answer['value']) : '';
+
+      $stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_fields','uid=:field AND deleted=0 AND hidden=0','','ASC','');
+      $stmt->bindValue(':field', $answer['field']);
+      $stmt->execute();
+      $field = $stmt->fetch();
+        
+      if($field['title'] == "button_1"){
+        $button1 = $key;
+      }else if($field['title'] == "button_2"){
+        $button2 = $key;
+      }else if($field['title'] == "button_3"){
+        $button3 = $key;
+      }else if($field['title'] == "button_4"){
+        $button4 = $key;
+      }else if($field['title'] == "control_top"){
+        $controlTop = $key;
+      }else if($field['title'] == "control_left"){
+        $controlLeft = $key;
+      }else if($field['title'] == "control_right"){
+        $controlRight = $key;
+      }else if($field['title'] == "control_bottom"){
+        $controlBottom = $key;
+      }else if($field['title'] == "button_5"){
+        $wuerd = $key;
+      }
+    }
     $actualKeys[] = 
       '<div class="acutalKeys">Die bisherigen Tastenbelegungen sind:</div>
-      <div class="actualButton-1">Button 1: '.$button1.'</div>
-      <div class="actualButton-2">Button 2: '.$button2.'</div> 
-      <div class="actualButton-3">Button 3: '.$button3.'</div> 
-      <div class="actualButton-4">Button 4: '.$button4.'</div>
+      <div class="keyRow"><div class="keyColumn actualButton-1">Button 1: '.$button1.'</div><div class="keyColumn acutalControlTop">Control Top: '.$controlTop.'</div></div>
+      <div class="keyRow"><div class="keyColumn actualButton-2">Button 2: '.$button2.'</div><div class="keyColumn acutalControlLeft">Control Left: '.$controlLeft.'</div></div>
+      <div class="keyRow"><div class="keyColumn actualButton-3">Button 3: '.$button3.'</div><div class="keyColumn acutalControlRight">Control Right: '.$controlRight.'</div></div> 
+      <div class="keyRow"><div class="keyColumn actualButton-4">Button 4: '.$button4.'</div><div class="keyColumn acutalControlBottom">Control Bottom: '.$controlBottom.'</div></div>
+      <div><div class="actualWuerd">Wuerd: '.$wuerd.'</div></div>
       </br></br>' 
     ;
     
-    //print_R($keys);
     $contentTop = '<div class="contact">'.$this->view->renderText($data).'</div><div class="keys">'.implode('', $actualKeys).'</div>';
     
-    // $mail = Templates::Fetch('contact_email');
-    // $mail2 = Templates::Fetch('contact_email_customer');
-    // $salutation = Templates::Fetch('email_signature');
-    
-
-    $columns = array(
-      'tstamp' => array(
-        'value' => time(),
-        'config' => array(
-          'type' => 'const',
-        )
-      ),
-      'crdate' => array(
-        'value' => time(),
-        'config' => array(
-          'type' => 'const',
-        )
-      ),
-      'pid' => array(
-        'value' => ($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $this->cObj->data['pid']),
-        'config' => array(
-          'type' => 'const',
-        )
-      ),
-      'sys_language_uid' => array(
-        'value' => $GLOBALS['TSFE']->config['config']['sys_language_uid'],
-        'config' => array(
-          'type' => 'const',
-        )
-      ),
-      'server_address' => array(
-        'value' => $_SERVER['REMOTE_ADDR'],
-        'config' => array(
-          'type' => 'const',
-        )
-      ),
-      'button_1' => array(
-        'label' => 'LLL:l_button1',
-        'config' => array(
-          'type' => 'input',
-          'size' => 30,
-          // 'validate' => 'length,2;required',
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'button_2' => array(
-        'label' => 'LLL:l_button2',
-        'config' => array(
-          //'inlineLabel' => 1,
-          'type' => 'input',
-          'size' => 30,
-          // 'validate' => 'length,2;required',
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'button_3' => array(
-        'label' => 'LLL:l_button3',
-        'config' => array(
-          //'inlineLabel' => 1,
-          'type' => 'input',
-          'size' => 30,
-          // 'validate' => 'required;email',
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'button_4' => array(
-        'label' => 'LLL:l_button4',
-        'config' => array(
-          'type' => 'input',
-          'size' => 30,
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'button_5' => array(
-        'label' => 'LLL:l_button5',
-        'config' => array(
-          'type' => 'input',
-          'size' => 30,
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'control_top' => array(
-        'label' => 'LLL:l_control_top',
-        'config' => array(
-          'type' => 'input',
-          'size' => 30,
-          // 'validate' => 'required',
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'control_left' => array(
-        'label' => 'LLL:l_control_left',
-        'config' => array(
-          'type' => 'input',
-          'size' => 30,
-          // 'validate' => 'required',
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'control_bottom' => array(
-        'label' => 'LLL:l_control_bottom',
-        'config' => array(
-          'type' => 'input',
-          'size' => 30,
-          // 'validate' => 'required',
-          'tabindex' => ++$tabindex
-        )
-      ),
-      'control_right' => array(
-        'label' => 'LLL:l_control_right',
-        'config' => array(
-          'type' => 'input',
-          'size' => 30,
-          // 'validate' => 'required',
-          'tabindex' => ++$tabindex
-        )
-      ),
-    );
-
-
-    $forms = new Forms(array(
-          'form' => array(
-            'method' => 'post',
-            'action' => $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id),
-            'successParam' => 1,
-            'successMessage' => '<div class="formsuccess">' . nl2br(Translations::Fetch('form_success')) . '</div>',
-            'id' => 'contactForm',
-            'template' => 'FILE:typo3conf/ext/content/res/form.html',
-            'submit' => array(
-              'text' => '<span>'.Translations::Fetch('submit').'</span>',
-              'type' => 'button',
-            ),
-            'submitAttributes' => array(
-              'class' => 'submit',
-            ),
-            'class' => 'contact-form',
-            'store' => 'db',
-            'labelSuffix' => '',
-            'requiredSuffix' => '&nbsp;<span class="required">*</span>',
-            'singleError' => false,
-            'errorMessages' => array(
-              'number' => 'LLL:err_number',
-              'email' => 'LLL:err_email',
-              'length' => 'LLL:err_length',
-              'captcha' => 'LLL:err_captcha',
-              'required' => 'LLL:err_required',
-              'date' => 'LLL:err_date',
-              'recaptcha' => 'LLL:err_recaptcha',
-              'honeypot' => Translations::Fetch('errcsrf'),
-              'csrf' => Translations::Fetch('err_csrf'),
-              'filltime' => 'LLL:err_csrf',
-            ),
-            'subheaders' => $subheaders,
-          ),
-          'defaults' => array(
-            'onfocus' => array(
-              'input' => 'this.select()',
-            ),
-            'class' => array(
-              'select' => 'styled formfield meta-bold',
-              'input' => 'formfield meta-bold',
-              'submit' => 'submit',
-              'radio' => '',
-              'text' => 'formfield',
-              'check' => 'styled',
-              'captchaText' => 'formfield meta-bold',
-              'captcha' => 'formfield'
-            ),
-            'style' => array(
-              'label' => '',
-              'select' => '',
-              'input' => '',
-              'radio' => '',
-              'text' => '',
-              'check' => '',
-            ),
-            'values' => $userValues,
-          ),
-          
-          'columns' => $columns,
-          'tables' => array(
-            'tx_buttons_manual' => array('exists' => 'server_address, pid', 'columns' => 'tstamp,pid,sys_language_uid,server_address,button_1,button_2,button_3,button_4,button_5,control_top,control_left,control_bottom,control_right'),
-          ),
-        ));
-    print_R($_POST['columns']);
-    $content .= '<div class="form-container" >' . $forms->process() . '</div>';
-    // $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id)
-    return '<div class="settings"><div class="formheader scrollwrap">' . $contentTop . '</div>' . $content.'</div>';
+    return '<div class="settings">' . $contentTop . '</div>';
   }
   
 }

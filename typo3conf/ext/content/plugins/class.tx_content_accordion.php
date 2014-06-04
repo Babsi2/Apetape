@@ -3,11 +3,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 class tx_content_accordion extends AbstractPlugin {
 
-		// Default extension plugin variables:
-	// var $prefixId = 'tx_content_accordion'; // Same as class name
-	// var $scriptRelPath = 'plugins/class.tx_content_accordion.php'; // Path to this script relative to the extension dir.
-	// var $extKey = 'content'; // The extension key.
-	// public $pi_checkCHash = TRUE;
 
 	/**
 	 *

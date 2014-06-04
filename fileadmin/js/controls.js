@@ -4,7 +4,13 @@ var i = 0;
 var timeoutZoom = 1000;
 
 function getControls(){
-	var length = $('#content #inhalt .opacityScrollable .items .imageOrder').length-1;
+	
+	if($('#content #inhalt #scrollable').hasClass('opacityScrollable')){
+		var length = $('#content #inhalt .opacityScrollable .items .imageOrder').length-1;
+	}else if($('#content #inhalt #scrollable').hasClass('scrollable')){
+		var length = $('#content #inhalt .scrollable .items .imageOrder').length-1;
+	}
+	
 
 	var borderLength = $('.scrollable-border .items .image').length;
 	
@@ -47,18 +53,18 @@ function getControls(){
 	$('#content #inhalt .opacityScrollable .items .imageOrder.opacity0').css('display', 'block').addClass('active');
 	$('.prev.browse.left.opacity').addClass('disabled');
 	
-	$('.next.browse.right.opacity').click(function(){
+	$('.next.browse.right').click(function(){
 		clickRight(length);
 	})
 
-	$('.prev.browse.left.opacity').click(function(){
+	$('.prev.browse.left').click(function(){
 		clickLeft(length);
 	})
 
 	$('.controls .control.top.zoom').click(function(){
 		clickTopZoom();
 	})
-	
+
 	$('.controls .control.bottom.zoom').click(function(){
 		clickBottomZoom();
 	});
@@ -111,7 +117,6 @@ function clickBottomZoom(){
 
 function clickTopRandom(){
 	timeout -= 100;
-	console.log(timeout);
 	if($('.controls .control.bottom').hasClass('disabled') && timeout < 2000){
 		
 		$('.controls .control.bottom').removeClass('disabled');
@@ -133,35 +138,51 @@ function clickBottomRandom(){
 
 function clickLeft(length){
 	$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600).removeClass('active');
-	i--;
+	$('#content #inhalt .scrollable .items .imageOrder').fadeOut(600).removeClass('active');
+	i=i-1;
 	if($('.next.browse.right.opacity').hasClass('disabled') && i <= length){
 		$('.next.browse.right.opacity').removeClass('disabled');
 		$('#content #inhalt .opacityScrollable .items .imageOrderLast.opacity-1').css('z-index', 11);
+	}else if($('.next.browse.right').hasClass('disabled') && i <= length){
+		$('.next.browse.right').removeClass('disabled');
+		$('#content #inhalt .scrollable .items .imageOrderLast.opacity-1').css('z-index', 11);
 	}
 	if(i <= 0){
 		$('.prev.browse.left.opacity').addClass('disabled').css('cursor', 'default');
 		$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(300).removeClass('active');
 		$('#content #inhalt .opacityScrollable .items .imageOrder.opacity0').fadeIn(600).addClass('active');
+		$('.prev.browse.left').addClass('disabled').css('cursor', 'default');
+		$('#content #inhalt .scrollable .items .imageOrder').fadeOut(300).removeClass('active');
+		$('#content #inhalt .scrollable .items .imageOrder.opacity0').fadeIn(600).addClass('active');
 		i = 0;
 	}else{
 		$('#content #inhalt .opacityScrollable .items .imageOrder.opacity'+i).fadeIn(600).addClass('active');
+		$('#content #inhalt .scrollable .items .imageOrder.opacity'+i).fadeIn(600).addClass('active');
 	}
 };
 
 function clickRight(length){
 	$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(600).removeClass('active');
+	$('#content #inhalt .scrollable .items .imageOrder').fadeOut(600).removeClass('active');
 
-	i++;
+	i=i+1;
 	if($('.prev.browse.left.opacity').hasClass('disabled') && i >= 1){
 		$('.prev.browse.left.opacity').removeClass('disabled');
+	}else if($('.prev.browse.left').hasClass('disabled') && i >= 1){
+		$('.prev.browse.left').removeClass('disabled');
 	}
 	if(i >= length){
 		$('.next.browse.right.opacity').addClass('disabled').css('cursor', 'default');
 		$('#content #inhalt .opacityScrollable .items .imageOrder').fadeOut(300).removeClass('active');
 		$('#content #inhalt .opacityScrollable .items .imageOrder.opacity'+length).fadeIn(600).addClass('active');
 		$('#content #inhalt .opacityScrollable .items .imageOrderLast.opacity-1').css('z-index', 9);
+		$('.next.browse.right').addClass('disabled').css('cursor', 'default');
+		$('#content #inhalt .scrollable .items .imageOrder').fadeOut(300).removeClass('active');
+		$('#content #inhalt .scrollable .items .imageOrder.opacity'+length).fadeIn(600).addClass('active');
+		$('#content #inhalt .scrollable .items .imageOrderLast.opacity-1').css('z-index', 9);
 		i=length;
 	}else{
 		$('#content #inhalt .opacityScrollable .items .imageOrder.opacity'+i).fadeIn(600).addClass('active');
+		$('#content #inhalt .scrollable .items .imageOrder.opacity'+i).fadeIn(600).addClass('active');
 	}
 };

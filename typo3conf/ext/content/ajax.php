@@ -20,34 +20,65 @@ $view;
 $uObj = utils::GetInstance($cObj);
 $view = new  View($conf, $uObj);
 
-$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_buttons_manual','server_address=:server_address','','sorting DESC','');
+$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_mails','sender_ip=:server_address AND deleted=0 AND hidden=0','','ASC','');
 $stmt->bindValue(':server_address', $_SERVER['REMOTE_ADDR']);
 $stmt->execute();
-$settings = $stmt->fetchAll();
+$mail = $stmt->fetch();
 
-foreach($settings as $set){
-	$ascButton1 = ord($set['button_1']);
-	$ascButton2 = ord($set['button_2']);
-	$ascButton3 = ord($set['button_3']);
-	$ascButton4 = ord($set['button_4']);
-	$ascButton5 = ord($set['button_5']);
+$stm = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_answers','mail=:server_address AND deleted=0 AND hidden=0','','ASC','');
+$stm->bindValue(':server_address', $mail['uid']);
+$stm->execute();
+$answers = $stm->fetchAll();
 
-	$ascControl1 = ord($set['control_top']);
-	$ascControl2 = ord($set['control_left']);
-	$ascControl3 = ord($set['control_bottom']);
-	$ascControl4 = ord($set['control_right']);
+if(!$answers){
+  $ascButton1 = ord('U');
+  $ascButton2 = ord('I');
+  $ascButton3 = ord('O');
+  $ascButton4 = ord('P');
 }
-// print_R("button 1: ".$ascButton1.'\n button 2: '.$ascButton2.'\n button 3: '.$ascButton3.'\n button 4: '.$ascButton4.'\n button 5: '.$ascButton5);
+    
+  
+foreach($answers as $answer){
+  $key = ord(strtoupper($answer['value'])) ? ord(strtoupper($answer['value'])) : '';
+
+  $stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_fields','uid=:field AND deleted=0 AND hidden=0','','ASC','');
+  $stmt->bindValue(':field', $answer['field']);
+  $stmt->execute();
+  $field = $stmt->fetch();
+    
+  if($field['title'] == "button_1"){
+    $ascButton1 = $key;
+  }else if($field['title'] == "button_2"){
+    $ascButton2 = $key;
+  }else if($field['title'] == "button_3"){
+    $ascButton3 = $key;
+  }else if($field['title'] == "button_4"){
+    $ascButton4 = $key;
+  }else if($field['title'] == "control_top"){
+    $ascControl1 = $key;
+  }else if($field['title'] == "control_left"){
+    $ascControl2 = $key;
+  }else if($field['title'] == "control_right"){
+    $ascControl4 = $key;
+  }else if($field['title'] == "control_bottom"){
+    $ascControl3 = $key;
+  }else if($field['title'] == "button_5"){
+    $ascButton5 = $key;
+  }
+}
+
 $link = $_GET['link'];
 $link_array = explode('/', $link);
-$page_links = explode('-', $link_array[5]);
+$page_links = explode('-', $link_array[4]);
 $page_link = $page_links[0].' '.$page_links[1];
+
 $arr = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','pages','pid=:pid AND hidden=0 AND deleted=0 AND doktype=1 AND NOT uid=:uid','','sorting DESC','');
-$arr->bindValue(':pid', 1);
-$arr->bindValue(':uid', 87);
+$arr->bindValue(':pid', 2);
+$arr->bindValue(':uid', 13);
 $arr->execute();
+
 $menues = $arr->fetchAll();
-//print_R(array_reverse($menues));
+
 $page_menues = array_reverse($menues);
 $clicked = $_GET['click'];
 $path = $_GET['path'];
@@ -71,7 +102,6 @@ foreach($page_menues as $i => $pm){
 	$pages = $stmt->fetchAll();
 
 	foreach($pages as $page){
-		// print_R($page);
 		$links_new = explode(' ',strtolower($title));
 		$link_new = implode('-',$links_new);
 		$navi = '
@@ -106,32 +136,19 @@ foreach($page_menues as $i => $pm){
 			getKeys();
 			getAudio();
 		';
-		if($title == "kapitel 2"){
-			$page_url = '
-				<script>
-					jQuery(document).ready(function(){
-						$("#content").removeClass("szeneChangeFast");
-						$("#content").removeClass("szeneBegin");
-						history.pushState(null,null,"apetape/'.$link_new.'");
-						'.$navi.'
-						$("#content #inhalt .opacityScrollable .items .imageOrder.opacity0").css("display", "block").addClass("active");
-						'.$javascript.'
-					});
-				</script>
-			';
-		}else{
-			$page_url = '
-				<script>
-					jQuery(document).ready(function(){
-						$("#content").removeClass("szeneChangeFast").addClass("szeneBegin");
-						history.pushState(null,null,"apetape/'.$link_new.'");
-						'.$navi.'
-						$("#content #inhalt .opacityScrollable .items .imageOrder.opacity0").css("display", "block").addClass("active");
-						'.$javascript.'
-					});
-				</script>
-			';
-		}
+		
+		$page_url = '
+			<script>
+				jQuery(document).ready(function(){
+					$("#content").removeClass("szeneChangeFast").addClass("szeneBegin");
+					history.pushState({},"","http://www.zac.co.at/apetape/'.$link_new.'");
+					'.$navi.'
+					$("#content #inhalt .opacityScrollable .items .imageOrder.opacity0").css("display", "block").addClass("active");
+					'.$javascript.'
+				});
+			</script>
+		';
+		
 		
 		if($page['border']){
 			$border = explode(',', $page['border']);
@@ -147,23 +164,19 @@ foreach($page_menues as $i => $pm){
 		if($page['sound']){
 			$sounds = explode(',', $page['sound']);
 			$sound = '
-				<audio controls autoplay id="player">
+				<audio autoplay id="player">
 				  <source src="fileadmin/user_upload/music/'.$sounds[0].'" type="audio/mpeg">
 				  <source src="fileadmin/user_upload/music/'.$sounds[1].'" type="audio/ogg">
 				 				Your browser does not support the audio element.
 				</audio>';
-				// <audio id="player" controls src="fileadmin/user_upload/music/'.$sounds[1].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
-				// '.t3lib_div::wrapJS('
-				// 	document.getElementById("player").play();
-				// ');
+				
 		}
 
 		if($page['images']){
 
 			$imageCollection = explode(',', $page['images']);
-			//print_R($imageCollection);
 			$j = 0;
-			if($page['image_order'] == 1 && ($page['pid'] == '81')){
+			if($page['image_order'] && ($page['pid'] == '12')){
 				$class = 'szene9';
 			}elseif($page['image_order']){
 				$class = 'imageOrder';
@@ -193,10 +206,8 @@ foreach($page_menues as $i => $pm){
 			    $j++;
 			}
 		}
-		//print_R($collection);
 
 		if($page['button_effect_one']){
-			//print_r($page['button_effect_one']);
 			$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_button','uid=:uid AND deleted=0 AND hidden=0','','sorting ASC','');
 			$stmt->bindValue(':uid', $page['button_effect_one']);
 			$stmt->execute();
@@ -208,7 +219,6 @@ foreach($page_menues as $i => $pm){
 		}
 
 		if($page['button_effect_two']){
-			//print_r($page['button_effect_two']);
 			$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_button','uid=:uid AND deleted=0 AND hidden=0','','sorting ASC','');
 			$stmt->bindValue(':uid', $page['button_effect_two']);
 			$stmt->execute();
@@ -220,7 +230,6 @@ foreach($page_menues as $i => $pm){
 		}
  
  		if($page['button_effect_three']){
- 			//print_r($page['button_effect_three']);
 			$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_button','uid=:uid AND deleted=0 AND hidden=0','','sorting ASC','');
 			$stmt->bindValue(':uid', $page['button_effect_three']);
 			$stmt->execute();
@@ -232,7 +241,6 @@ foreach($page_menues as $i => $pm){
 		}
 
 		if($page['button_effect_four']){
-			//print_r($page['button_effect_four']);
 			$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_button','uid=:uid AND deleted=0 AND hidden=0','','sorting ASC','');
 			$stmt->bindValue(':uid', $page['button_effect_four']);
 			$stmt->execute();
@@ -250,7 +258,7 @@ foreach($page_menues as $i => $pm){
 				</div>
 			';
 		}
-		// var_dump($page);
+
 		if($page['controls']){
 		
 			foreach(explode(',', $page['controls']) as $control){
@@ -267,7 +275,7 @@ foreach($page_menues as $i => $pm){
 					}else{
 						$inactive = '';
 					}
-					// print_R($ctl['uid']);
+
 					if($ctl['uid'] == 3 || $ctl['uid'] == 4){
 						$upDown = 'pfad';
 					}elseif($ctl['uid'] == 5 || $ctl['uid'] == 6){
@@ -294,7 +302,7 @@ foreach($page_menues as $i => $pm){
 		if($page['CType'] == "content_video_loop"){
 			$video = '
 				<video autoplay loop style="display:block;">
-				  <source src="/apetape/fileadmin/user_upload/video/'.$page['video'].'" type="video/mp4">
+				  <source src="fileadmin/user_upload/video/'.$page['video'].'" type="video/mp4">
 				Your browser does not support the video tag.
 				</video>
 			';
@@ -332,28 +340,25 @@ foreach($page_menues as $i => $pm){
 				                }else{
 				                    $("#content #inhalt .overlayBlack").addClass("thatsIt");
 				                }
-						}, 250000);
+						}, 183000);
 					});
 				</script>';
 
 			$contentText = $js.'<div class="text">'.$h1.$h2.$textContent.'</div>';
 		}
-		if($page['list_type'] == "content_path" && $page['pid'] == 79 && $path == 'true'){
+		if($page['list_type'] == "content_path" && $page['pid'] == 10){
 			$res = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*', 'tx_path','pid=:pid','','','');
 			$res->bindValue(':pid', $page['pid']);
 			$res->execute();
 			$row = $res->fetch();
-
+			
 			$coordinates = explode(',',$row['position']);
-			// print_R($coordinates);
 
 			
 			for($i=0; $i < count($coordinates); $i++){
 				$sum[] = $coordinates[$i].','.$coordinates[$i+1];
 				$i++;
 			}
-
-			// print_R($sum);
 
 			for($j=0; $j<count($sum); $j++){
 				if($j == 0){
@@ -365,8 +370,8 @@ foreach($page_menues as $i => $pm){
 			}
 
 
-			$path = '
-				<div class="path" style="z-index:979; display:block;">
+			$pathComplete = '
+				<div class="path" style="z-index:979;">
 					<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 					<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
 					    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -396,8 +401,6 @@ foreach($page_menues as $i => $pm){
 
 					</svg>
 				</div>';
-		}else{
-			$path = '';
 		}
 
 		if($image){
@@ -412,7 +415,7 @@ foreach($page_menues as $i => $pm){
 			$imageBorder = '';
 		}
 
-		if($page['image_order'] && ($page['pid'] != '81')){
+		if($page['image_order'] && ($page['pid'] != '12')){
 			$collectionAll = '
 				<div class="opacityScrollable" id="scrollable">
 					<div class="items">
@@ -432,7 +435,7 @@ foreach($page_menues as $i => $pm){
 			$classA = '
 				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
 				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
-		}elseif($page['pid'] == '79'){
+		}elseif($page['pid'] == '10'){
 			$collectionAll = '
 				<div class="opacityScrollable szene7" id="scrollable">
 					<div class="items">
@@ -474,7 +477,7 @@ foreach($page_menues as $i => $pm){
 		</div>'
 	;
 
-	print($content.$path.$overlay.$videoOverlay.$contentText.$page_url);
+	print($content.$pathComplete.$overlay.$videoOverlay.$contentText.$page_url);
 	
 	
 	

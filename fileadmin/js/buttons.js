@@ -8,30 +8,30 @@ function getButtons(){
 	$('.buttons .button.Sepia').click(function(){
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
-			$('#content #inhalt .opacityScrollable .items .active img').removeClass('sepia');
-			$('#content #inhalt .scrollable .items .active img').removeClass('sepia');
+			$('#content #inhalt .opacityScrollable .items img').removeClass('sepia');
+			$('#content #inhalt .scrollable .items img').removeClass('sepia');
 		}else{
 			console.log('sepia');
 			$(this).addClass('active');
-			$('#content #inhalt .opacityScrollable .items .active img').addClass('sepia');
-			$('#content #inhalt .scrollable .items .active img').addClass('sepia');
-			$('#content #inhalt .opacityScrollable .items .active img').removeClass('blau');
-			$('#content #inhalt .scrollable .items .active img').removeClass('blau');
+			$('#content #inhalt .opacityScrollable .items img').addClass('sepia');
+			$('#content #inhalt .scrollable .items img').addClass('sepia');
+			$('#content #inhalt .opacityScrollable .items img').removeClass('contrast');
+			$('#content #inhalt .scrollable .items img').removeClass('contrast');
 		}
 	});
 
-	$('.buttons .button.Blau').click(function(){
+	$('.buttons .button.Contrast').click(function(){
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
-			$('#content #inhalt .opacityScrollable .items .active img').removeClass('blau');
-			$('#content #inhalt .scrollable .items .active img').removeClass('blau');
+			$('#content #inhalt .opacityScrollable .items img').removeClass('contrast');
+			$('#content #inhalt .scrollable .items img').removeClass('contrast');
 		}else{
 			console.log('blau');
 			$(this).addClass('active');
-			$('#content #inhalt .opacityScrollable .items .active img').addClass('blau');
-			$('#content #inhalt .scrollable .items .active img').addClass('blau');
-			$('#content #inhalt .opacityScrollable .items .active img').removeClass('sepia');
-			$('#content #inhalt .scrollable .items .active img').removeClass('sepia');
+			$('#content #inhalt .opacityScrollable .items img').addClass('contrast');
+			$('#content #inhalt .scrollable .items img').addClass('contrast');
+			$('#content #inhalt .opacityScrollable .items img').removeClass('sepia');
+			$('#content #inhalt .scrollable .items img').removeClass('sepia');
 			$('.buttons .button.Sepia').removeClass('active');
 		}
 	});
@@ -99,13 +99,15 @@ function getButtons(){
 	}).mouseup(function(e) {
 		clearInterval(timerId);
 	    clearTimeout(this.downTimer);
-	    console.log(press);
 	    $(this).removeClass('active');
 	    // if(press === true){
 	    // 	$('#content #inhalt .overlayBlack').removeClass('strobo');
 	    // 	press = false;
 	    // }
-	    $('#content #inhalt .overlayBlack').removeClass('dropped');
+	    if(!$(this).hasClass('active')){
+	    	$('#content #inhalt .overlayBlack').removeClass('dropped');
+	    }
+	    
 	});
 	
 	$('.buttons .button.Blur-O-S').mousedown(function(e) {
@@ -175,10 +177,11 @@ function getButtons(){
 	$('.buttons .button.Opacity-on-off').click(function(){
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
-			$('#content #inhalt #scrollable .items .active').removeClass('opacified-o-n');
+			$('.szene9Scrollable.szene9 .items .opacity0').removeClass('opacified-o-n');
 		}else{
-			console.log('rotate');
+			console.log('opacity');
 			$(this).addClass('active');
+
 			$('#content #inhalt #scrollable .items .active').addClass('opacified-o-n');
 			$('.szene9Scrollable.szene9 .items .opacity0').addClass('opacified-o-n');
 		}
@@ -234,15 +237,15 @@ function getButtons(){
 		$(this).addClass('active');
 		$('#content #inhalt .overlay').addClass('dropped').css('z-index', 11);
 		setTimeout(function(){
-		   $('.buttons .button.Drop').toggleClass('active');
-		   $('#content #inhalt .overlay').toggleClass('dropped').css('z-index', 0);
-		},8000);
+		   $('.buttons .button.Drop').removeClass('active');
+		   $('#content #inhalt .overlay').removeClass('dropped').css('z-index', 0);
+		},4000);
 	});
 
-	$('.szene9Scrollable.szene9 .items .szene9').css('opacity', 0);
+	$('.szene9Scrollable.szene9 .items .opacity0, .szene9Scrollable.szene9 .items .opacity1, .szene9Scrollable.szene9 .items .opacity2').css('opacity', 0);
 	
-	$('.szene9Scrollable.szene9 .items .szene9').first().addClass('active');
-	$('.buttons .button.Gif-1').addClass('active');
+	// $('.szene9Scrollable.szene9 .items').first().addClass('active');
+	// $('.buttons .button.Gif-1').addClass('active');
 
 	$('.buttons .button.Gif-2').click(function(){
 		$('.buttons .button.Gif-1').removeClass('active');

@@ -3,11 +3,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 class tx_content_szene extends AbstractPlugin {
 
-		// Default extension plugin variables:
-	// var $prefixId = 'tx_content_szene'; // Same as class name
-	// var $scriptRelPath = 'plugins/class.tx_content_szene.php'; // Path to this script relative to the extension dir.
-	// var $extKey = 'content'; // The extension key.
-	// public $pi_checkCHash = TRUE;
 
 	/**
 	 *
@@ -30,24 +25,52 @@ class tx_content_szene extends AbstractPlugin {
 		$this->view = new  View($conf, $this->uObj);
 		#################################################################################
 		
-		$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_buttons_manual','server_address=:server_address','','sorting DESC','');
+		$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_mails','sender_ip=:server_address AND deleted=0 AND hidden=0','','ASC','');
 		$stmt->bindValue(':server_address', $_SERVER['REMOTE_ADDR']);
 		$stmt->execute();
-		$settings = $stmt->fetchAll();
+		$mail = $stmt->fetch();
 
-		foreach($settings as $set){
-			$ascButton1 = ord(strtoupper($set['button_1']));
-			$ascButton2 = ord(strtoupper($set['button_2']));
-			$ascButton3 = ord(strtoupper($set['button_3']));
-			$ascButton4 = ord(strtoupper($set['button_4']));
-			$ascButton5 = ord(strtoupper($set['button_5']));
+		$stm = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_answers','mail=:server_address AND deleted=0 AND hidden=0','','ASC','');
+		$stm->bindValue(':server_address', $mail['uid']);
+		$stm->execute();
+		$answers = $stm->fetchAll();
 
-			$ascControl1 = ord($set['control_top']);
-			$ascControl2 = ord($set['control_left']);
-			$ascControl3 = ord($set['control_bottom']);
-			$ascControl4 = ord($set['control_right']);
+		if(!$answers){
+		  $ascButton1 = ord('U');
+		  $ascButton2 = ord('I');
+		  $ascButton3 = ord('O');
+		  $ascButton4 = ord('P');
 		}
-		// print_R("button 1: ".$ascButton1.'\n button 2: '.$ascButton2.'\n button 3: '.$ascButton3.'\n button 4: '.$ascButton4.'\n button 5: '.$ascButton5);
+		    
+		  
+		foreach($answers as $answer){
+		  $key = ord(strtoupper($answer['value'])) ? ord(strtoupper($answer['value'])) : '';
+
+		  $stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_powermail_domain_model_fields','uid=:field AND deleted=0 AND hidden=0','','ASC','');
+		  $stmt->bindValue(':field', $answer['field']);
+		  $stmt->execute();
+		  $field = $stmt->fetch();
+		    
+		  if($field['title'] == "button_1"){
+		    $ascButton1 = $key;
+		  }else if($field['title'] == "button_2"){
+		    $ascButton2 = $key;
+		  }else if($field['title'] == "button_3"){
+		    $ascButton3 = $key;
+		  }else if($field['title'] == "button_4"){
+		    $ascButton4 = $key;
+		  }else if($field['title'] == "control_top"){
+	        $ascControl1 = $key;
+	      }else if($field['title'] == "control_left"){
+	        $ascControl2 = $key;
+	      }else if($field['title'] == "control_right"){
+	        $ascControl4 = $key;
+	      }else if($field['title'] == "control_bottom"){
+	        $ascControl3 = $key;
+	      }else if($field['title'] == "button_5"){
+	        $ascButton5 = $key;
+	      }
+		}
 
 		if($this->cObj->data['border']){
 			$border = explode(',', $this->cObj->data['border']);
@@ -65,15 +88,11 @@ class tx_content_szene extends AbstractPlugin {
 			$sounds = explode(',', $this->cObj->data['sound']);
 
 			$sound = '
-				<audio controls id="player" >
+				<audio autoplay id="player" >
 				  <source src="fileadmin/user_upload/music/'.$sounds[0].'" type="audio/mpeg">
 				  <source src="fileadmin/user_upload/music/'.$sounds[1].'" type="audio/ogg">
 				 				Your browser does not support the audio element.
 				</audio>';
-				// <audio id="player" controls src="fileadmin/user_upload/music/'.$sounds[1].'" style="display: block; position:absolute; top:20px; z-index: 9999;"></audio>
-				// '.t3lib_div::wrapJS('
-				// 	document.getElementById("player").play();
-				// ');
 		}
 
 
@@ -100,6 +119,17 @@ class tx_content_szene extends AbstractPlugin {
 								'params' => 'id="css-filter-blur" draggable="true"'
 							)).'
 						</div>
+						<svg id="svg-image-blur" style="height: 1000px;">
+						    <filter id="blur-effect-1">
+						        <feGaussianBlur stdDeviation="2" />
+						    </filter>
+						    <filter id="sepia">
+								<feColorMatrix values="0.393 0.769 0.189 0 0 0.349 0.686 0.168 0 0 0.272 0.534 0.131 0 0 0 0 0 1 0" type="matrix">
+							</filter>
+							<filter id="hue-rotate">
+								<feColorMatrix values="180" type="hueRotate">
+							</filter>
+						</svg>
 			    	</div>';
 
 			    $j++;
@@ -120,7 +150,6 @@ class tx_content_szene extends AbstractPlugin {
 		}
 
 		if($this->cObj->data['button_effect_two']){
-			//print_r($this->cObj->data['button_effect_two']);
 			$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_button','uid=:uid'.$this->cObj->enableFields('tx_button'),'','sorting ASC','');
 			$stmt->bindValue(':uid', $this->cObj->data['button_effect_two']);
 			$stmt->execute();
@@ -132,7 +161,6 @@ class tx_content_szene extends AbstractPlugin {
 		}
  
  		if($this->cObj->data['button_effect_three']){
- 			//print_r($this->cObj->data['button_effect_three']);
 			$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_button','uid=:uid'.$this->cObj->enableFields('tx_button'),'','sorting ASC','');
 			$stmt->bindValue(':uid', $this->cObj->data['button_effect_three']);
 			$stmt->execute();
@@ -144,7 +172,6 @@ class tx_content_szene extends AbstractPlugin {
 		}
 
 		if($this->cObj->data['button_effect_four']){
-			//print_r($this->cObj->data['button_effect_four']);
 			$stmt = $GLOBALS['TYPO3_DB']->prepare_SELECTquery('*','tx_button','uid=:uid'.$this->cObj->enableFields('tx_button'),'','sorting ASC','');
 			$stmt->bindValue(':uid', $this->cObj->data['button_effect_four']);
 			$stmt->execute();
@@ -162,7 +189,7 @@ class tx_content_szene extends AbstractPlugin {
 				</div>
 			';
 		}
-		// var_dump($this->cObj->data);
+		
 		if($this->cObj->data['controls']){
 		
 			foreach(explode(',', $this->cObj->data['controls']) as $control){
@@ -205,7 +232,7 @@ class tx_content_szene extends AbstractPlugin {
 			$imageBorder = '';
 		}
 
-		if($this->cObj->data['image_order'] && ($this->cObj->data['pid'] != '81') && ($this->cObj->data['pid'] != '79')){
+		if($this->cObj->data['image_order'] && ($this->cObj->data['pid'] != '12') && ($this->cObj->data['pid'] != '10')){
 			$collection = '
 				<div class="opacityScrollable" id="scrollable">
 					<div class="items">
@@ -215,7 +242,7 @@ class tx_content_szene extends AbstractPlugin {
 			$classA = '
 				<a class="prev browse left opacity" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
 				<a class="next browse right opacity" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
-		}elseif($this->cObj->data['image_order'] && ($this->cObj->data['pid'] == '81')){
+		}elseif($this->cObj->data['image_order'] && ($this->cObj->data['pid'] == '12')){
 			$collection = '
 				<div class="szene9Scrollable szene9" id="scrollable">
 					<div class="items">
@@ -225,7 +252,7 @@ class tx_content_szene extends AbstractPlugin {
 			$classA = '
 				<a class="prev browse left '.$inactive.'" title="'.$controlText[1].'" data-controlLeft = "'.$ascControl2.'"></a>
 				<a class="next browse right '.$inactive.'" title="'.$controlText[2].'" data-controlRight = "'.$ascControl4.'"></a>';
-		}elseif($this->cObj->data['pid'] == '79'){
+		}elseif($this->cObj->data['pid'] == '10'){
 			$collection = '
 				<div class="opacityScrollable szene7" id="scrollable">
 					<div class="items">

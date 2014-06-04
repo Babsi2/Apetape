@@ -84,13 +84,13 @@ function getTypo(){
 	$('.scrollable').css('height', $(document).height()+30);
 	$(".scrollable").css('width', $(window).width());
 	$('.scrollable .items div').first().addClass('active');
-	$(".scrollable").scrollable({
-		onSeek: function(){
-			$('.scrollable .items div').removeClass('active');
-			//$('.scrollable .items div img').removeClass('zoomed').removeClass('rotated').removeClass('blured').removeClass('opacified');
-			$('.scrollable .items > div:nth-child(' + (this.getIndex()+1) + ')').addClass('active');
-		}
-	});
+	// $(".scrollable").scrollable({
+	// 	onSeek: function(){
+	// 		$('.scrollable .items div').removeClass('active');
+	// 		//$('.scrollable .items div img').removeClass('zoomed').removeClass('rotated').removeClass('blured').removeClass('opacified');
+	// 		$('.scrollable .items > div:nth-child(' + (this.getIndex()+1) + ')').addClass('active');
+	// 	}
+	// });
 	
 	if($(window).width() > 980){
 		$('#navi').click(function(){
@@ -129,27 +129,28 @@ function getTypo(){
 
 	
 	$('#contentWrap #content-navi .accordion-menu .accordion-sub-content a').click(function(event){
-		console.log($(this)[0].href);
+		console.log(window.location.href);
 		event.preventDefault();
 		var oldRef = $(this)[0].href;
 		var ref = oldRef.substring(0, oldRef.length - 5);
 		console.log(ref);
-		if(ref == "http://localhost/apetape/apetape/einstellungen"){
+		if(ref == "http://www.zac.co.at/apetape/einstellungen"){
 			$('#content').removeClass('szeneBegin').removeClass('szeneChangeFast');
-			window.location.href="apetape/einstellungen";
-		}else if(ref == "http://localhost/apetape/apetape/kapitel-2"){
-			$.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
+			window.location.href="http://www.zac.co.at/apetape/einstellungen";
+		}else if(ref == "http://www.zac.co.at/apetape/kapitel-2"){
+			$.post(window.location.href+"/index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
 		      $('#inhalt').html( data ); 
 		     
 		    });
 		}else{
 			$('#content').removeClass('szeneBegin').addClass('szeneChangeFast');
-			$.post( "index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
+			$.post(window.location.href+"/index.php?eID=complete&link="+ref+"&click=true&path=false", function( data ) {
 		      $('#inhalt').html( data ); 
 		     
 		    });
 		}
-	})
+	});
+
 	if($('#content-navi .accordion-menu').hasClass('pageActive')){
 		$('#content-navi').show();
 		$('#navi').show();
@@ -172,8 +173,8 @@ function getTypo(){
 	  // Ausgabemeldung zusammenstellen
 	  // var out = 'Mausposition: ' + x + ', ' + y;
 	  // Ausgabe im dafür vorgesehenen SPAN-Element
-	  $('.szene9Scrollable.szene9 .items .szene9 img').css('left', x);
-	  $('.szene9Scrollable.szene9 .items .szene9 img').css('top', y);
+	  $('.szene9Scrollable.szene9 .items img').css('left', x);
+	  $('.szene9Scrollable.szene9 .items img').css('top', y);
 	  // document.getElementById ('info').firstChild.data = out;
 	}
 
@@ -189,13 +190,15 @@ function getTypo(){
 		$(".scrollable").scrollable('height', $('.image img').height());
 		$('#content #inhalt .opacityScrollable .items img').css('height', $(window).height());
 		$('#content #inhalt .opacityScrollable .items img').css('width', $(window).width());
+		$('#content #inhalt .scrollable .items img').css('height', $(window).height());
+		$('#content #inhalt .scrollable .items img').css('width', $(window).width());
 		$('.menuBackground img').css('width', $(window).width());
 	});
 
 
 }
+
 $(document).ready(function(){
-	
 	getTypo();
 });
 
@@ -203,47 +206,68 @@ function bottom() {
 	window.setTimeout(function(){
 		$('#bottom').scrollIntoView(180000, 'linear');
 	}, 3000);
+
+	window.setTimeout(function(){
+		$("#conten #inhalt .overlayBlack").css("opacity",1);
+            if($("#content #inhalt .overlayBlack").hasClass("thatsIt")){
+                $("#content #inhalt .overlayBlack").removeClass("thatsIt");
+            }else{
+                $("#content #inhalt .overlayBlack").addClass("thatsIt");
+            }
+	}, 183000);
 };
 
 function loadInteractive(){
-	$(".section-0.ui-accordion-header").click(function(){
-		if($(this).hasClass("ui-accordion-header-active") && !$(".javascript").hasClass("active")){
-			$(".waiting").css("display", "block");
-			// window.location.hash = "/";
-			var imageAddr = "http://www.tranquilmusic.ca/images/cats/Cat2.JPG" + "?n=" + Math.random();
-			var startTime, endTime;
-			var downloadSize = 5616998;
-			var download = new Image();
-			download.onload = function () {
-			    endTime = (new Date()).getTime();
-			    showResults();
-			}
-			startTime = (new Date()).getTime();
-			download.src = imageAddr;
+	$(".section-1.ui-accordion-header").click(function(){
+		console.log('interactive');
+		console.log(navigator.vendor);
+		if(navigator.vendor == "Apple Computer, Inc." || navigator.vendor == "Opera Software ASA" || navigator.vendor == "Google Inc."){
+			if($(this).hasClass("ui-accordion-header-active") && !$(".javascript").hasClass("active")){
+				$(".waiting").css("display", "block");
+				// window.location.hash = "/";
+				var imageAddr = "http://www.tranquilmusic.ca/images/cats/Cat2.JPG" + "?n=" + Math.random();
+				var startTime, endTime;
+				var downloadSize = 5616998;
+				var download = new Image();
+				download.onload = function () {
+				    endTime = (new Date()).getTime();
+				    showResults();
+				}
+				startTime = (new Date()).getTime();
+				download.src = imageAddr;
 
-			function showResults() {
-			    var duration = (endTime - startTime) / 1000; //Math.round()
-			    var bitsLoaded = downloadSize * 8;
-			    var speedBps = (bitsLoaded / duration).toFixed(2);
-			    var speedKbps = (speedBps / 1024).toFixed(2);
-			    var speedMbps = (speedKbps / 1024).toFixed(2);
-			   
-				$(".waiting").css("display", "none");
-				if(speedMbps >= 0.50){
-						console.log("zum Video");
-						$(".javascript").addClass("active").append("Sorry but your connection is too slow. You will be redirected to the default video in a few seconds!");
-						clearTimeout(this.downTimer);
-					this.downTimer = setTimeout(function() {
+				function showResults() {
+				    var duration = (endTime - startTime) / 1000; //Math.round()
+				    var bitsLoaded = downloadSize * 8;
+				    var speedBps = (bitsLoaded / duration).toFixed(2);
+				    var speedKbps = (speedBps / 1024).toFixed(2);
+				    var speedMbps = (speedKbps / 1024).toFixed(2);
+				   
+					$(".waiting").css("display", "none");
+					if(speedMbps >= 0.50){
+							console.log("zum Video");
+							$(".javascript").addClass("active").append("Sorry but your connection is too slow. You will be redirected to the default video in a few seconds!");
+							clearTimeout(this.downTimer);
+						this.downTimer = setTimeout(function() {
+								
+								$(".section-1.ui-accordion-header").click();
+							},2000);
 							
-							$(".section-1.ui-accordion-header").click();
-						},2000);
-						
-				}else{
-					console.log("kann weiter gehen");
-					//window.location.href = "/index.php?id=6";
-					$(".javascript").addClass("active").append("Okey your Connection is fast enough. <a class='accLink' href='/apetape/apetape/kapiteleins.html'>Here</a> You can go to the interactive show.");
+					}else{
+						console.log("kann weiter gehen");
+						//window.location.href = "/index.php?id=6";
+						$(".javascript").addClass("active").append("Okey your Connection is fast enough. <a href='http://www.zac.co.at/apetape/kapitel-1' class='accLink'>Here</a> You can go to the interactive show.");
+					}
 				}
 			}
+		}else{
+			console.log("zum Video");
+			$(".javascript").addClass("active").append("Sorry but you don't use Safari, Opera or Chrome. You will be redirected to the default video in a few seconds!");
+			clearTimeout(this.downTimer);
+			this.downTimer = setTimeout(function() {
+				
+				$(".section-0.ui-accordion-header").click();
+			},2000);
 		}
 	});
 }
